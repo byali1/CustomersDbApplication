@@ -1,0 +1,5 @@
+# Ignore 
+DataAccess/Concrete/AdoNet/CustomersDbContext.cs
+/DataAccess/Concrete/AdoNet/CustomersDbContext.cs
+/.vs
+.vs
