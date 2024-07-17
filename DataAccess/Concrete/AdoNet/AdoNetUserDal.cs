@@ -21,7 +21,7 @@ namespace DataAccess.Concrete.AdoNet
             _passwordHasher = passwordHasher;
         }
 
-       
+
         public List<User> GetAll()
         {
 
@@ -87,6 +87,46 @@ namespace DataAccess.Concrete.AdoNet
         public void Delete(User user)
         {
             throw new NotImplementedException();
+        }
+
+        public bool IsUserExist(string username)
+        {
+            _dbContext.OpenConnectionIfClosed();
+
+            SqlCommand sqlCommand = new SqlCommand("Select Count(*) from users where username = @username", _dbContext.GetConnection());
+
+            sqlCommand.Parameters.AddWithValue("@username", username);
+
+            int count = (int)sqlCommand.ExecuteScalar();
+            _dbContext.CloseConnectionIfOpen();
+            return count > 0;
+        }
+
+
+
+        public bool VerifyPassword(string password, string passwordHash)
+        {
+            return _passwordHasher.VerifyPassword(password, passwordHash);
+        }
+
+        public string GetPasswordHashByUsername(string username)
+        {
+            _dbContext.OpenConnectionIfClosed();
+
+            SqlCommand sqlCommand = new SqlCommand("Select passwordHash from users where username= @username", _dbContext.GetConnection());
+
+            sqlCommand.Parameters.AddWithValue("@username", username);
+
+            SqlDataReader dataReader = sqlCommand.ExecuteReader();
+
+            if (dataReader.Read())
+            {
+                string hash = dataReader["PasswordHash"].ToString();
+                _dbContext.CloseConnectionIfOpen();
+                return hash;
+            }
+            _dbContext.CloseConnectionIfOpen();
+            return "null";
         }
     }
 }

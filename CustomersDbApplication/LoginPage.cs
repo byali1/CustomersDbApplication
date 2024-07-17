@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Utilities.SpecialFunctions;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -30,23 +31,75 @@ namespace CustomersDbApplication
             _userDal = userDal;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
             var username = tbxUsername.Text;
             var password = tbxPassword.Text;
 
+
+
+            if (!checkBoxIHaveAccount.Checked)
+            {
+                if (!IsUserExist(username))
+                {
+                    SignUp(username, password);
+                    return;
+                }
+
+                MessageBox.Show("Bu kullanıcı adı ile zaten bir üye mevcut.", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+
+            }
+
+            //Hesabım var
+            if (IsUserExist(username))
+            {
+                string passwordHash = GetPasswordHash(username);
+
+                if (VerifyUserPassword(password, passwordHash))
+                {
+                    SignIn(username, password);
+                    return;
+                }
+
+                MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            MessageBox.Show("Böyle bir hesap bulunamadı..", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+
+
+        }
+
+
+
+        private void checkBoxIHaveAccount_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxIHaveAccount.Checked)
+            {
+                btnSignUp.Text = "Giriş yap";
+
+                return;
+            }
+
+            btnSignUp.Text = "Üye ol";
+        }
+
+
+
+        private void SignUp(string username, string password)
+        {
             if (ControlFunctions.IsNullOrWhiteSpace(username) || ControlFunctions.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Kullanıcı adı ve şifre boş olamaz, boşluk karakteri içeremez.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            
+
 
             if (ControlFunctions.CheckStartsWithNumber(username))
             {
@@ -58,7 +111,7 @@ namespace CustomersDbApplication
             if (ControlFunctions.IsContainsSpace(username))
             {
 
-              ControlFunctions.RemoveSpaces(username);
+                ControlFunctions.RemoveSpaces(username);
             }
 
 
@@ -85,7 +138,29 @@ namespace CustomersDbApplication
         }
 
 
+        private void SignIn(string username, string password)
+        {
 
 
+
+            this.Hide();
+            HomePage homePage = new HomePage(_dbContext);
+            homePage.Show();
+        }
+
+        private bool IsUserExist(string username)
+        {
+            return _userDal.IsUserExist(username);
+        }
+
+        private bool VerifyUserPassword(string password, string passworHash)
+        {
+            return _userDal.VerifyPassword(password, passworHash);
+        }
+
+        private string GetPasswordHash(string username)
+        {
+            return _userDal.GetPasswordHashByUsername(username);
+        }
     }
 }

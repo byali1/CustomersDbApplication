@@ -28,25 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnLogin = new Button();
             tbxUsername = new TextBox();
             tbxPassword = new TextBox();
             lblUsername = new Label();
             lblPassword = new Label();
-            checkBoxSignUp = new CheckBox();
+            checkBoxIHaveAccount = new CheckBox();
             btnSignUp = new Button();
             SuspendLayout();
-            // 
-            // btnLogin
-            // 
-            btnLogin.Cursor = Cursors.Hand;
-            btnLogin.Location = new Point(325, 235);
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(86, 29);
-            btnLogin.TabIndex = 0;
-            btnLogin.Text = "Giriş Yap";
-            btnLogin.UseVisualStyleBackColor = true;
-            btnLogin.Click += btnLogin_Click;
             // 
             // tbxUsername
             // 
@@ -80,15 +68,16 @@
             lblPassword.TabIndex = 4;
             lblPassword.Text = "Şifre:";
             // 
-            // checkBoxSignUp
+            // checkBoxIHaveAccount
             // 
-            checkBoxSignUp.AutoSize = true;
-            checkBoxSignUp.Location = new Point(233, 191);
-            checkBoxSignUp.Name = "checkBoxSignUp";
-            checkBoxSignUp.Size = new Size(95, 19);
-            checkBoxSignUp.TabIndex = 5;
-            checkBoxSignUp.Text = "Hesabım yok";
-            checkBoxSignUp.UseVisualStyleBackColor = true;
+            checkBoxIHaveAccount.AutoSize = true;
+            checkBoxIHaveAccount.Location = new Point(233, 191);
+            checkBoxIHaveAccount.Name = "checkBoxIHaveAccount";
+            checkBoxIHaveAccount.Size = new Size(92, 19);
+            checkBoxIHaveAccount.TabIndex = 5;
+            checkBoxIHaveAccount.Text = "Hesabım var";
+            checkBoxIHaveAccount.UseVisualStyleBackColor = true;
+            checkBoxIHaveAccount.CheckedChanged += checkBoxIHaveAccount_CheckedChanged;
             // 
             // btnSignUp
             // 
@@ -107,12 +96,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(628, 318);
             Controls.Add(btnSignUp);
-            Controls.Add(checkBoxSignUp);
+            Controls.Add(checkBoxIHaveAccount);
             Controls.Add(lblPassword);
             Controls.Add(lblUsername);
             Controls.Add(tbxPassword);
             Controls.Add(tbxUsername);
-            Controls.Add(btnLogin);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "LoginPage";
@@ -123,13 +111,11 @@
         }
 
         #endregion
-
-        private Button btnLogin;
         private TextBox tbxUsername;
         private TextBox tbxPassword;
         private Label lblUsername;
         private Label lblPassword;
-        private CheckBox checkBoxSignUp;
+        private CheckBox checkBoxIHaveAccount;
         private Button btnSignUp;
     }
 }

@@ -13,5 +13,9 @@ namespace DataAccess.Abstract
         void Add(User user);
         void Update(User user);
         void Delete(User user);
+
+        bool IsUserExist(string username);
+        bool VerifyPassword(string password, string passwordHash);
+        string GetPasswordHashByUsername(string username);
     }
 }
