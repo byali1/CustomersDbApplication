@@ -38,14 +38,14 @@
             // 
             // tbxUsername
             // 
-            tbxUsername.Location = new Point(230, 104);
+            tbxUsername.Location = new Point(81, 68);
             tbxUsername.Name = "tbxUsername";
             tbxUsername.Size = new Size(181, 23);
             tbxUsername.TabIndex = 1;
             // 
             // tbxPassword
             // 
-            tbxPassword.Location = new Point(230, 162);
+            tbxPassword.Location = new Point(81, 126);
             tbxPassword.Name = "tbxPassword";
             tbxPassword.Size = new Size(181, 23);
             tbxPassword.TabIndex = 2;
@@ -53,7 +53,7 @@
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(230, 86);
+            lblUsername.Location = new Point(81, 50);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(74, 15);
             lblUsername.TabIndex = 3;
@@ -62,7 +62,7 @@
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(232, 144);
+            lblPassword.Location = new Point(83, 108);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(33, 15);
             lblPassword.TabIndex = 4;
@@ -71,7 +71,7 @@
             // checkBoxIHaveAccount
             // 
             checkBoxIHaveAccount.AutoSize = true;
-            checkBoxIHaveAccount.Location = new Point(233, 191);
+            checkBoxIHaveAccount.Location = new Point(83, 165);
             checkBoxIHaveAccount.Name = "checkBoxIHaveAccount";
             checkBoxIHaveAccount.Size = new Size(92, 19);
             checkBoxIHaveAccount.TabIndex = 5;
@@ -82,7 +82,7 @@
             // btnSignUp
             // 
             btnSignUp.Cursor = Cursors.Hand;
-            btnSignUp.Location = new Point(230, 235);
+            btnSignUp.Location = new Point(124, 204);
             btnSignUp.Name = "btnSignUp";
             btnSignUp.Size = new Size(86, 29);
             btnSignUp.TabIndex = 6;
@@ -94,7 +94,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(628, 318);
+            ClientSize = new Size(333, 274);
             Controls.Add(btnSignUp);
             Controls.Add(checkBoxIHaveAccount);
             Controls.Add(lblPassword);
@@ -106,6 +106,7 @@
             Name = "LoginPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CustomersDb - Giriş Paneli";
+            Load += LoginPage_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -46,7 +46,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(707, 324);
             Controls.Add(dgwCustomers);
+            MaximizeBox = false;
             Name = "HomePage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CustomersDb App";
             Load += HomePage_Load;
             ((System.ComponentModel.ISupportInitialize)dgwCustomers).EndInit();

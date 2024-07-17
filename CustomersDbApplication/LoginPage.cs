@@ -140,9 +140,6 @@ namespace CustomersDbApplication
 
         private void SignIn(string username, string password)
         {
-
-
-
             this.Hide();
             HomePage homePage = new HomePage(_dbContext);
             homePage.Show();
@@ -161,6 +158,11 @@ namespace CustomersDbApplication
         private string GetPasswordHash(string username)
         {
             return _userDal.GetPasswordHashByUsername(username);
+        }
+
+        private void LoginPage_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
