@@ -8,7 +8,7 @@ using BCrypt.Net;
 
 namespace DataAccess.Concrete
 {
-    public class PasswordHash :IPasswordHasher
+    public class PasswordHasher :IPasswordHasher
     {
         public string HashPassword(string password)
         {

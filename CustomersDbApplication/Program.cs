@@ -16,7 +16,7 @@ namespace CustomersDbApplication
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             IDbContext dbContext = new CustomersDbContext();
-            IPasswordHasher passwordHasher = new PasswordHash();
+            IPasswordHasher passwordHasher = new PasswordHasher();
 
             IUserDal userDal = new AdoNetUserDal(dbContext, passwordHasher);
 
