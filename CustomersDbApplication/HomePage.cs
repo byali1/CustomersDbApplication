@@ -8,6 +8,8 @@ namespace CustomersDbApplication
     {
         private IDbContext _dbContext;
 
+        private Panel userControlPanel;
+
         //public HomePage()
         //{
         //    InitializeComponent();
@@ -17,15 +19,38 @@ namespace CustomersDbApplication
             _dbContext = dbContext;
             InitializeComponent();
 
+            userControlPanel = new Panel();
+            userControlPanel.Dock = DockStyle.Fill;
+
+            this.Controls.Add(userControlPanel);
+            userControlPanel.BringToFront();
+
         }
 
 
 
         private void HomePage_Load(object sender, EventArgs e)
         {
-            CustomerManager customerManager = new CustomerManager(new AdoNetCustomerDal(_dbContext));
-            dgwCustomers.DataSource = customerManager.GetAll();
 
+
+        }
+
+
+
+        private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new UserControlAddPerson(_dbContext));
+        }
+
+
+
+
+        //Other func.
+        private void LoadUserControl(UserControl userControl)
+        {
+            userControlPanel.Controls.Clear();
+            userControl.Dock = DockStyle.Fill;
+            userControlPanel.Controls.Add(userControl);
         }
     }
 }
