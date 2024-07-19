@@ -53,7 +53,16 @@ namespace DataAccess.Concrete.AdoNet
 
         public void Add(Customer customer)
         {
-            throw new NotImplementedException();
+            _dbContext.OpenConnectionIfClosed();
+
+            SqlCommand sqlCommand = new SqlCommand("Insert into Customers values(@Name, @LastName)", _dbContext.GetConnection());
+
+            sqlCommand.Parameters.AddWithValue("@Name", customer.Name);
+            sqlCommand.Parameters.AddWithValue("@LastName", customer.LastName);
+            sqlCommand.ExecuteNonQuery();
+
+
+            _dbContext.CloseConnectionIfOpen();
         }
 
         public void Update(Customer customer)

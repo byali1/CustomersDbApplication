@@ -15,6 +15,6 @@ namespace Entities.Concrete
         public string PasswordHash { get; set; }
         public DateTime AccountCreatedTime { get; set; }
         public DateTime LastAciveTime { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool IsActive { get; set; }
     }
 }

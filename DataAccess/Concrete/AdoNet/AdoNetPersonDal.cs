@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DataAccess.Abstract;
+using Entities.Concrete;
+
+namespace DataAccess.Concrete.AdoNet
+{
+    public class AdoNetPersonDal:IPersonDal
+    {
+        private IDbContext _dbContext;
+
+        public AdoNetPersonDal(IDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        public List<Person> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(Person person)
+        {
+            _dbContext.OpenConnectionIfClosed();
+
+            SqlCommand sqlCommand = new SqlCommand("Insert into Persons values(@CustomerId, @PersonIdentityTypeId, @PersonOccupationId, @PersonGenderId, @IdentityNumber, @BirthDate, @BirthPlace, @CreatedTime, @UpdatedTime)", _dbContext.GetConnection());
+
+            sqlCommand.Parameters.AddWithValue("@CustomerId", person.CustomerId);
+            sqlCommand.Parameters.AddWithValue("@PersonIdentityTypeId", person.PersonIdentityTypeId);
+            sqlCommand.Parameters.AddWithValue("@PersonOccupationId", person.PersonOccupationId);
+            sqlCommand.Parameters.AddWithValue("@PersonGenderId", person.PersonGenderId);
+            sqlCommand.Parameters.AddWithValue("@IdentityNumber", person.IdentityNumber);
+            sqlCommand.Parameters.AddWithValue("@BirthDate", person.BirthDate);
+            sqlCommand.Parameters.AddWithValue("@BirthPlace", person.BirthPlace);
+            sqlCommand.Parameters.AddWithValue("@CreatedTime", person.CreatedTime);
+            sqlCommand.Parameters.AddWithValue("@UpdatedTime", person.UpdatedTime);
+
+            sqlCommand.ExecuteNonQuery();
+
+
+            _dbContext.OpenConnectionIfClosed();
+
+        }
+
+        public void Update(Person person)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Person person)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -1,3 +1,5 @@
+using Business.Abstract;
+using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Abstract.PasswordHashing;
 using DataAccess.Concrete;
@@ -17,14 +19,16 @@ namespace CustomersDbApplication
             // see https://aka.ms/applicationconfiguration.
             IDbContext dbContext = new CustomersDbContext();
             IPasswordHasher passwordHasher = new PasswordHasher();
-
             IUserDal userDal = new AdoNetUserDal(dbContext, passwordHasher);
+
+
+            IUserService userService = new UserManager(userDal);
 
 
             ApplicationConfiguration.Initialize();
             //Application.Run(new HomePage(dbContext));
 
-            Application.Run(new LoginPage(dbContext,userDal));
+            Application.Run(new LoginPage(userService,dbContext));
         }
     }
 }

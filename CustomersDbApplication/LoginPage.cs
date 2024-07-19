@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Business.Abstract;
 using Business.Utilities.SpecialFunctions;
 using DataAccess.Concrete;
 using Entities.Concrete;
@@ -18,17 +19,17 @@ namespace CustomersDbApplication
     public partial class LoginPage : Form
     {
         private IDbContext _dbContext;
-        private IUserDal _userDal;
+        private IUserService _userService;
         //public LoginPage()
         //{
         //    InitializeComponent();
         //}
 
-        public LoginPage(IDbContext dbContext, IUserDal userDal)
+        public LoginPage( IUserService userService, IDbContext dbContext)
         {
             InitializeComponent();
+            _userService = userService;
             _dbContext = dbContext;
-            _userDal = userDal;
         }
 
 
@@ -119,7 +120,7 @@ namespace CustomersDbApplication
 
             try
             {
-                _userDal.Add(new User
+                _userService.Add(new User
                 {
                     UserRoleId = 1,
                     Username = username.ToLower(),
@@ -147,17 +148,17 @@ namespace CustomersDbApplication
 
         private bool IsUserExist(string username)
         {
-            return _userDal.IsUserExist(username);
+            return _userService.IsUserExist(username);
         }
 
         private bool VerifyUserPassword(string password, string passworHash)
         {
-            return _userDal.VerifyPassword(password, passworHash);
+            return _userService.VerifyPassword(password, passworHash);
         }
 
         private string GetPasswordHash(string username)
         {
-            return _userDal.GetPasswordHashByUsername(username);
+            return _userService.GetPasswordHashByUsername(username);
         }
 
         private void LoginPage_Load(object sender, EventArgs e)

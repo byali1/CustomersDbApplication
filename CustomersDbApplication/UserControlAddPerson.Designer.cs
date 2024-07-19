@@ -106,7 +106,7 @@
             Controls.Add(grpBxAddCustomer);
             Controls.Add(dgwPersons);
             Name = "UserControlAddPerson";
-            Size = new Size(917, 502);
+            Size = new Size(917, 514);
             Load += UserControlAddPerson_Load;
             ((System.ComponentModel.ISupportInitialize)customersDbContextBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();
