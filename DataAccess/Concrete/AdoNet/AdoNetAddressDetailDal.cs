@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
@@ -10,7 +11,12 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetAddressDetailDal :IAddressDetailDal
     {
-        public List<AddressDetail> GetAll()
+        public List<AddressDetail> GetAll(Expression<Func<AddressDetail, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AddressDetail Get(Expression<Func<AddressDetail, bool>> filter)
         {
             throw new NotImplementedException();
         }

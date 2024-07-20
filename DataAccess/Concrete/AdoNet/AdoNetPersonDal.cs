@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
@@ -17,7 +18,14 @@ namespace DataAccess.Concrete.AdoNet
         {
             _dbContext = dbContext;
         }
-        public List<Person> GetAll()
+        
+
+        public List<Person> GetAll(Expression<Func<Person, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Person Get(Expression<Func<Person, bool>> filter)
         {
             throw new NotImplementedException();
         }

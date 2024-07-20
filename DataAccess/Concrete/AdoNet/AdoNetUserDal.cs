@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
@@ -22,9 +23,9 @@ namespace DataAccess.Concrete.AdoNet
         }
 
 
-        public List<User> GetAll()
+        
+        public List<User> GetAll(Expression<Func<User, bool>> filter = null)
         {
-
             _dbContext.OpenConnectionIfClosed();
 
             SqlCommand sqlCommand = new SqlCommand("Select * from Users", _dbContext.GetConnection());
@@ -57,6 +58,10 @@ namespace DataAccess.Concrete.AdoNet
             return users;
         }
 
+        public User Get(Expression<Func<User, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Add(User user)
         {

@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICompanySectorDal
+    public interface ICompanySectorDal:IEntityRepository<CompanySector>
     {
-        List<CompanySector> GetAll();
-        void Add(CompanySector companySector);
-        void Update(CompanySector companySector);
-        void Delete(CompanySector companySector);
+       
     }
 }

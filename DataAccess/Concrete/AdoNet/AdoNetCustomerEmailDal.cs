@@ -9,29 +9,29 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.AdoNet
 {
-    public class AdoNetCompanyDal: ICompanyDal
+    public class AdoNetCustomerEmailDal : ICustomerEmailDal
     {
-        public List<Company> GetAll(Expression<Func<Company, bool>> filter = null)
+        public List<CustomerEmail> GetAll(Expression<Func<CustomerEmail, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public Company Get(Expression<Func<Company, bool>> filter)
+        public CustomerEmail Get(Expression<Func<CustomerEmail, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(Company company)
+        public void Add(CustomerEmail entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Company company)
+        public void Update(CustomerEmail entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Company company)
+        public void Delete(CustomerEmail entity)
         {
             throw new NotImplementedException();
         }

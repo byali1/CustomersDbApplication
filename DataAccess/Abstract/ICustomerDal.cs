@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICustomerDal
+    public interface ICustomerDal:IEntityRepository<Customer>
     {
-        List<Customer> GetAll();
-        void Add(Customer customer);
-        void Update(Customer customer);
-        void Delete(Customer customer);
+       
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
@@ -10,7 +11,12 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetCompanySectorDal:ICompanySectorDal
     {
-        public List<CompanySector> GetAll()
+        public List<CompanySector> GetAll(Expression<Func<CompanySector, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CompanySector Get(Expression<Func<CompanySector, bool>> filter)
         {
             throw new NotImplementedException();
         }

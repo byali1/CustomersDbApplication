@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities.Concrete;
 using System.Data.SqlClient;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.AdoNet
 {
@@ -19,10 +20,8 @@ namespace DataAccess.Concrete.AdoNet
             _dbContext = dbContext;
         }
 
-
-        public List<Customer> GetAll()
+        public List<Customer> GetAll(Expression<Func<Customer, bool>> filter = null)
         {
-
             _dbContext.OpenConnectionIfClosed();
 
             SqlCommand sqlCommand = new SqlCommand("Select * from Customers", _dbContext.GetConnection());
@@ -49,6 +48,10 @@ namespace DataAccess.Concrete.AdoNet
             return customers;
         }
 
+        public Customer Get(Expression<Func<Customer, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
 
 
         public void Add(Customer customer)

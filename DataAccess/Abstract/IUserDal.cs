@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IUserDal
+    public interface IUserDal:IEntityRepository<User>
     {
-        List<User> GetAll();
-        void Add(User user);
-        void Update(User user);
-        void Delete(User user);
-
+        //Özel operasyonlar
         bool IsUserExist(string username);
         bool VerifyPassword(string password, string passwordHash);
         string GetPasswordHashByUsername(string username);

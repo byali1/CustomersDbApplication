@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IAddressTypeDal
+    public interface IAddressTypeDal:IEntityRepository<AddressType>
     {
-        List<AddressType> GetAll();
-        void Add(AddressType addressType);
-        void Update(AddressType addressType);
-        void Delete(AddressType addressType);
+        
     }
 }

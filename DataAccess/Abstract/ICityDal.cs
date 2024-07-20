@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface ICityDal
+    public interface ICityDal:IEntityRepository<City>
     {
-        List<City> GetAll();
+       
        
     }
 }
