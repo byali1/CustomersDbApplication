@@ -1,1 +1,2 @@
-To better learn SQL, ORM tools like Entity Framework have not been preferred.
+A database application in Windows Forms
+
