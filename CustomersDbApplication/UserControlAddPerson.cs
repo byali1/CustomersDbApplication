@@ -34,8 +34,11 @@ namespace CustomersDbApplication
         private void UserControlAddPerson_Load(object sender, EventArgs e)
         {
             dgwPersons.DataSource = _personService.GetAll();
-            FillComboBoxPersonIdentityTypes(new EfPersonIdentityTypeDal());
+            //FillComboBoxPersonIdentityTypes(new EfPersonIdentityTypeDal());
             //FillComboBoxPersonOccupations(new EfPersonOccupationDal());
+
+            FillComboBox(cbxPersonIdentityType, new EfPersonIdentityTypeDal().GetAll(), "IdentityTypeDescription", "PersonIdentityTypeId");
+            FillComboBox(cbxPersonOccupations, new EfPersonOccupationDal().GetAll(), "OccupationName", "PersonOccupationId");
 
 
         }
@@ -89,29 +92,15 @@ namespace CustomersDbApplication
             return false;
         }
 
-
-
-
-
-        private void FillComboBoxPersonIdentityTypes(IPersonIdentityTypeDal personIdentityTypeDal)
+        private void FillComboBox<T>(ComboBox comboBox, List<T> dataSource, string displayMember, string valueMember)
         {
-            BindingSource bindingSource = new BindingSource();
-            
-            bindingSource.DataSource = personIdentityTypeDal.GetAll();
-            cbxPersonIdentityType.DataSource = bindingSource;
-            cbxPersonIdentityType.DisplayMember = "IdentityTypeDescription";
-            cbxPersonIdentityType.ValueMember = "PersonIdentityTypeId";
-        }
-
-
-        private void FillComboBoxPersonOccupations(IPersonOccupationDal personOccupationDal)
-        {
-            BindingSource bindingSource = new BindingSource();
-
-            bindingSource.DataSource = personOccupationDal.GetAll();
-            cbxPersonOccupations.DataSource = bindingSource;
-            cbxPersonIdentityType.DisplayMember = "OccupationName";
-            cbxPersonIdentityType.ValueMember = "PersonOccupationId";
+            BindingSource bindingSource = new BindingSource
+            {
+                DataSource = dataSource
+            };
+            comboBox.DataSource = bindingSource;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
         }
     }
 }

@@ -51,11 +51,12 @@
             // 
             // dgwPersons
             // 
+            dgwPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgwPersons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgwPersons.Location = new Point(33, 3);
             dgwPersons.Name = "dgwPersons";
             dgwPersons.RowTemplate.Height = 25;
-            dgwPersons.Size = new Size(771, 190);
+            dgwPersons.Size = new Size(1097, 190);
             dgwPersons.TabIndex = 0;
             // 
             // label2
@@ -109,6 +110,9 @@
             // 
             // cbxPersonOccupations
             // 
+            cbxPersonOccupations.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbxPersonOccupations.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxPersonOccupations.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPersonOccupations.FormattingEnabled = true;
             cbxPersonOccupations.Location = new Point(272, 132);
             cbxPersonOccupations.Name = "cbxPersonOccupations";
@@ -126,6 +130,9 @@
             // 
             // cbxPersonIdentityType
             // 
+            cbxPersonIdentityType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbxPersonIdentityType.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxPersonIdentityType.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPersonIdentityType.FormattingEnabled = true;
             cbxPersonIdentityType.Location = new Point(17, 132);
             cbxPersonIdentityType.Name = "cbxPersonIdentityType";
@@ -149,7 +156,7 @@
             Controls.Add(grpBxAddPerson);
             Controls.Add(dgwPersons);
             Name = "UserControlAddPerson";
-            Size = new Size(819, 445);
+            Size = new Size(1161, 498);
             Load += UserControlAddPerson_Load;
             ((System.ComponentModel.ISupportInitialize)customersDbContextBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();

@@ -25,7 +25,7 @@ namespace CustomersDbApplication
         //    InitializeComponent();
         //}
 
-        public LoginPage( IUserService userService, IDbContext dbContext)
+        public LoginPage(IUserService userService, IDbContext dbContext)
         {
             InitializeComponent();
             _userService = userService;
@@ -163,7 +163,9 @@ namespace CustomersDbApplication
 
         private void LoginPage_Load(object sender, EventArgs e)
         {
-
+            tbxUsername.Text = "byali";
+            tbxPassword.Text = "byali123";
+            checkBoxIHaveAccount.Checked = true;
         }
     }
 }
