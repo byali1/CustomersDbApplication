@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -13,27 +14,48 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public List<PersonIdentityType> GetAll(Expression<Func<PersonIdentityType, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (EfCustomersDbContext customersDbContext = new EfCustomersDbContext())
+            {
+                return filter == null ? customersDbContext.Set<PersonIdentityType>().ToList() : customersDbContext.Set<PersonIdentityType>().Where(filter).ToList();
+            }
         }
 
         public PersonIdentityType Get(Expression<Func<PersonIdentityType, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (EfCustomersDbContext customersDbContext = new EfCustomersDbContext())
+            {
+                return customersDbContext.Set<PersonIdentityType>().SingleOrDefault(filter);
+            }
         }
 
         public void Add(PersonIdentityType entity)
         {
-            throw new NotImplementedException();
+            using (EfCustomersDbContext customersDbContext = new EfCustomersDbContext())
+            {
+                var addedEntity = customersDbContext.Entry(entity);
+                addedEntity.State = EntityState.Added;
+                customersDbContext.SaveChanges();
+            }
         }
 
         public void Update(PersonIdentityType entity)
         {
-            throw new NotImplementedException();
+            using (EfCustomersDbContext customersDbContext = new EfCustomersDbContext())
+            {
+                var updatedEntity = customersDbContext.Entry(entity);
+                updatedEntity.State = EntityState.Modified;
+                customersDbContext.SaveChanges();
+            }
         }
 
         public void Delete(PersonIdentityType entity)
         {
-            throw new NotImplementedException();
+            using (EfCustomersDbContext customersDbContext = new EfCustomersDbContext())
+            {
+                var deletedEntity = customersDbContext.Entry(entity);
+                deletedEntity.State = EntityState.Deleted;
+                customersDbContext.SaveChanges();
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace CustomersDbApplication
 {
     public partial class HomePage : Form
     {
-        private IDbContext _dbContext;
+        
 
         private Panel userControlPanel;
 
@@ -15,9 +15,8 @@ namespace CustomersDbApplication
         //{
         //    InitializeComponent();
         //}
-        public HomePage(IDbContext dbContext)
+        public HomePage()
         {
-            _dbContext = dbContext;
             InitializeComponent();
 
             userControlPanel = new Panel();
@@ -40,7 +39,10 @@ namespace CustomersDbApplication
 
         private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadUserControl(new UserControlAddPerson(_dbContext));
+            LoadUserControl(new UserControlAddPerson(new CustomerManager(new EfCustomerDal()), new PersonManager(new EfPersonDal())));
+
+
+
         }
 
 

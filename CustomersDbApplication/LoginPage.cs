@@ -142,7 +142,7 @@ namespace CustomersDbApplication
         private void SignIn(string username, string password)
         {
             this.Hide();
-            HomePage homePage = new HomePage(_dbContext);
+            HomePage homePage = new HomePage();
             homePage.Show();
         }
 

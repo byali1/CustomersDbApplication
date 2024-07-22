@@ -47,7 +47,7 @@
             menuStripHomePage.Items.AddRange(new ToolStripItem[] { cRUDİşlemleriToolStripMenuItem, görüntüleToolStripMenuItem });
             menuStripHomePage.Location = new Point(0, 0);
             menuStripHomePage.Name = "menuStripHomePage";
-            menuStripHomePage.Size = new Size(707, 24);
+            menuStripHomePage.Size = new Size(1164, 24);
             menuStripHomePage.TabIndex = 1;
             menuStripHomePage.Text = "menuStrip1";
             // 
@@ -120,7 +120,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(707, 324);
+            ClientSize = new Size(1164, 420);
             Controls.Add(menuStripHomePage);
             MainMenuStrip = menuStripHomePage;
             MaximizeBox = false;

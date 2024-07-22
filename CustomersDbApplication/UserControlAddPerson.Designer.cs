@@ -35,10 +35,14 @@
             lblName = new Label();
             tbxCustomerName = new TextBox();
             tbxCustomerLastName = new TextBox();
-            grpBxAddCustomer = new GroupBox();
+            grpBxAddPerson = new GroupBox();
+            cbxPersonOccupations = new ComboBox();
+            lblPersonIdentityType = new Label();
+            cbxPersonIdentityType = new ComboBox();
+            btnAddPerson = new Button();
             ((System.ComponentModel.ISupportInitialize)customersDbContextBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgwPersons).BeginInit();
-            grpBxAddCustomer.SuspendLayout();
+            grpBxAddPerson.SuspendLayout();
             SuspendLayout();
             // 
             // customersDbContextBindingSource
@@ -48,16 +52,16 @@
             // dgwPersons
             // 
             dgwPersons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgwPersons.Location = new Point(68, 26);
+            dgwPersons.Location = new Point(33, 3);
             dgwPersons.Name = "dgwPersons";
             dgwPersons.RowTemplate.Height = 25;
-            dgwPersons.Size = new Size(423, 150);
+            dgwPersons.Size = new Size(771, 190);
             dgwPersons.TabIndex = 0;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(273, 38);
+            label2.Location = new Point(272, 55);
             label2.Name = "label2";
             label2.Size = new Size(87, 15);
             label2.TabIndex = 2;
@@ -66,7 +70,7 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(18, 38);
+            lblName.Location = new Point(17, 55);
             lblName.Name = "lblName";
             lblName.Size = new Size(69, 15);
             lblName.TabIndex = 1;
@@ -74,44 +78,83 @@
             // 
             // tbxCustomerName
             // 
-            tbxCustomerName.Location = new Point(18, 56);
+            tbxCustomerName.Location = new Point(17, 73);
             tbxCustomerName.Name = "tbxCustomerName";
             tbxCustomerName.Size = new Size(209, 23);
             tbxCustomerName.TabIndex = 3;
             // 
             // tbxCustomerLastName
             // 
-            tbxCustomerLastName.Location = new Point(273, 56);
+            tbxCustomerLastName.Location = new Point(272, 73);
             tbxCustomerLastName.Name = "tbxCustomerLastName";
             tbxCustomerLastName.Size = new Size(209, 23);
             tbxCustomerLastName.TabIndex = 4;
             // 
-            // grpBxAddCustomer
+            // grpBxAddPerson
             // 
-            grpBxAddCustomer.Controls.Add(tbxCustomerLastName);
-            grpBxAddCustomer.Controls.Add(tbxCustomerName);
-            grpBxAddCustomer.Controls.Add(lblName);
-            grpBxAddCustomer.Controls.Add(label2);
-            grpBxAddCustomer.Location = new Point(68, 199);
-            grpBxAddCustomer.Name = "grpBxAddCustomer";
-            grpBxAddCustomer.Size = new Size(501, 196);
-            grpBxAddCustomer.TabIndex = 4;
-            grpBxAddCustomer.TabStop = false;
-            grpBxAddCustomer.Text = "Müşteri ekle";
+            grpBxAddPerson.Controls.Add(cbxPersonOccupations);
+            grpBxAddPerson.Controls.Add(lblPersonIdentityType);
+            grpBxAddPerson.Controls.Add(cbxPersonIdentityType);
+            grpBxAddPerson.Controls.Add(btnAddPerson);
+            grpBxAddPerson.Controls.Add(tbxCustomerLastName);
+            grpBxAddPerson.Controls.Add(tbxCustomerName);
+            grpBxAddPerson.Controls.Add(lblName);
+            grpBxAddPerson.Controls.Add(label2);
+            grpBxAddPerson.Location = new Point(33, 214);
+            grpBxAddPerson.Name = "grpBxAddPerson";
+            grpBxAddPerson.Size = new Size(501, 196);
+            grpBxAddPerson.TabIndex = 4;
+            grpBxAddPerson.TabStop = false;
+            grpBxAddPerson.Text = "Gerçek müşteri ekle";
+            // 
+            // cbxPersonOccupations
+            // 
+            cbxPersonOccupations.FormattingEnabled = true;
+            cbxPersonOccupations.Location = new Point(272, 132);
+            cbxPersonOccupations.Name = "cbxPersonOccupations";
+            cbxPersonOccupations.Size = new Size(209, 23);
+            cbxPersonOccupations.TabIndex = 8;
+            // 
+            // lblPersonIdentityType
+            // 
+            lblPersonIdentityType.AutoSize = true;
+            lblPersonIdentityType.Location = new Point(17, 114);
+            lblPersonIdentityType.Name = "lblPersonIdentityType";
+            lblPersonIdentityType.Size = new Size(63, 15);
+            lblPersonIdentityType.TabIndex = 7;
+            lblPersonIdentityType.Text = "Kimlik tipi:";
+            // 
+            // cbxPersonIdentityType
+            // 
+            cbxPersonIdentityType.FormattingEnabled = true;
+            cbxPersonIdentityType.Location = new Point(17, 132);
+            cbxPersonIdentityType.Name = "cbxPersonIdentityType";
+            cbxPersonIdentityType.Size = new Size(209, 23);
+            cbxPersonIdentityType.TabIndex = 6;
+            // 
+            // btnAddPerson
+            // 
+            btnAddPerson.Location = new Point(406, 22);
+            btnAddPerson.Name = "btnAddPerson";
+            btnAddPerson.Size = new Size(75, 23);
+            btnAddPerson.TabIndex = 5;
+            btnAddPerson.Text = "Ekle";
+            btnAddPerson.UseVisualStyleBackColor = true;
+            btnAddPerson.Click += btnAddPerson_Click;
             // 
             // UserControlAddPerson
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(grpBxAddCustomer);
+            Controls.Add(grpBxAddPerson);
             Controls.Add(dgwPersons);
             Name = "UserControlAddPerson";
-            Size = new Size(917, 514);
+            Size = new Size(819, 445);
             Load += UserControlAddPerson_Load;
             ((System.ComponentModel.ISupportInitialize)customersDbContextBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();
-            grpBxAddCustomer.ResumeLayout(false);
-            grpBxAddCustomer.PerformLayout();
+            grpBxAddPerson.ResumeLayout(false);
+            grpBxAddPerson.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -122,6 +165,10 @@
         private Label lblName;
         private TextBox tbxCustomerName;
         private TextBox tbxCustomerLastName;
-        private GroupBox grpBxAddCustomer;
+        private GroupBox grpBxAddPerson;
+        private Button btnAddPerson;
+        private ComboBox cbxPersonIdentityType;
+        private Label lblPersonIdentityType;
+        private ComboBox cbxPersonOccupations;
     }
 }
