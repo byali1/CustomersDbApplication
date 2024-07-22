@@ -242,3 +242,4 @@ _Pvt_Extensions
 .fake/ 
 /DataAccess/Concrete/AdoNet/CustomersDbContext.cs
 /DataAccess/Concrete/EntityFramework/EfCustomersDbContext.cs
+/DataAccess/Concrete/EntityFramework/EfCustomersDbContext.cs
