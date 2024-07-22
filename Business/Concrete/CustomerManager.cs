@@ -23,19 +23,25 @@ namespace Business.Concrete
             return _customerDal.GetAll();
         }
 
+        public List<Customer> GetAllByName(string fullName)
+        {
+            return _customerDal.GetAll(c => (c.Name + " " + c.LastName).Contains(fullName));
+
+        }
+
         public void Add(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Add(customer);
         }
 
         public void Update(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Update(customer);
         }
 
         public void Delete(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Delete(customer);
         }
     }
 }

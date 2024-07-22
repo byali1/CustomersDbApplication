@@ -1,6 +1,7 @@
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.AdoNet;
+using DataAccess.Concrete.EntityFramework;
 
 namespace CustomersDbApplication
 {
@@ -51,6 +52,11 @@ namespace CustomersDbApplication
             userControlPanel.Controls.Clear();
             userControl.Dock = DockStyle.Fill;
             userControlPanel.Controls.Add(userControl);
+        }
+
+        private void listAllCustomersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new UserControlListCustomers(new CustomerManager(new EfCustomerDal())));
         }
     }
 }

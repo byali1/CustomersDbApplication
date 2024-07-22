@@ -36,9 +36,9 @@
             kullanıcıSilToolStripMenuItem = new ToolStripMenuItem();
             kullanıcıDüzenleToolStripMenuItem = new ToolStripMenuItem();
             görüntüleToolStripMenuItem = new ToolStripMenuItem();
-            müşterileriListeleToolStripMenuItem = new ToolStripMenuItem();
-            gerçekMüşterileriListeleToolStripMenuItem = new ToolStripMenuItem();
-            tüzelMüşterileriListeleToolStripMenuItem = new ToolStripMenuItem();
+            listAllCustomersToolStripMenuItem = new ToolStripMenuItem();
+            listPersonsToolStripMenuItem = new ToolStripMenuItem();
+            listCompaniesListeleToolStripMenuItem = new ToolStripMenuItem();
             menuStripHomePage.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,58 +62,59 @@
             // 
             addCustomerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addPersonToolStripMenuItem, addCompanyToolStripMenuItem });
             addCustomerToolStripMenuItem.Name = "addCustomerToolStripMenuItem";
-            addCustomerToolStripMenuItem.Size = new Size(180, 22);
+            addCustomerToolStripMenuItem.Size = new Size(158, 22);
             addCustomerToolStripMenuItem.Text = "Müşteri ekle";
             // 
             // addPersonToolStripMenuItem
             // 
             addPersonToolStripMenuItem.Name = "addPersonToolStripMenuItem";
-            addPersonToolStripMenuItem.Size = new Size(180, 22);
+            addPersonToolStripMenuItem.Size = new Size(177, 22);
             addPersonToolStripMenuItem.Text = "Gerçek müşteri ekle";
             addPersonToolStripMenuItem.Click += addPersonToolStripMenuItem_Click;
             // 
             // addCompanyToolStripMenuItem
             // 
             addCompanyToolStripMenuItem.Name = "addCompanyToolStripMenuItem";
-            addCompanyToolStripMenuItem.Size = new Size(180, 22);
+            addCompanyToolStripMenuItem.Size = new Size(177, 22);
             addCompanyToolStripMenuItem.Text = "Tüzel müşteri ekle";
             // 
             // kullanıcıSilToolStripMenuItem
             // 
             kullanıcıSilToolStripMenuItem.Name = "kullanıcıSilToolStripMenuItem";
-            kullanıcıSilToolStripMenuItem.Size = new Size(180, 22);
+            kullanıcıSilToolStripMenuItem.Size = new Size(158, 22);
             kullanıcıSilToolStripMenuItem.Text = "Müşteri sil";
             // 
             // kullanıcıDüzenleToolStripMenuItem
             // 
             kullanıcıDüzenleToolStripMenuItem.Name = "kullanıcıDüzenleToolStripMenuItem";
-            kullanıcıDüzenleToolStripMenuItem.Size = new Size(180, 22);
+            kullanıcıDüzenleToolStripMenuItem.Size = new Size(158, 22);
             kullanıcıDüzenleToolStripMenuItem.Text = "Müşteri düzenle";
             // 
             // görüntüleToolStripMenuItem
             // 
-            görüntüleToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { müşterileriListeleToolStripMenuItem, gerçekMüşterileriListeleToolStripMenuItem, tüzelMüşterileriListeleToolStripMenuItem });
+            görüntüleToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { listAllCustomersToolStripMenuItem, listPersonsToolStripMenuItem, listCompaniesListeleToolStripMenuItem });
             görüntüleToolStripMenuItem.Name = "görüntüleToolStripMenuItem";
             görüntüleToolStripMenuItem.Size = new Size(72, 20);
             görüntüleToolStripMenuItem.Text = "Görüntüle";
             // 
-            // müşterileriListeleToolStripMenuItem
+            // listAllCustomersToolStripMenuItem
             // 
-            müşterileriListeleToolStripMenuItem.Name = "müşterileriListeleToolStripMenuItem";
-            müşterileriListeleToolStripMenuItem.Size = new Size(202, 22);
-            müşterileriListeleToolStripMenuItem.Text = "Müşterileri listele";
+            listAllCustomersToolStripMenuItem.Name = "listAllCustomersToolStripMenuItem";
+            listAllCustomersToolStripMenuItem.Size = new Size(202, 22);
+            listAllCustomersToolStripMenuItem.Text = "Müşterileri listele";
+            listAllCustomersToolStripMenuItem.Click += listAllCustomersToolStripMenuItem_Click;
             // 
-            // gerçekMüşterileriListeleToolStripMenuItem
+            // listPersonsToolStripMenuItem
             // 
-            gerçekMüşterileriListeleToolStripMenuItem.Name = "gerçekMüşterileriListeleToolStripMenuItem";
-            gerçekMüşterileriListeleToolStripMenuItem.Size = new Size(202, 22);
-            gerçekMüşterileriListeleToolStripMenuItem.Text = "Gerçek müşterileri listele";
+            listPersonsToolStripMenuItem.Name = "listPersonsToolStripMenuItem";
+            listPersonsToolStripMenuItem.Size = new Size(202, 22);
+            listPersonsToolStripMenuItem.Text = "Gerçek müşterileri listele";
             // 
-            // tüzelMüşterileriListeleToolStripMenuItem
+            // listCompaniesListeleToolStripMenuItem
             // 
-            tüzelMüşterileriListeleToolStripMenuItem.Name = "tüzelMüşterileriListeleToolStripMenuItem";
-            tüzelMüşterileriListeleToolStripMenuItem.Size = new Size(202, 22);
-            tüzelMüşterileriListeleToolStripMenuItem.Text = "Tüzel müşterileri listele";
+            listCompaniesListeleToolStripMenuItem.Name = "listCompaniesListeleToolStripMenuItem";
+            listCompaniesListeleToolStripMenuItem.Size = new Size(202, 22);
+            listCompaniesListeleToolStripMenuItem.Text = "Tüzel müşterileri listele";
             // 
             // HomePage
             // 
@@ -140,9 +141,9 @@
         private ToolStripMenuItem kullanıcıSilToolStripMenuItem;
         private ToolStripMenuItem kullanıcıDüzenleToolStripMenuItem;
         private ToolStripMenuItem görüntüleToolStripMenuItem;
-        private ToolStripMenuItem müşterileriListeleToolStripMenuItem;
-        private ToolStripMenuItem gerçekMüşterileriListeleToolStripMenuItem;
-        private ToolStripMenuItem tüzelMüşterileriListeleToolStripMenuItem;
+        private ToolStripMenuItem listAllCustomersToolStripMenuItem;
+        private ToolStripMenuItem listPersonsToolStripMenuItem;
+        private ToolStripMenuItem listCompaniesListeleToolStripMenuItem;
         private ToolStripMenuItem addPersonToolStripMenuItem;
         private ToolStripMenuItem addCompanyToolStripMenuItem;
     }

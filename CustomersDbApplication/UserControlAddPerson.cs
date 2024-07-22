@@ -15,7 +15,7 @@ namespace CustomersDbApplication
 {
     public partial class UserControlAddPerson : UserControl
     {
-        private IDbContext _dbContext;
+        private readonly IDbContext _dbContext;
         public UserControlAddPerson(IDbContext dbContext)
         {
             _dbContext = dbContext;
