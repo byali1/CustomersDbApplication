@@ -40,7 +40,9 @@ namespace CustomersDbApplication
 
         private void listAllCustomersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ListCustomerPage listCustomerPage = new ListCustomerPage(new CustomerManager(new EfCustomerDal()));
+            listCustomerPage.MdiParent = this;
+            listCustomerPage.Show();
         }
     }
 }

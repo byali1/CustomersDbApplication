@@ -1,6 +1,4 @@
-﻿using Business.Concrete;
-using DataAccess.Abstract;
-using DataAccess.Concrete.AdoNet;
+﻿using Business.Abstract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,27 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Business.Abstract;
-using DataAccess.Concrete.EntityFramework;
 
 namespace CustomersDbApplication
 {
-    public partial class UserControlListCustomers : UserControl
+    public partial class ListCustomerPage : Form
     {
         private readonly ICustomerService _customerService;
-
-
-        public UserControlListCustomers(ICustomerService customerService)
+        public ListCustomerPage(ICustomerService customerService)
         {
-
             _customerService = customerService;
             InitializeComponent();
-        }
-
-        private void UserControlListCustomers_Load(object sender, EventArgs e)
-        {
-            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            dgwCustomers.DataSource = customerManager.GetAll();
         }
 
         private void tbxSearchCustomerByName_TextChanged(object sender, EventArgs e)
@@ -44,9 +31,9 @@ namespace CustomersDbApplication
             dgwCustomers.DataSource = _customerService.GetAllByName(text);
         }
 
-        private void lblSearchCustomer_Click(object sender, EventArgs e)
+        private void ListCustomerPage_Load(object sender, EventArgs e)
         {
-
+            dgwCustomers.DataSource = _customerService.GetAll();
         }
     }
 }
