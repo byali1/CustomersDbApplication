@@ -97,6 +97,7 @@ namespace CustomersDbApplication
 
         private void SignIn(string username, string password)
         {
+            _userService.UpdateLastActiveTime(username);
             isSignInSuccess = true;
             this.Close();
         }

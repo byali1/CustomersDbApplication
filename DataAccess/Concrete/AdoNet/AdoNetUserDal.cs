@@ -133,5 +133,19 @@ namespace DataAccess.Concrete.AdoNet
             _dbContext.CloseConnectionIfOpen();
             return "null";
         }
+
+        public void UpdateLastActiveTime(string username)
+        {
+            _dbContext.OpenConnectionIfClosed();
+
+            SqlCommand sqlCommand = new SqlCommand("Update Users Set LastActiveTime = @dateTimeUtcNow Where username = @username", _dbContext.GetConnection());
+
+            sqlCommand.Parameters.AddWithValue("@dateTimeUtcNow", DateTime.UtcNow);
+            sqlCommand.Parameters.AddWithValue("@username", username);
+
+            sqlCommand.ExecuteNonQuery();
+
+            _dbContext.CloseConnectionIfOpen();
+        }
     }
 }

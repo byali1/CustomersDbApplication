@@ -14,5 +14,6 @@ namespace DataAccess.Abstract
         bool IsUserExist(string username);
         bool VerifyPassword(string password, string passwordHash);
         string GetPasswordHashByUsername(string username);
+        void UpdateLastActiveTime(string username);
     }
 }

@@ -52,5 +52,10 @@ namespace Business.Concrete
         {
             return _userDal.GetPasswordHashByUsername(username);
         }
+
+        public void UpdateLastActiveTime(string username)
+        {
+            _userDal.UpdateLastActiveTime(username);
+        }
     }
 }

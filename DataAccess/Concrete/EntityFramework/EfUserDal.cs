@@ -26,5 +26,10 @@ namespace DataAccess.Concrete.EntityFramework
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateLastActiveTime(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
