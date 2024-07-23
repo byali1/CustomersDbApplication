@@ -4,30 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
     public class AddressDetailManager :IAddressDetailService
     {
+        private IAddressDetailDal _addressDetailDal;
+
+        public AddressDetailManager(IAddressDetailDal addressDetailDal)
+        {
+            _addressDetailDal = addressDetailDal;
+        }
         public List<AddressDetail> GetAll()
         {
-            throw new NotImplementedException();
+            return _addressDetailDal.GetAll();
         }
 
         public void Add(AddressDetail addressDetail)
         {
-            throw new NotImplementedException();
+            _addressDetailDal.Add(addressDetail);
         }
 
         public void Update(AddressDetail addressDetail)
         {
-            throw new NotImplementedException();
+            _addressDetailDal.Update(addressDetail);
         }
 
         public void Delete(AddressDetail addressDetail)
         {
-            throw new NotImplementedException();
+            _addressDetailDal.Delete(addressDetail);
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Abstract;
+using Business.Utilities.SpecialFunctions;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
@@ -21,10 +22,14 @@ namespace CustomersDbApplication
 
         private readonly ICustomerService _customerService;
         private readonly IPersonService _personService;
-        public UserControlAddPerson(ICustomerService customerService, IPersonService personService)
+        private readonly ICustomerAddressService _customerAddressService;
+        private readonly IAddressDetailService _addressDetailService;
+        public UserControlAddPerson(ICustomerService customerService, IPersonService personService, ICustomerAddressService customerAddressService, IAddressDetailService addressDetailService)
         {
             _customerService = customerService;
             _personService = personService;
+            _customerAddressService = customerAddressService;
+            _addressDetailService = addressDetailService;
             InitializeComponent();
 
         }
@@ -33,12 +38,20 @@ namespace CustomersDbApplication
 
         private void UserControlAddPerson_Load(object sender, EventArgs e)
         {
+            
+
             dgwPersons.DataSource = _personService.GetAll();
             //FillComboBoxPersonIdentityTypes(new EfPersonIdentityTypeDal());
             //FillComboBoxPersonOccupations(new EfPersonOccupationDal());
 
             FillComboBox(cbxPersonIdentityType, new EfPersonIdentityTypeDal().GetAll(), "IdentityTypeDescription", "PersonIdentityTypeId");
             FillComboBox(cbxPersonOccupations, new EfPersonOccupationDal().GetAll(), "OccupationName", "PersonOccupationId");
+
+            FillComboBox(cbxAddressTypes, new EfAddressTypeDal().GetAll(), "AddressTypeDescription", "AddressTypeId");
+
+            FillComboBox(cbxCities, new EfCityDal().GetAll(), "CityName", "CityId");
+
+           
 
 
         }
@@ -48,10 +61,19 @@ namespace CustomersDbApplication
             string customerName = tbxCustomerName.Text;
             string customerLastName = tbxCustomerLastName.Text;
 
+
+
             var check = IsNullOrEmptyCustomerInformation(customerName, customerLastName);
 
             if (!check)
             {
+                if (ControlFunctions.CheckStartsWithNumber(customerName) || ControlFunctions.CheckStartsWithNumber(customerLastName))
+                {
+                    MessageBox.Show("Müşteri adı ve soyadı sayı ile başlayamaz.", "", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
                 var customer = new Customer
                 {
                     Name = customerName,
@@ -60,28 +82,74 @@ namespace CustomersDbApplication
 
                 _customerService.Add(customer);
 
-                int customerId = customer.CustomerId;
+                // int customerId = customer.CustomerId;
 
                 var selectedIdentityType = (PersonIdentityType)cbxPersonIdentityType.SelectedItem;
                 int personIdentityTypeId = selectedIdentityType.PersonIdentityTypeId;
 
 
+                var selectedOccupation = (PersonOccupation)cbxPersonOccupations.SelectedItem;
+                int personOccupationId = selectedOccupation.PersonOccupationId;
+
+                var selectedAddressType = (AddressType)cbxAddressTypes.SelectedItem;
+                int customerAddressTypeId = selectedAddressType.AddressTypeId;
+
+                var selectedCity = (City)cbxCities.SelectedItem;
+                int cityId = selectedCity.CityId;
+
+                var selectedDistrict = (District)cbxDistricts.SelectedItem;
+                int districtId = selectedDistrict.DistrictId;
+
+                int personGenderId = GetGenderId(radioBtnMale.Checked, radioBtnFemale.Checked);
+
+                var customerAddress = new CustomerAddress
+                {
+                    CustomerId = customer.CustomerId,
+                    AddressTypeId = customerAddressTypeId,
+                    AddressName = tbxAddressName.Text,
+                    IsBillingAddress = checkBxIsBillingAddress.Checked
+                };
+
+                _customerAddressService.Add(customerAddress);
+
+                var addressDetail = new AddressDetail
+                {
+                    CustomerAddressId = customerAddress.CustomerAddressId,
+                    AddressDetailDescription = richTbxAddressDetailDescription.Text,
+                    CityId = cityId,
+                    CountryId = 190,
+                    DistrictId = districtId
+                };
+
+                _addressDetailService.Add(addressDetail);
 
 
 
+                _personService.Add(new Person
+                {
+                    CustomerId = customer.CustomerId,
+                    PersonIdentityTypeId = personIdentityTypeId,
+                    PersonOccupationId = personOccupationId,
+                    PersonGenderId = personGenderId,
+                    IdentityNumber = tbxIdentityNumber.Text,
+                    BirthDate = dTimePickerBirthDate.Value,
+                    BirthPlace = tbxBirthPlace.Text,
+                    CreatedTime = DateTime.UtcNow,
+                    UpdatedTime = DateTime.UtcNow
+                });
 
 
+
+                MessageBox.Show("Müşteri başarıyla eklendi.", "BAŞARILI", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
             }
 
             MessageBox.Show("Müşteri ad ve soyad kısmı boş olamaz.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+
         }
 
-
-        private bool AddCustomerToDatabase(string customerName, string customerLastName)
-        {
-            return true;
-        }
 
         private bool IsNullOrEmptyCustomerInformation(string customerName, string customerLastName)
         {
@@ -90,6 +158,43 @@ namespace CustomersDbApplication
                 return true;
             }
             return false;
+        }
+
+        private int GetGenderId(bool radioBtnMaleChecked, bool radioBtnFemaleChecked)
+        {
+            if (radioBtnMaleChecked)
+            {
+                return 1;
+            }
+            if (radioBtnFemaleChecked)
+            {
+                return 2;
+            }
+
+            MessageBox.Show("Lütfen cinsiyet seçin.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return -1;
+        }
+
+
+        private void tbxIdentityNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void grpBxAddPerson_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxCities_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedCity = (City)cbxCities.SelectedItem;
+            int cityId = selectedCity.CityId;
+
+            FillComboBox(cbxDistricts, new EfDistrictDal().GetAll(d=> d.CityId == cityId), "DistrictName", "DistrictId");
         }
 
         private void FillComboBox<T>(ComboBox comboBox, List<T> dataSource, string displayMember, string valueMember)
