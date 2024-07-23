@@ -122,8 +122,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1164, 559);
             Controls.Add(menuStripHomePage);
+            IsMdiContainer = true;
             MainMenuStrip = menuStripHomePage;
-            MaximizeBox = false;
             Name = "HomePage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CustomersDb App";

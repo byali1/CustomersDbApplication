@@ -1,44 +1,26 @@
 ﻿using DataAccess.Abstract;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Abstract;
-using Business.Utilities.SpecialFunctions;
-using DataAccess.Concrete;
 using Entities.Concrete;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace CustomersDbApplication
 {
     public partial class LoginPage : Form
     {
-        private IDbContext _dbContext;
-        private IUserService _userService;
-        //public LoginPage()
-        //{
-        //    InitializeComponent();
-        //}
+        public bool isSignInSuccess = false;
+        private readonly IUserService _userService;
 
-        public LoginPage(IUserService userService, IDbContext dbContext)
+        public LoginPage(IUserService userService)
         {
-            InitializeComponent();
             _userService = userService;
-            _dbContext = dbContext;
+            InitializeComponent();
         }
-
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
             var username = tbxUsername.Text;
             var password = tbxPassword.Text;
-
-
 
             if (!checkBoxIHaveAccount.Checked)
             {
@@ -50,10 +32,9 @@ namespace CustomersDbApplication
 
                 MessageBox.Show("Bu kullanıcı adı ile zaten bir üye mevcut.", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-
             }
 
-            //Hesabım var
+            // Hesabım var
             if (IsUserExist(username))
             {
                 string passwordHash = GetPasswordHash(username);
@@ -65,58 +46,35 @@ namespace CustomersDbApplication
                 }
 
                 MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 return;
             }
 
-            MessageBox.Show("Böyle bir hesap bulunamadı..", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-
-
-
+            MessageBox.Show("Böyle bir hesap bulunamadı.", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
         private void checkBoxIHaveAccount_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxIHaveAccount.Checked)
             {
                 btnSignUp.Text = "Giriş yap";
-
                 return;
             }
 
             btnSignUp.Text = "Üye ol";
         }
 
-
-
         private void SignUp(string username, string password)
         {
-            if (ControlFunctions.IsNullOrWhiteSpace(username) || ControlFunctions.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Kullanıcı adı ve şifre boş olamaz, boşluk karakteri içeremez.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Kullanıcı adı ve şifre boş olamaz.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-
-
-            if (ControlFunctions.CheckStartsWithNumber(username))
-            {
-                MessageBox.Show("Kullanıcı adı sayı ile başlayamaz.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-
-            if (ControlFunctions.IsContainsSpace(username))
-            {
-
-                ControlFunctions.RemoveSpaces(username);
-            }
-
-
-
 
             try
             {
@@ -134,16 +92,13 @@ namespace CustomersDbApplication
             catch (Exception exception)
             {
                 MessageBox.Show($"Kayıt işlemi başarısız. {exception.Message}", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
             }
         }
 
-
         private void SignIn(string username, string password)
         {
-            this.Hide();
-            HomePage homePage = new HomePage();
-            homePage.Show();
+            isSignInSuccess = true;
+            this.Close();
         }
 
         private bool IsUserExist(string username)
@@ -151,9 +106,9 @@ namespace CustomersDbApplication
             return _userService.IsUserExist(username);
         }
 
-        private bool VerifyUserPassword(string password, string passworHash)
+        private bool VerifyUserPassword(string password, string passwordHash)
         {
-            return _userService.VerifyPassword(password, passworHash);
+            return _userService.VerifyPassword(password, passwordHash);
         }
 
         private string GetPasswordHash(string username)

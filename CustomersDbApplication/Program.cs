@@ -2,8 +2,12 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Abstract.PasswordHashing;
-using DataAccess.Concrete;
 using DataAccess.Concrete.AdoNet;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Windows.Forms;
+using DataAccess.Concrete;
+using DataAccess.Concrete.EntityFramework;
 
 namespace CustomersDbApplication
 {
@@ -15,20 +19,35 @@ namespace CustomersDbApplication
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            IDbContext dbContext = new CustomersDbContext();
-            IPasswordHasher passwordHasher = new PasswordHasher();
-            IUserDal userDal = new AdoNetUserDal(dbContext, passwordHasher);
-
-
-            IUserService userService = new UserManager(userDal);
-
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
             ApplicationConfiguration.Initialize();
-            //Application.Run(new HomePage(dbContext));
+            var loginPage = serviceProvider.GetRequiredService<LoginPage>();
+            Application.Run(loginPage);
 
-            Application.Run(new LoginPage(userService,dbContext));
+            if (loginPage.isSignInSuccess)
+            {
+                var homePage = serviceProvider.GetRequiredService<HomePage>();
+                Application.Run(homePage);
+            }
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddScoped<IDbContext, CustomersDbContext>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IUserDal, AdoNetUserDal>();
+            services.AddScoped<IUserService, UserManager>();
+
+            services.AddScoped<LoginPage>();
+            services.AddScoped<HomePage>();
+
+            services.AddScoped<ICustomerService, CustomerManager>();
+            services.AddScoped<ICustomerDal, EfCustomerDal>();
+
+            // Register other services here
         }
     }
 }
