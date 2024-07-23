@@ -24,12 +24,22 @@ namespace CustomersDbApplication
         private readonly IPersonService _personService;
         private readonly ICustomerAddressService _customerAddressService;
         private readonly IAddressDetailService _addressDetailService;
-        public UserControlAddPerson(ICustomerService customerService, IPersonService personService, ICustomerAddressService customerAddressService, IAddressDetailService addressDetailService)
+        private readonly IPhoneNumberDetailService _phoneNumberDetailService;
+        private readonly ICustomerPhoneNumberService _customerPhoneNumberService;
+        private readonly IEmailDetailService _emailDetailService;
+        private readonly ICustomerEmailService _customerEmailService;
+
+
+        public UserControlAddPerson(ICustomerService customerService, IPersonService personService, ICustomerAddressService customerAddressService, IAddressDetailService addressDetailService, IPhoneNumberDetailService phoneNumberDetailService, ICustomerPhoneNumberService customerPhoneNumberService, IEmailDetailService emailDetailService, ICustomerEmailService customerEmailService)
         {
             _customerService = customerService;
             _personService = personService;
             _customerAddressService = customerAddressService;
             _addressDetailService = addressDetailService;
+            _phoneNumberDetailService = phoneNumberDetailService;
+            _customerPhoneNumberService = customerPhoneNumberService;
+            _emailDetailService = emailDetailService;
+            _customerEmailService = customerEmailService;
             InitializeComponent();
 
         }
@@ -38,7 +48,7 @@ namespace CustomersDbApplication
 
         private void UserControlAddPerson_Load(object sender, EventArgs e)
         {
-            
+
 
             dgwPersons.DataSource = _personService.GetAll();
             //FillComboBoxPersonIdentityTypes(new EfPersonIdentityTypeDal());
@@ -51,7 +61,7 @@ namespace CustomersDbApplication
 
             FillComboBox(cbxCities, new EfCityDal().GetAll(), "CityName", "CityId");
 
-           
+
 
 
         }
@@ -139,6 +149,38 @@ namespace CustomersDbApplication
                 });
 
 
+                var phoneNumberDetail = new PhoneNumberDetail
+                {
+                    PhoneNumber = tbxPhoneNumber.Text
+                };
+
+                _phoneNumberDetailService.Add(phoneNumberDetail);
+
+                var customerPhoneNumber = new CustomerPhoneNumber
+                {
+                    PhoneNumberDetailId = phoneNumberDetail.PhoneNumberDetailId,
+                    CustomerId = customer.CustomerId,
+                    IsPrimary = checkBxIsPrimaryPhoneNumber.Checked
+                };
+
+                _customerPhoneNumberService.Add(customerPhoneNumber);
+
+                var emailDetail = new EmailDetail
+                {
+                    Email = tbxEmail.Text
+                };
+
+                _emailDetailService.Add(emailDetail);
+
+                var customerEmail = new CustomerEmail
+                {
+                    CustomerEmailDetailId = emailDetail.CustomerEmailDetailId,
+                    CustomerId = customer.CustomerId,
+                    IsPrimary = checkBxIsPrimaryEmail.Checked
+                };
+
+                _customerEmailService.Add(customerEmail);
+
 
                 MessageBox.Show("Müşteri başarıyla eklendi.", "BAŞARILI", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
@@ -194,7 +236,7 @@ namespace CustomersDbApplication
             var selectedCity = (City)cbxCities.SelectedItem;
             int cityId = selectedCity.CityId;
 
-            FillComboBox(cbxDistricts, new EfDistrictDal().GetAll(d=> d.CityId == cityId), "DistrictName", "DistrictId");
+            FillComboBox(cbxDistricts, new EfDistrictDal().GetAll(d => d.CityId == cityId), "DistrictName", "DistrictId");
         }
 
         private void FillComboBox<T>(ComboBox comboBox, List<T> dataSource, string displayMember, string valueMember)

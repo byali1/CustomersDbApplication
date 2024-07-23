@@ -36,6 +36,12 @@
             tbxCustomerName = new TextBox();
             tbxCustomerLastName = new TextBox();
             grpBxAddPerson = new GroupBox();
+            checkBxIsPrimaryEmail = new CheckBox();
+            checkBxIsPrimaryPhoneNumber = new CheckBox();
+            tbxEmail = new TextBox();
+            lblEmail = new Label();
+            tbxPhoneNumber = new TextBox();
+            lblPhoneNumber = new Label();
             checkBxIsBillingAddress = new CheckBox();
             cbxDistricts = new ComboBox();
             lblDistrict = new Label();
@@ -114,6 +120,12 @@
             // 
             // grpBxAddPerson
             // 
+            grpBxAddPerson.Controls.Add(checkBxIsPrimaryEmail);
+            grpBxAddPerson.Controls.Add(checkBxIsPrimaryPhoneNumber);
+            grpBxAddPerson.Controls.Add(tbxEmail);
+            grpBxAddPerson.Controls.Add(lblEmail);
+            grpBxAddPerson.Controls.Add(tbxPhoneNumber);
+            grpBxAddPerson.Controls.Add(lblPhoneNumber);
             grpBxAddPerson.Controls.Add(checkBxIsBillingAddress);
             grpBxAddPerson.Controls.Add(cbxDistricts);
             grpBxAddPerson.Controls.Add(lblDistrict);
@@ -145,16 +157,70 @@
             grpBxAddPerson.Controls.Add(label2);
             grpBxAddPerson.Location = new Point(33, 214);
             grpBxAddPerson.Name = "grpBxAddPerson";
-            grpBxAddPerson.Size = new Size(1010, 343);
+            grpBxAddPerson.Size = new Size(1010, 390);
             grpBxAddPerson.TabIndex = 4;
             grpBxAddPerson.TabStop = false;
             grpBxAddPerson.Text = "Gerçek müşteri ekle";
             grpBxAddPerson.Enter += grpBxAddPerson_Enter;
             // 
+            // checkBxIsPrimaryEmail
+            // 
+            checkBxIsPrimaryEmail.AutoSize = true;
+            checkBxIsPrimaryEmail.Location = new Point(524, 303);
+            checkBxIsPrimaryEmail.Name = "checkBxIsPrimaryEmail";
+            checkBxIsPrimaryEmail.Size = new Size(119, 19);
+            checkBxIsPrimaryEmail.TabIndex = 38;
+            checkBxIsPrimaryEmail.Text = "Birincil email yap.";
+            checkBxIsPrimaryEmail.UseVisualStyleBackColor = true;
+            // 
+            // checkBxIsPrimaryPhoneNumber
+            // 
+            checkBxIsPrimaryPhoneNumber.AutoSize = true;
+            checkBxIsPrimaryPhoneNumber.Location = new Point(769, 236);
+            checkBxIsPrimaryPhoneNumber.Name = "checkBxIsPrimaryPhoneNumber";
+            checkBxIsPrimaryPhoneNumber.Size = new Size(142, 19);
+            checkBxIsPrimaryPhoneNumber.TabIndex = 37;
+            checkBxIsPrimaryPhoneNumber.Text = "Birincil numaram yap.";
+            checkBxIsPrimaryPhoneNumber.UseVisualStyleBackColor = true;
+            // 
+            // tbxEmail
+            // 
+            tbxEmail.Location = new Point(524, 274);
+            tbxEmail.Name = "tbxEmail";
+            tbxEmail.Size = new Size(209, 23);
+            tbxEmail.TabIndex = 36;
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Location = new Point(524, 253);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(39, 15);
+            lblEmail.TabIndex = 35;
+            lblEmail.Text = "Email:";
+            // 
+            // tbxPhoneNumber
+            // 
+            tbxPhoneNumber.Location = new Point(769, 207);
+            tbxPhoneNumber.MaxLength = 10;
+            tbxPhoneNumber.Name = "tbxPhoneNumber";
+            tbxPhoneNumber.PlaceholderText = "5XXXXXXXXX";
+            tbxPhoneNumber.Size = new Size(209, 23);
+            tbxPhoneNumber.TabIndex = 34;
+            // 
+            // lblPhoneNumber
+            // 
+            lblPhoneNumber.AutoSize = true;
+            lblPhoneNumber.Location = new Point(769, 186);
+            lblPhoneNumber.Name = "lblPhoneNumber";
+            lblPhoneNumber.Size = new Size(100, 15);
+            lblPhoneNumber.TabIndex = 33;
+            lblPhoneNumber.Text = "Telefon numarası:";
+            // 
             // checkBxIsBillingAddress
             // 
             checkBxIsBillingAddress.AutoSize = true;
-            checkBxIsBillingAddress.Location = new Point(272, 206);
+            checkBxIsBillingAddress.Location = new Point(17, 360);
             checkBxIsBillingAddress.Name = "checkBxIsBillingAddress";
             checkBxIsBillingAddress.Size = new Size(159, 19);
             checkBxIsBillingAddress.TabIndex = 32;
@@ -187,7 +253,7 @@
             cbxCities.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxCities.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxCities.FormattingEnabled = true;
-            cbxCities.Location = new Point(272, 277);
+            cbxCities.Location = new Point(272, 207);
             cbxCities.Name = "cbxCities";
             cbxCities.Size = new Size(209, 23);
             cbxCities.TabIndex = 29;
@@ -196,7 +262,7 @@
             // lblCity
             // 
             lblCity.AutoSize = true;
-            lblCity.Location = new Point(272, 256);
+            lblCity.Location = new Point(272, 186);
             lblCity.Name = "lblCity";
             lblCity.Size = new Size(36, 15);
             lblCity.TabIndex = 28;
@@ -217,21 +283,21 @@
             richTbxAddressDetailDescription.Location = new Point(17, 204);
             richTbxAddressDetailDescription.MaxLength = 2000;
             richTbxAddressDetailDescription.Name = "richTbxAddressDetailDescription";
-            richTbxAddressDetailDescription.Size = new Size(209, 119);
+            richTbxAddressDetailDescription.Size = new Size(209, 148);
             richTbxAddressDetailDescription.TabIndex = 26;
             richTbxAddressDetailDescription.Text = "";
             // 
             // tbxAddressName
             // 
-            tbxAddressName.Location = new Point(769, 207);
+            tbxAddressName.Location = new Point(272, 274);
             tbxAddressName.Name = "tbxAddressName";
-            tbxAddressName.Size = new Size(123, 23);
+            tbxAddressName.Size = new Size(209, 23);
             tbxAddressName.TabIndex = 22;
             // 
             // lblAddressName
             // 
             lblAddressName.AutoSize = true;
-            lblAddressName.Location = new Point(769, 186);
+            lblAddressName.Location = new Point(272, 253);
             lblAddressName.Name = "lblAddressName";
             lblAddressName.Size = new Size(65, 15);
             lblAddressName.TabIndex = 21;
@@ -320,7 +386,7 @@
             // lblGender
             // 
             lblGender.AutoSize = true;
-            lblGender.Location = new Point(524, 256);
+            lblGender.Location = new Point(272, 312);
             lblGender.Name = "lblGender";
             lblGender.Size = new Size(52, 15);
             lblGender.TabIndex = 11;
@@ -329,7 +395,7 @@
             // radioBtnFemale
             // 
             radioBtnFemale.AutoSize = true;
-            radioBtnFemale.Location = new Point(592, 278);
+            radioBtnFemale.Location = new Point(340, 334);
             radioBtnFemale.Name = "radioBtnFemale";
             radioBtnFemale.Size = new Size(55, 19);
             radioBtnFemale.TabIndex = 10;
@@ -340,7 +406,7 @@
             // radioBtnMale
             // 
             radioBtnMale.AutoSize = true;
-            radioBtnMale.Location = new Point(524, 278);
+            radioBtnMale.Location = new Point(272, 334);
             radioBtnMale.Name = "radioBtnMale";
             radioBtnMale.Size = new Size(53, 19);
             radioBtnMale.TabIndex = 9;
@@ -382,7 +448,7 @@
             // btnAddPerson
             // 
             btnAddPerson.BackColor = Color.LightGreen;
-            btnAddPerson.Location = new Point(884, 291);
+            btnAddPerson.Location = new Point(895, 352);
             btnAddPerson.Name = "btnAddPerson";
             btnAddPerson.Size = new Size(109, 32);
             btnAddPerson.TabIndex = 5;
@@ -397,7 +463,7 @@
             Controls.Add(grpBxAddPerson);
             Controls.Add(dgwPersons);
             Name = "UserControlAddPerson";
-            Size = new Size(1079, 584);
+            Size = new Size(1079, 630);
             Load += UserControlAddPerson_Load;
             ((System.ComponentModel.ISupportInitialize)customersDbContextBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();
@@ -439,5 +505,11 @@
         private ComboBox cbxDistricts;
         private Label lblDistrict;
         private CheckBox checkBxIsBillingAddress;
+        private TextBox tbxPhoneNumber;
+        private Label lblPhoneNumber;
+        private TextBox tbxEmail;
+        private Label lblEmail;
+        private CheckBox checkBxIsPrimaryPhoneNumber;
+        private CheckBox checkBxIsPrimaryEmail;
     }
 }

@@ -4,15 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
     public class CityManager : ICityService
     {
+        private ICityDal _cityDal;
+
+        public CityManager(ICityDal cityDal)
+        {
+            _cityDal = cityDal;
+        }
         public List<City> GetAll()
         {
-            throw new NotImplementedException();
+            return _cityDal.GetAll();
         }
     }
 }

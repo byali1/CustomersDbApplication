@@ -4,30 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
     public class EmailDetailManager:IEmailDetailService
     {
+        private IEmailDetailDal _emailDetailDal;
+
+        public EmailDetailManager(IEmailDetailDal emailDetailDal)
+        {
+            _emailDetailDal = emailDetailDal;
+        }
         public List<EmailDetail> GetAll()
         {
-            throw new NotImplementedException();
+            return _emailDetailDal.GetAll();
         }
 
         public void Add(EmailDetail emailDetail)
         {
-            throw new NotImplementedException();
+            _emailDetailDal.Add(emailDetail);
         }
 
         public void Update(EmailDetail emailDetail)
         {
-            throw new NotImplementedException();
+            _emailDetailDal.Update(emailDetail);
         }
 
         public void Delete(EmailDetail emailDetail)
         {
-            throw new NotImplementedException();
+            _emailDetailDal.Delete(emailDetail);
         }
     }
 }

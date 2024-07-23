@@ -4,30 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
     public class PhoneNumberDetailManager:IPhoneNumberDetailService
     {
+        private IPhoneNumberDetailDal _phoneNumberDetailDal;
+
+        public PhoneNumberDetailManager(IPhoneNumberDetailDal phoneNumberDetailDal)
+        {
+            _phoneNumberDetailDal = phoneNumberDetailDal;
+        }
         public List<PhoneNumberDetail> GetAll()
         {
-            throw new NotImplementedException();
+            return _phoneNumberDetailDal.GetAll();
         }
 
         public void Add(PhoneNumberDetail phoneNumberDetail)
         {
-            throw new NotImplementedException();
+            _phoneNumberDetailDal.Add(phoneNumberDetail);
         }
 
         public void Update(PhoneNumberDetail phoneNumberDetail)
         {
-            throw new NotImplementedException();
+            _phoneNumberDetailDal.Update(phoneNumberDetail);
         }
 
         public void Delete(PhoneNumberDetail phoneNumberDetail)
         {
-            throw new NotImplementedException();
+            _phoneNumberDetailDal.Delete(phoneNumberDetail);
         }
     }
 }

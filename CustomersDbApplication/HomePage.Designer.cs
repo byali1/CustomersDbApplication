@@ -120,7 +120,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1164, 420);
+            ClientSize = new Size(1164, 559);
             Controls.Add(menuStripHomePage);
             MainMenuStrip = menuStripHomePage;
             MaximizeBox = false;

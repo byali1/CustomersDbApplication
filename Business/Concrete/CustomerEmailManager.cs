@@ -4,30 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class CustomerEmailManager:ICustomerEmailService
+    public class CustomerEmailManager : ICustomerEmailService
     {
+        private ICustomerEmailDal _customerEmailDal;
+
+        public CustomerEmailManager(ICustomerEmailDal customerEmailDal)
+        {
+            _customerEmailDal = customerEmailDal;
+        }
         public List<CustomerEmail> GetAll()
         {
-            throw new NotImplementedException();
+            return _customerEmailDal.GetAll();
         }
 
         public void Add(CustomerEmail customerEmail)
         {
-            throw new NotImplementedException();
+            _customerEmailDal.Add(customerEmail);
         }
 
         public void Update(CustomerEmail customerEmail)
         {
-            throw new NotImplementedException();
+            _customerEmailDal.Update(customerEmail);
         }
 
         public void Delete(CustomerEmail customerEmail)
         {
-            throw new NotImplementedException();
+            _customerEmailDal.Delete(customerEmail);
         }
     }
 }

@@ -39,7 +39,16 @@ namespace CustomersDbApplication
 
         private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadUserControl(new UserControlAddPerson(new CustomerManager(new EfCustomerDal()), new PersonManager(new EfPersonDal()), new CustomerAddressManager(new EfCustomerAddressDal()), new AddressDetailManager(new EfAddressDetailDal())));
+            LoadUserControl(new UserControlAddPerson(
+                new CustomerManager(new EfCustomerDal()),
+                new PersonManager(new EfPersonDal()),
+                new CustomerAddressManager(new EfCustomerAddressDal()),
+                new AddressDetailManager(new EfAddressDetailDal()),
+                new PhoneNumberDetailManager(new EfPhoneNumberDetailDal()),
+                new CustomerPhoneNumberManager(new EfCustomerPhoneNumberDal()),
+                new EmailDetailManager(new EfEmailDetailDal()),
+                new CustomerEmailManager(new EfCustomerEmailDal())
+                ));
 
 
 
