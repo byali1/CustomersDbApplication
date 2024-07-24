@@ -38,7 +38,7 @@
             görüntüleToolStripMenuItem = new ToolStripMenuItem();
             listAllCustomersToolStripMenuItem = new ToolStripMenuItem();
             listPersonsToolStripMenuItem = new ToolStripMenuItem();
-            listCompaniesListeleToolStripMenuItem = new ToolStripMenuItem();
+            listCompaniesToolStripMenuItem = new ToolStripMenuItem();
             menuStripHomePage.SuspendLayout();
             SuspendLayout();
             // 
@@ -92,7 +92,7 @@
             // 
             // görüntüleToolStripMenuItem
             // 
-            görüntüleToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { listAllCustomersToolStripMenuItem, listPersonsToolStripMenuItem, listCompaniesListeleToolStripMenuItem });
+            görüntüleToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { listAllCustomersToolStripMenuItem, listPersonsToolStripMenuItem, listCompaniesToolStripMenuItem });
             görüntüleToolStripMenuItem.Name = "görüntüleToolStripMenuItem";
             görüntüleToolStripMenuItem.Size = new Size(72, 20);
             görüntüleToolStripMenuItem.Text = "Görüntüle";
@@ -109,12 +109,14 @@
             listPersonsToolStripMenuItem.Name = "listPersonsToolStripMenuItem";
             listPersonsToolStripMenuItem.Size = new Size(202, 22);
             listPersonsToolStripMenuItem.Text = "Gerçek müşterileri listele";
+            listPersonsToolStripMenuItem.Click += listPersonsToolStripMenuItem_Click;
             // 
-            // listCompaniesListeleToolStripMenuItem
+            // listCompaniesToolStripMenuItem
             // 
-            listCompaniesListeleToolStripMenuItem.Name = "listCompaniesListeleToolStripMenuItem";
-            listCompaniesListeleToolStripMenuItem.Size = new Size(202, 22);
-            listCompaniesListeleToolStripMenuItem.Text = "Tüzel müşterileri listele";
+            listCompaniesToolStripMenuItem.Name = "listCompaniesToolStripMenuItem";
+            listCompaniesToolStripMenuItem.Size = new Size(202, 22);
+            listCompaniesToolStripMenuItem.Text = "Tüzel müşterileri listele";
+            listCompaniesToolStripMenuItem.Click += listCompaniesToolStripMenuItem_Click;
             // 
             // HomePage
             // 
@@ -143,7 +145,7 @@
         private ToolStripMenuItem görüntüleToolStripMenuItem;
         private ToolStripMenuItem listAllCustomersToolStripMenuItem;
         private ToolStripMenuItem listPersonsToolStripMenuItem;
-        private ToolStripMenuItem listCompaniesListeleToolStripMenuItem;
+        private ToolStripMenuItem listCompaniesToolStripMenuItem;
         private ToolStripMenuItem addPersonToolStripMenuItem;
         private ToolStripMenuItem addCompanyToolStripMenuItem;
     }

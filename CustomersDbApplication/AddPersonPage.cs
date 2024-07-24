@@ -69,6 +69,57 @@ namespace CustomersDbApplication
                     return;
                 }
 
+                if (ControlFunctions.IsNullOrWhiteSpace(tbxIdentityNumber.Text) || tbxIdentityNumber.TextLength != 11 || Convert.ToInt64(tbxIdentityNumber.Text) % 2 != 0)
+                {
+                    MessageBox.Show("TC Kimlik numarasını lütfen doğru giriniz.", "", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (ControlFunctions.IsNullOrWhiteSpace(tbxBirthPlace.Text))
+                {
+                    MessageBox.Show("Doğum yerinizi lütfen doldurun.", "", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (ControlFunctions.IsNullOrWhiteSpace(richTbxAddressDetailDescription.Text))
+                {
+                    MessageBox.Show("Adres kısmını lütfen doldurun.", "", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (richTbxAddressDetailDescription.TextLength < 10)
+                {
+                    MessageBox.Show("Adresinizi detaylı bir şekilde yazdığınızdan emin olun.", "", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (ControlFunctions.IsNullOrWhiteSpace(tbxAddressName.Text))
+                {
+                    MessageBox.Show("Adresinize lütfen bir isim verin.", "", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (ControlFunctions.IsNullOrWhiteSpace(tbxEmail.Text))
+                {
+                    MessageBox.Show("Lütfen email kısmını doldurun.", "", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!ControlFunctions.IsValidEmail(tbxEmail.Text))
+                {
+                    MessageBox.Show("Lütfen geçerli bir email girin.", "", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+
+
                 var customer = new Customer
                 {
                     Name = customerName,
@@ -227,6 +278,14 @@ namespace CustomersDbApplication
             int cityId = selectedCity.CityId;
 
             FillComboBox(cbxDistricts, new EfDistrictDal().GetAll(d => d.CityId == cityId), "DistrictName", "DistrictId");
+        }
+
+        private void tbxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

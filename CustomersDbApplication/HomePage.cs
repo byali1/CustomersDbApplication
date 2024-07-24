@@ -44,5 +44,17 @@ namespace CustomersDbApplication
             listCustomerPage.MdiParent = this;
             listCustomerPage.Show();
         }
+
+        private void listPersonsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListPersonPage listPersonPage = new ListPersonPage(new PersonManager(new EfPersonDal()));
+            listPersonPage.MdiParent = this;
+            listPersonPage.Show();
+        }
+
+        private void listCompaniesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

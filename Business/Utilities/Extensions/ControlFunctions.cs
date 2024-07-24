@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Business.Utilities.SpecialFunctions
@@ -20,6 +22,28 @@ namespace Business.Utilities.SpecialFunctions
 
             return false;
         }
+        //public static bool IsValidEmail(string text)
+        //{
+        //    if (text.Contains("@"))
+        //    {
+        //        return true;
+        //    }
+
+        //    return false;
+        //}
+
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                MailAddress mailAddress = new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
 
 
         public static bool IsContainsSpace(string text)
@@ -34,6 +58,15 @@ namespace Business.Utilities.SpecialFunctions
         public static bool IsNullOrWhiteSpace(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool IsNullOrEmpty(string text)
+        {
+            if (string.IsNullOrEmpty(text))
             {
                 return true;
             }
