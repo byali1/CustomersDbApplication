@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.AdoNet
 {
@@ -59,6 +60,16 @@ namespace DataAccess.Concrete.AdoNet
         }
 
         public void Delete(Person person)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PersonDetailDto> GetPersonDetails(Expression<Func<PersonDetailDto, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PersonDetailDto> GetPersonDetails()
         {
             throw new NotImplementedException();
         }

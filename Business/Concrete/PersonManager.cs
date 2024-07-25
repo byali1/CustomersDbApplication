@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -36,6 +37,16 @@ namespace Business.Concrete
         public void Delete(Person person)
         {
             _personDal.Delete(person);
+        }
+
+        public List<PersonDetailDto> GetPersonDetails()
+        {
+            return _personDal.GetPersonDetails();
+        }
+
+        public List<PersonDetailDto> GetPersonDetailsByName(string fullName)
+        {
+            return _personDal.GetPersonDetails(p => (p.Name + " " + p.LastName).Contains(fullName));
         }
     }
 }

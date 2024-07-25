@@ -47,8 +47,9 @@
             // 
             tbxSearchPersonByName.Location = new Point(335, 44);
             tbxSearchPersonByName.Name = "tbxSearchPersonByName";
-            tbxSearchPersonByName.Size = new Size(394, 23);
+            tbxSearchPersonByName.Size = new Size(772, 23);
             tbxSearchPersonByName.TabIndex = 7;
+            tbxSearchPersonByName.TextChanged += tbxSearchPersonByName_TextChanged;
             // 
             // dgwPersons
             // 
@@ -60,14 +61,14 @@
             dgwPersons.Name = "dgwPersons";
             dgwPersons.ReadOnly = true;
             dgwPersons.RowTemplate.Height = 25;
-            dgwPersons.Size = new Size(948, 195);
+            dgwPersons.Size = new Size(1319, 231);
             dgwPersons.TabIndex = 6;
             // 
             // ListPersonPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(998, 320);
+            ClientSize = new Size(1358, 326);
             Controls.Add(lblSearchPerson);
             Controls.Add(tbxSearchPersonByName);
             Controls.Add(dgwPersons);

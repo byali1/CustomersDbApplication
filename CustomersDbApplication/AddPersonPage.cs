@@ -51,6 +51,8 @@ namespace CustomersDbApplication
             FillComboBox(cbxCities, new EfCityDal().GetAll(), "CityName", "CityId");
         }
 
+
+
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
             string customerName = tbxCustomerName.Text;
@@ -218,8 +220,13 @@ namespace CustomersDbApplication
                 _customerEmailService.Add(customerEmail);
 
                 dgwPersons.DataSource = _personService.GetAll();
+                //dgwPersons.DataSource = _personService.GetPersonDetails();
+
+                ClearTextboxesOnAddPersonPage();
+
                 MessageBox.Show("Müşteri başarıyla eklendi.", "BAŞARILI", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
+
                 return;
             }
 
@@ -286,6 +293,24 @@ namespace CustomersDbApplication
             {
                 e.Handled = true;
             }
+        }
+
+        private void ClearTextboxesOnAddPersonPage()
+        {
+            tbxCustomerName.Clear();
+            tbxCustomerLastName.Clear();
+            tbxIdentityNumber.Clear();
+            tbxAddressName.Clear();
+            tbxBirthPlace.Clear();
+            tbxEmail.Clear();
+            tbxPhoneNumber.Clear();
+            richTbxAddressDetailDescription.Clear();
+            checkBxIsBillingAddress.Checked = false;
+            checkBxIsPrimaryEmail.Checked = false;
+            checkBxIsPrimaryPhoneNumber.Checked = false;
+            radioBtnFemale.Checked = false;
+            radioBtnMale.Checked= false;
+
         }
     }
 }

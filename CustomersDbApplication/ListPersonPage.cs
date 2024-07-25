@@ -24,7 +24,19 @@ namespace CustomersDbApplication
 
         private void ListPersonPage_Load(object sender, EventArgs e)
         {
-            dgwPersons.DataSource = _personService.GetAll();
+            //dgwPersons.DataSource = _personService.GetAll();
+            dgwPersons.DataSource = _personService.GetPersonDetails();
+
+        }
+
+        private void tbxSearchPersonByName_TextChanged(object sender, EventArgs e)
+        {
+            SearchPersonDetailByName(tbxSearchPersonByName.Text);
+        }
+
+        private void SearchPersonDetailByName(string text)
+        {
+            dgwPersons.DataSource = _personService.GetPersonDetailsByName(text);
         }
     }
 }
