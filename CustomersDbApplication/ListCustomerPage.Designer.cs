@@ -73,6 +73,7 @@
             Controls.Add(tbxSearchCustomerByName);
             Controls.Add(dgwCustomers);
             Name = "ListCustomerPage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Müşterileri Listele";
             Load += ListCustomerPage_Load;
             ((System.ComponentModel.ISupportInitialize)dgwCustomers).EndInit();

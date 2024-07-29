@@ -462,6 +462,7 @@
             ClientSize = new Size(1071, 447);
             Controls.Add(grpBxUpdatePerson);
             Name = "UpdatePersonPage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Gerçek Müşteri Güncelleme Paneli";
             Load += UpdatePersonPage_Load;
             grpBxUpdatePerson.ResumeLayout(false);
