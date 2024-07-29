@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using DataAccess.Abstract;
+using Entities;
 using Entities.Concrete;
 using Entities.DTOs;
 
@@ -24,10 +25,7 @@ namespace Business.Concrete
             return _personDal.GetAll();
         }
 
-        public Person Get(Person person)
-        {
-            throw new NotImplementedException();
-        }
+        
 
 
         public void Add(Person person)
@@ -43,6 +41,11 @@ namespace Business.Concrete
         public void Delete(Person person)
         {
             _personDal.Delete(person);
+        }
+
+        public PersonById GetPersonIdValuesById(int personId)
+        {
+            return _personDal.GetPersonIdValuesById(personId);
         }
 
         public List<PersonDetailDto> GetPersonDetails()

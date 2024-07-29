@@ -7,23 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Business.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities;
+using Entities.Concrete;
 using Entities.DTOs;
 
 namespace CustomersDbApplication.PersonForms
 {
     public partial class UpdatePersonPage : Form
     {
+        private IPersonService _personService;
         private PersonDetailDto _personDetailDto;
-        public UpdatePersonPage(PersonDetailDto personDetailDto)
+        public UpdatePersonPage(PersonDetailDto personDetailDto, IPersonService personService)
         {
             _personDetailDto = personDetailDto;
+            _personService = personService;
             InitializeComponent();
         }
 
         private void UpdatePersonPage_Load(object sender, EventArgs e)
         {
+            var personById = _personService.GetPersonIdValuesById(_personDetailDto.PersonId);
+
 
             ListPersonPage.FillComboBox(cbxCities, new EfCityDal().GetAll(), "CityName", "CityId");
             ListPersonPage.FillComboBox(cbxPersonOccupations, new EfPersonOccupationDal().GetAll(), "OccupationName", "PersonOccupationId");
@@ -43,11 +49,13 @@ namespace CustomersDbApplication.PersonForms
             richTbxAddressDetailDescription.Text = _personDetailDto.AddressDetailDescription;
 
             //CBX
-            cbxPersonIdentityType.SelectedText = _personDetailDto.IdentityTypeDescription;
-            cbxPersonOccupations.SelectedText = _personDetailDto.OccupationName;
-            cbxCities.SelectedText = _personDetailDto.CityName;
-            cbxDistricts.SelectedText = _personDetailDto.DistrictName;
-            cbxAddressTypes.SelectedText = _personDetailDto.AddressTypeDescription;
+            cbxPersonIdentityType.SelectedValue = personById.PersonIdentityTypeId;
+            cbxPersonOccupations.SelectedValue = personById.PersonOccupationId;
+            cbxAddressTypes.SelectedValue = personById.AddressTypeId;
+
+            cbxCities.SelectedValue = personById.CityId;
+            cbxDistricts.SelectedValue = personById.DistrictId;
+
 
             //Checkbox
             checkBxIsBillingAddress.Checked = _personDetailDto.IsBillingAddress;
@@ -107,6 +115,16 @@ namespace CustomersDbApplication.PersonForms
                 cbxDistricts.DisplayMember = "Name";
                 cbxDistricts.Enabled = false;
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void grpBxUpdatePerson_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

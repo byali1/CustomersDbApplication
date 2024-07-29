@@ -234,7 +234,7 @@ namespace CustomersDbApplication
 
                 if (form is HomePage homePage)
                 {
-                    UpdatePersonPage updatePersonPage = new UpdatePersonPage(personDTO);
+                    UpdatePersonPage updatePersonPage = new UpdatePersonPage(personDTO,new PersonManager(new EfPersonDal()));
                     updatePersonPage.MdiParent = homePage;
                     updatePersonPage.Show();
                     break;

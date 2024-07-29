@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
+using Entities;
 using Entities.Concrete;
 using Entities.DTOs;
 
@@ -65,6 +66,11 @@ namespace DataAccess.Concrete.AdoNet
         }
 
         public List<PersonDetailDto> GetPersonDetails(Expression<Func<PersonDetailDto, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PersonById GetPersonIdValuesById(int personId)
         {
             throw new NotImplementedException();
         }

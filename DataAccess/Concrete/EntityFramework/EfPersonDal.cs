@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
+using Entities;
 using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
@@ -96,6 +97,35 @@ namespace DataAccess.Concrete.EntityFramework
                 return query.ToList();
             }
         }
+
+        public PersonById GetPersonIdValuesById(int personId)
+        {
+            using (EfCustomersDbContext context = new EfCustomersDbContext())
+            {
+                var query = from p in context.Persons
+                    join ca in context.CustomerAddresses
+                        on p.CustomerId equals ca.CustomerId
+                    join ad in context.AddressDetails
+                        on ca.CustomerAddressId equals ad.CustomerAddressId
+                    where p.PersonId == personId
+                     select new PersonById
+                    {
+                        PersonId = p.PersonId,
+                        CustomerId = p.CustomerId,
+                        PersonIdentityTypeId = p.PersonIdentityTypeId,
+                        PersonOccupationId = p.PersonOccupationId,
+                        PersonGenderId = p.PersonGenderId,
+                        CustomerAddressId = ca.CustomerAddressId,
+                        AddressTypeId = ca.AddressTypeId,
+                        CityId = ad.CityId,
+                        DistrictId = ad.DistrictId
+                    };
+                return query.SingleOrDefault();
+
+
+            }
+        }
+
 
         public List<PersonDetailDto> GetPersonDetailsByFilter(string name = null, string lastName = null, string email = null, string identityNumber = null, string city = null, string district = null, string phoneNumber = null, string birthPlace = null, string occupation = null)
         {

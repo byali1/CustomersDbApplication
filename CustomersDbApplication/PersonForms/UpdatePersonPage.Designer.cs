@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             grpBxUpdatePerson = new GroupBox();
+            btnExit = new Button();
             checkBxIsPrimaryEmail = new CheckBox();
             checkBxIsPrimaryPhoneNumber = new CheckBox();
             tbxEmail = new TextBox();
@@ -69,6 +70,7 @@
             // 
             // grpBxUpdatePerson
             // 
+            grpBxUpdatePerson.Controls.Add(btnExit);
             grpBxUpdatePerson.Controls.Add(checkBxIsPrimaryEmail);
             grpBxUpdatePerson.Controls.Add(checkBxIsPrimaryPhoneNumber);
             grpBxUpdatePerson.Controls.Add(tbxEmail);
@@ -111,6 +113,20 @@
             grpBxUpdatePerson.TabIndex = 7;
             grpBxUpdatePerson.TabStop = false;
             grpBxUpdatePerson.Text = "Gerçek müşteri güncelle";
+            grpBxUpdatePerson.Enter += grpBxUpdatePerson_Enter;
+            // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.FromArgb(255, 123, 123);
+            btnExit.Cursor = Cursors.Hand;
+            btnExit.ForeColor = Color.Maroon;
+            btnExit.Location = new Point(895, 334);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(83, 32);
+            btnExit.TabIndex = 39;
+            btnExit.Text = "Kapat";
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
             // 
             // checkBxIsPrimaryEmail
             // 
@@ -400,7 +416,7 @@
             btnUpdatePerson.BackColor = SystemColors.ActiveCaption;
             btnUpdatePerson.Cursor = Cursors.Hand;
             btnUpdatePerson.ForeColor = Color.Black;
-            btnUpdatePerson.Location = new Point(869, 334);
+            btnUpdatePerson.Location = new Point(769, 334);
             btnUpdatePerson.Name = "btnUpdatePerson";
             btnUpdatePerson.Size = new Size(109, 32);
             btnUpdatePerson.TabIndex = 5;
@@ -491,5 +507,6 @@
         private TextBox tbxCustomerName;
         private Label lblName;
         private Label label2;
+        private Button btnExit;
     }
 }

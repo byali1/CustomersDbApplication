@@ -8,12 +8,14 @@ using Core.DataAccess;
 using Entities.DTOs;
 using Core.Entities;
 using System.Linq.Expressions;
+using Entities;
 
 namespace DataAccess.Abstract
 {
     public interface IPersonDal: IEntityRepository<Person>
     {
         List<PersonDetailDto> GetPersonDetails(Expression<Func<PersonDetailDto, bool>> filter = null);
+        PersonById GetPersonIdValuesById(int personId);
         List<PersonDetailDto> GetPersonDetailsByFilter(
             string name = null,
             string lastName = null,
