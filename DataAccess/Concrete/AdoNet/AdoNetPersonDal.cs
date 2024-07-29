@@ -69,6 +69,13 @@ namespace DataAccess.Concrete.AdoNet
             throw new NotImplementedException();
         }
 
+        public List<PersonDetailDto> GetPersonDetailsByFilter(string name = null, string lastName = null, string email = null,
+            string identityNumber = null, string city = null, string district = null, string phoneNumber = null,
+            string birthPlace = null, string occupation = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<PersonDetailDto> GetPersonDetails()
         {
             throw new NotImplementedException();

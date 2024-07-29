@@ -14,5 +14,15 @@ namespace DataAccess.Abstract
     public interface IPersonDal: IEntityRepository<Person>
     {
         List<PersonDetailDto> GetPersonDetails(Expression<Func<PersonDetailDto, bool>> filter = null);
+        List<PersonDetailDto> GetPersonDetailsByFilter(
+            string name = null,
+            string lastName = null,
+            string email = null,
+            string identityNumber = null,
+            string city = null,
+            string district = null,
+            string phoneNumber = null,
+            string birthPlace = null,
+            string occupation = null);
     }
 }

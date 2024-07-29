@@ -21,7 +21,7 @@ namespace Business.Concrete
 
         public List<Person> GetAll()
         {
-          return  _personDal.GetAll();
+            return _personDal.GetAll();
         }
 
         public void Add(Person person)
@@ -42,6 +42,13 @@ namespace Business.Concrete
         public List<PersonDetailDto> GetPersonDetails()
         {
             return _personDal.GetPersonDetails();
+        }
+
+        public List<PersonDetailDto> GetPersonDetailsByFilter(string name = null, string lastName = null, string email = null,
+            string identityNumber = null, string city = null, string district = null,
+            string phoneNumber = null, string birthPlace = null, string occupation = null)
+        {
+            return _personDal.GetPersonDetailsByFilter(name,lastName, email, identityNumber, city, district, phoneNumber, birthPlace, occupation);
         }
 
         public List<PersonDetailDto> GetPersonDetailsByName(string fullName)
