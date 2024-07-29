@@ -21,6 +21,18 @@ namespace CustomersDbApplication
 
         }
 
+        public static bool IsFormOpen(Type targetForm)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == targetForm)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddPersonPage addPersonPage = new AddPersonPage(

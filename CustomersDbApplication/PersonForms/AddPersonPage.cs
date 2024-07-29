@@ -39,6 +39,8 @@ namespace CustomersDbApplication
             InitializeComponent();
         }
 
+
+
         private void AddPersonPage_Load(object sender, EventArgs e)
         {
             dgwPersons.DataSource = _personService.GetAll();
@@ -309,8 +311,13 @@ namespace CustomersDbApplication
             checkBxIsPrimaryEmail.Checked = false;
             checkBxIsPrimaryPhoneNumber.Checked = false;
             radioBtnFemale.Checked = false;
-            radioBtnMale.Checked= false;
+            radioBtnMale.Checked = false;
 
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

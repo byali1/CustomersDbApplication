@@ -1,6 +1,6 @@
-﻿namespace CustomersDbApplication
+﻿namespace CustomersDbApplication.PersonForms
 {
-    partial class AddPersonPage
+    partial class UpdatePersonPage
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            grpBxAddPerson = new GroupBox();
-            btnExit = new Button();
+            grpBxUpdatePerson = new GroupBox();
             checkBxIsPrimaryEmail = new CheckBox();
             checkBxIsPrimaryPhoneNumber = new CheckBox();
             tbxEmail = new TextBox();
@@ -60,73 +59,58 @@
             cbxPersonOccupations = new ComboBox();
             lblPersonIdentityType = new Label();
             cbxPersonIdentityType = new ComboBox();
-            btnAddPerson = new Button();
+            btnUpdatePerson = new Button();
             tbxCustomerLastName = new TextBox();
             tbxCustomerName = new TextBox();
             lblName = new Label();
             label2 = new Label();
-            dgwPersons = new DataGridView();
-            grpBxAddPerson.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgwPersons).BeginInit();
+            grpBxUpdatePerson.SuspendLayout();
             SuspendLayout();
             // 
-            // grpBxAddPerson
+            // grpBxUpdatePerson
             // 
-            grpBxAddPerson.Controls.Add(btnExit);
-            grpBxAddPerson.Controls.Add(checkBxIsPrimaryEmail);
-            grpBxAddPerson.Controls.Add(checkBxIsPrimaryPhoneNumber);
-            grpBxAddPerson.Controls.Add(tbxEmail);
-            grpBxAddPerson.Controls.Add(lblEmail);
-            grpBxAddPerson.Controls.Add(tbxPhoneNumber);
-            grpBxAddPerson.Controls.Add(lblPhoneNumber);
-            grpBxAddPerson.Controls.Add(checkBxIsBillingAddress);
-            grpBxAddPerson.Controls.Add(cbxDistricts);
-            grpBxAddPerson.Controls.Add(lblDistrict);
-            grpBxAddPerson.Controls.Add(cbxCities);
-            grpBxAddPerson.Controls.Add(lblCity);
-            grpBxAddPerson.Controls.Add(label4);
-            grpBxAddPerson.Controls.Add(richTbxAddressDetailDescription);
-            grpBxAddPerson.Controls.Add(tbxAddressName);
-            grpBxAddPerson.Controls.Add(lblAddressName);
-            grpBxAddPerson.Controls.Add(cbxAddressTypes);
-            grpBxAddPerson.Controls.Add(lblAddressType);
-            grpBxAddPerson.Controls.Add(tbxBirthPlace);
-            grpBxAddPerson.Controls.Add(lblBirthPlace);
-            grpBxAddPerson.Controls.Add(label3);
-            grpBxAddPerson.Controls.Add(dTimePickerBirthDate);
-            grpBxAddPerson.Controls.Add(lblOccupation);
-            grpBxAddPerson.Controls.Add(tbxIdentityNumber);
-            grpBxAddPerson.Controls.Add(label1);
-            grpBxAddPerson.Controls.Add(lblGender);
-            grpBxAddPerson.Controls.Add(radioBtnFemale);
-            grpBxAddPerson.Controls.Add(radioBtnMale);
-            grpBxAddPerson.Controls.Add(cbxPersonOccupations);
-            grpBxAddPerson.Controls.Add(lblPersonIdentityType);
-            grpBxAddPerson.Controls.Add(cbxPersonIdentityType);
-            grpBxAddPerson.Controls.Add(btnAddPerson);
-            grpBxAddPerson.Controls.Add(tbxCustomerLastName);
-            grpBxAddPerson.Controls.Add(tbxCustomerName);
-            grpBxAddPerson.Controls.Add(lblName);
-            grpBxAddPerson.Controls.Add(label2);
-            grpBxAddPerson.Location = new Point(34, 245);
-            grpBxAddPerson.Name = "grpBxAddPerson";
-            grpBxAddPerson.Size = new Size(1010, 390);
-            grpBxAddPerson.TabIndex = 6;
-            grpBxAddPerson.TabStop = false;
-            grpBxAddPerson.Text = "Gerçek müşteri ekle";
-            // 
-            // btnExit
-            // 
-            btnExit.BackColor = Color.FromArgb(255, 123, 123);
-            btnExit.Cursor = Cursors.Hand;
-            btnExit.ForeColor = Color.Maroon;
-            btnExit.Location = new Point(891, 347);
-            btnExit.Name = "btnExit";
-            btnExit.Size = new Size(87, 32);
-            btnExit.TabIndex = 39;
-            btnExit.Text = "Kapat";
-            btnExit.UseVisualStyleBackColor = false;
-            btnExit.Click += btnExit_Click;
+            grpBxUpdatePerson.Controls.Add(checkBxIsPrimaryEmail);
+            grpBxUpdatePerson.Controls.Add(checkBxIsPrimaryPhoneNumber);
+            grpBxUpdatePerson.Controls.Add(tbxEmail);
+            grpBxUpdatePerson.Controls.Add(lblEmail);
+            grpBxUpdatePerson.Controls.Add(tbxPhoneNumber);
+            grpBxUpdatePerson.Controls.Add(lblPhoneNumber);
+            grpBxUpdatePerson.Controls.Add(checkBxIsBillingAddress);
+            grpBxUpdatePerson.Controls.Add(cbxDistricts);
+            grpBxUpdatePerson.Controls.Add(lblDistrict);
+            grpBxUpdatePerson.Controls.Add(cbxCities);
+            grpBxUpdatePerson.Controls.Add(lblCity);
+            grpBxUpdatePerson.Controls.Add(label4);
+            grpBxUpdatePerson.Controls.Add(richTbxAddressDetailDescription);
+            grpBxUpdatePerson.Controls.Add(tbxAddressName);
+            grpBxUpdatePerson.Controls.Add(lblAddressName);
+            grpBxUpdatePerson.Controls.Add(cbxAddressTypes);
+            grpBxUpdatePerson.Controls.Add(lblAddressType);
+            grpBxUpdatePerson.Controls.Add(tbxBirthPlace);
+            grpBxUpdatePerson.Controls.Add(lblBirthPlace);
+            grpBxUpdatePerson.Controls.Add(label3);
+            grpBxUpdatePerson.Controls.Add(dTimePickerBirthDate);
+            grpBxUpdatePerson.Controls.Add(lblOccupation);
+            grpBxUpdatePerson.Controls.Add(tbxIdentityNumber);
+            grpBxUpdatePerson.Controls.Add(label1);
+            grpBxUpdatePerson.Controls.Add(lblGender);
+            grpBxUpdatePerson.Controls.Add(radioBtnFemale);
+            grpBxUpdatePerson.Controls.Add(radioBtnMale);
+            grpBxUpdatePerson.Controls.Add(cbxPersonOccupations);
+            grpBxUpdatePerson.Controls.Add(lblPersonIdentityType);
+            grpBxUpdatePerson.Controls.Add(cbxPersonIdentityType);
+            grpBxUpdatePerson.Controls.Add(btnUpdatePerson);
+            grpBxUpdatePerson.Controls.Add(tbxCustomerLastName);
+            grpBxUpdatePerson.Controls.Add(tbxCustomerName);
+            grpBxUpdatePerson.Controls.Add(lblName);
+            grpBxUpdatePerson.Controls.Add(label2);
+            grpBxUpdatePerson.ForeColor = Color.Firebrick;
+            grpBxUpdatePerson.Location = new Point(32, 32);
+            grpBxUpdatePerson.Name = "grpBxUpdatePerson";
+            grpBxUpdatePerson.Size = new Size(1010, 390);
+            grpBxUpdatePerson.TabIndex = 7;
+            grpBxUpdatePerson.TabStop = false;
+            grpBxUpdatePerson.Text = "Gerçek müşteri güncelle";
             // 
             // checkBxIsPrimaryEmail
             // 
@@ -411,16 +395,17 @@
             cbxPersonIdentityType.Size = new Size(209, 23);
             cbxPersonIdentityType.TabIndex = 6;
             // 
-            // btnAddPerson
+            // btnUpdatePerson
             // 
-            btnAddPerson.BackColor = Color.LightGreen;
-            btnAddPerson.Location = new Point(769, 347);
-            btnAddPerson.Name = "btnAddPerson";
-            btnAddPerson.Size = new Size(87, 32);
-            btnAddPerson.TabIndex = 5;
-            btnAddPerson.Text = "Ekle";
-            btnAddPerson.UseVisualStyleBackColor = false;
-            btnAddPerson.Click += btnAddPerson_Click;
+            btnUpdatePerson.BackColor = SystemColors.ActiveCaption;
+            btnUpdatePerson.Cursor = Cursors.Hand;
+            btnUpdatePerson.ForeColor = Color.Black;
+            btnUpdatePerson.Location = new Point(869, 334);
+            btnUpdatePerson.Name = "btnUpdatePerson";
+            btnUpdatePerson.Size = new Size(109, 32);
+            btnUpdatePerson.TabIndex = 5;
+            btnUpdatePerson.Text = "Güncelle";
+            btnUpdatePerson.UseVisualStyleBackColor = false;
             // 
             // tbxCustomerLastName
             // 
@@ -454,39 +439,23 @@
             label2.TabIndex = 2;
             label2.Text = "Müşteri soyadı:";
             // 
-            // dgwPersons
-            // 
-            dgwPersons.AllowUserToAddRows = false;
-            dgwPersons.AllowUserToDeleteRows = false;
-            dgwPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgwPersons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgwPersons.Location = new Point(34, 34);
-            dgwPersons.Name = "dgwPersons";
-            dgwPersons.ReadOnly = true;
-            dgwPersons.RowTemplate.Height = 25;
-            dgwPersons.Size = new Size(1010, 190);
-            dgwPersons.TabIndex = 5;
-            // 
-            // AddPersonPage
+            // UpdatePersonPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1077, 676);
-            Controls.Add(grpBxAddPerson);
-            Controls.Add(dgwPersons);
-            Name = "AddPersonPage";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Gerçek Müşteri Ekleme Paneli";
-            Load += AddPersonPage_Load;
-            grpBxAddPerson.ResumeLayout(false);
-            grpBxAddPerson.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();
+            ClientSize = new Size(1071, 447);
+            Controls.Add(grpBxUpdatePerson);
+            Name = "UpdatePersonPage";
+            Text = "Gerçek Müşteri Güncelleme Paneli";
+            Load += UpdatePersonPage_Load;
+            grpBxUpdatePerson.ResumeLayout(false);
+            grpBxUpdatePerson.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private GroupBox grpBxAddPerson;
+        private GroupBox grpBxUpdatePerson;
         private CheckBox checkBxIsPrimaryEmail;
         private CheckBox checkBxIsPrimaryPhoneNumber;
         private TextBox tbxEmail;
@@ -517,12 +486,10 @@
         private ComboBox cbxPersonOccupations;
         private Label lblPersonIdentityType;
         private ComboBox cbxPersonIdentityType;
-        private Button btnAddPerson;
+        private Button btnUpdatePerson;
         private TextBox tbxCustomerLastName;
         private TextBox tbxCustomerName;
         private Label lblName;
         private Label label2;
-        private DataGridView dgwPersons;
-        private Button btnExit;
     }
 }

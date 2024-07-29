@@ -14,6 +14,8 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfPersonDal : EfEntityRepositoryBase<Person, EfCustomersDbContext>, IPersonDal
     {
+       
+
         public List<PersonDetailDto> GetPersonDetails(Expression<Func<PersonDetailDto, bool>> filter = null)
         {
             using (EfCustomersDbContext context = new EfCustomersDbContext())
@@ -62,6 +64,8 @@ namespace DataAccess.Concrete.EntityFramework
                             join ei in emailInfo on c.CustomerId equals ei.CustomerId
                             select new PersonDetailDto
                             {
+                                CustomerId =c.CustomerId,
+                               PersonId  = p.PersonId,
                                 Name = c.Name,
                                 LastName = c.LastName,
                                 IdentityNumber = p.IdentityNumber,
@@ -78,7 +82,10 @@ namespace DataAccess.Concrete.EntityFramework
                                 PhoneNumber = pi.PhoneNumber,
                                 IsPrimaryPhone = pi.IsPrimary,
                                 Email = ei.Email,
-                                IsPrimaryEmail = ei.IsPrimary
+                                IsPrimaryEmail = ei.IsPrimary,
+                                PersonGenderId = p.PersonGenderId
+
+
                             };
 
                 if (filter != null)
@@ -138,6 +145,8 @@ namespace DataAccess.Concrete.EntityFramework
                             join ei in emailInfo on c.CustomerId equals ei.CustomerId
                             select new PersonDetailDto
                             {
+                                CustomerId = c.CustomerId,
+                                PersonId = p.PersonId,
                                 Name = c.Name,
                                 LastName = c.LastName,
                                 IdentityNumber = p.IdentityNumber,
@@ -154,7 +163,8 @@ namespace DataAccess.Concrete.EntityFramework
                                 PhoneNumber = pi.PhoneNumber,
                                 IsPrimaryPhone = pi.IsPrimary,
                                 Email = ei.Email,
-                                IsPrimaryEmail = ei.IsPrimary
+                                IsPrimaryEmail = ei.IsPrimary,
+                                PersonGenderId = p.PersonGenderId
                             };
 
 

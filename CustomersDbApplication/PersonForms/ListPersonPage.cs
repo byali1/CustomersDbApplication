@@ -8,9 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Abstract;
+using Business.Concrete;
+using CustomersDbApplication.PersonForms;
 using DataAccess.Concrete.EntityFramework;
 using Entities;
 using Entities.Concrete;
+using Entities.DTOs;
 
 
 namespace CustomersDbApplication
@@ -159,8 +162,104 @@ namespace CustomersDbApplication
             }
         }
 
+        private void btnOpenFormToAddPerson_Click(object sender, EventArgs e)
+        {
+            if (HomePage.IsFormOpen(typeof(AddPersonPage)))
+            {
+                MessageBox.Show("Gerçek müşteri ekleme paneli zaten açık.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-        private void FillComboBox<T>(ComboBox comboBox, List<T> dataSource, string displayMember, string valueMember)
+            foreach (Form form in Application.OpenForms)
+            {
+
+                if (form is HomePage homePage)
+                {
+                    AddPersonPage addPersonPage = new AddPersonPage(
+                        new CustomerManager(new EfCustomerDal()),
+                        new PersonManager(new EfPersonDal()),
+                        new CustomerAddressManager(new EfCustomerAddressDal()),
+                        new AddressDetailManager(new EfAddressDetailDal()),
+                        new PhoneNumberDetailManager(new EfPhoneNumberDetailDal()),
+                        new CustomerPhoneNumberManager(new EfCustomerPhoneNumberDal()),
+                        new EmailDetailManager(new EfEmailDetailDal()),
+                        new CustomerEmailManager(new EfCustomerEmailDal())
+                    );
+                    addPersonPage.MdiParent = homePage;
+                    addPersonPage.Show();
+                    break;
+                }
+
+            }
+
+
+        }
+
+        private void btnOpenFormToUpdatePerson_Click(object sender, EventArgs e)
+        {
+            if (HomePage.IsFormOpen(typeof(UpdatePersonPage)))
+            {
+                MessageBox.Show("Gerçek müşteri güncelleme paneli zaten açık.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var personDTO = new PersonDetailDto
+            {
+                CustomerId = Convert.ToInt32(dgwPersons.CurrentRow.Cells[0].Value),
+                PersonId = Convert.ToInt32(dgwPersons.CurrentRow.Cells[1].Value),
+                Name = dgwPersons.CurrentRow.Cells[2].Value.ToString(),
+                LastName = dgwPersons.CurrentRow.Cells[3].Value.ToString(),
+                IdentityNumber = dgwPersons.CurrentRow.Cells[4].Value.ToString(),
+                IdentityTypeDescription = dgwPersons.CurrentRow.Cells[5].Value.ToString(),
+                BirthDate = Convert.ToDateTime(dgwPersons.CurrentRow.Cells[6].Value),
+                BirthPlace = dgwPersons.CurrentRow.Cells[7].Value.ToString(),
+                OccupationName = dgwPersons.CurrentRow.Cells[8].Value.ToString(),
+                AddressDetailDescription = dgwPersons.CurrentRow.Cells[9].Value.ToString(),
+                IsBillingAddress = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[10].Value),
+                CountryName = dgwPersons.CurrentRow.Cells[11].Value.ToString(),
+                CityName = dgwPersons.CurrentRow.Cells[12].Value.ToString(),
+                DistrictName = dgwPersons.CurrentRow.Cells[13].Value.ToString(),
+                AddressTypeDescription = dgwPersons.CurrentRow.Cells[14].Value.ToString(),
+                PhoneNumber = dgwPersons.CurrentRow.Cells[15].Value.ToString(),
+                IsPrimaryPhone = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[16].Value),
+                Email = dgwPersons.CurrentRow.Cells[17].Value.ToString(),
+                IsPrimaryEmail = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[18].Value),
+                PersonGenderId = Convert.ToInt16(dgwPersons.CurrentRow.Cells[19].Value)
+
+            };
+
+
+            foreach (Form form in Application.OpenForms)
+            {
+
+                if (form is HomePage homePage)
+                {
+                    UpdatePersonPage updatePersonPage = new UpdatePersonPage(personDTO);
+                    updatePersonPage.MdiParent = homePage;
+                    updatePersonPage.Show();
+                    break;
+                }
+
+            }
+        }
+
+        private void dgwPersons_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgwPersons_SelectionChanged(object sender, EventArgs e)
+        {
+            bool anyRowSelected = dgwPersons.SelectedRows.Count == 1;
+            btnOpenFormToUpdatePerson.Enabled = anyRowSelected;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        public static void FillComboBox<T>(ComboBox comboBox, List<T> dataSource, string displayMember, string valueMember)
         {
             var comboBoxItems = new List<ComboBoxItem>();
             comboBoxItems.Add(new ComboBoxItem { Id = null, Name = "Seçiniz" });

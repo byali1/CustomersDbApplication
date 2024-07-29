@@ -9,6 +9,8 @@ namespace Entities.DTOs
 {
     public class PersonDetailDto : IDto
     {
+        public int CustomerId { get; set; }
+        public int PersonId { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string IdentityNumber { get; set; }
@@ -26,6 +28,8 @@ namespace Entities.DTOs
         public bool IsPrimaryPhone { get; set; }
         public string Email { get; set; }
         public bool IsPrimaryEmail { get; set; }
+        public int PersonGenderId { get; set; }
+
 
 
     }

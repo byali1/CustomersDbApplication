@@ -12,6 +12,7 @@ namespace Business.Abstract
     public interface IPersonService
     {
         List<Person> GetAll();
+        Person Get(Person person);
         void Add(Person person);
         void Update(Person person);
         void Delete(Person person);

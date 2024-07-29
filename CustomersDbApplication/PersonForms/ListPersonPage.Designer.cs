@@ -34,6 +34,7 @@
             tbxPersonFirstName = new TextBox();
             tbxPersonLastName = new TextBox();
             grpBoxFilterPerson = new GroupBox();
+            btnClear = new Button();
             lblPhoneNumber = new Label();
             lblDistrict = new Label();
             lblCity = new Label();
@@ -47,15 +48,20 @@
             tbxBirthPlace = new TextBox();
             tbxIdentityNumber = new TextBox();
             btnRefresh = new Button();
-            btnClear = new Button();
+            btnOpenFormToAddPerson = new Button();
+            grpBoxCRUD = new GroupBox();
+            btnDeletePerson = new Button();
+            btnOpenFormToUpdatePerson = new Button();
+            btnExit = new Button();
             ((System.ComponentModel.ISupportInitialize)dgwPersons).BeginInit();
             grpBoxFilterPerson.SuspendLayout();
+            grpBoxCRUD.SuspendLayout();
             SuspendLayout();
             // 
             // lblSearchPerson
             // 
             lblSearchPerson.AutoSize = true;
-            lblSearchPerson.Location = new Point(206, 205);
+            lblSearchPerson.Location = new Point(83, 208);
             lblSearchPerson.Name = "lblSearchPerson";
             lblSearchPerson.Size = new Size(108, 15);
             lblSearchPerson.TabIndex = 8;
@@ -63,9 +69,9 @@
             // 
             // tbxSearchPersonByName
             // 
-            tbxSearchPersonByName.Location = new Point(320, 202);
+            tbxSearchPersonByName.Location = new Point(197, 205);
             tbxSearchPersonByName.Name = "tbxSearchPersonByName";
-            tbxSearchPersonByName.Size = new Size(772, 23);
+            tbxSearchPersonByName.Size = new Size(678, 23);
             tbxSearchPersonByName.TabIndex = 7;
             tbxSearchPersonByName.TextChanged += tbxSearchPersonByName_TextChanged;
             // 
@@ -79,8 +85,10 @@
             dgwPersons.Name = "dgwPersons";
             dgwPersons.ReadOnly = true;
             dgwPersons.RowTemplate.Height = 25;
-            dgwPersons.Size = new Size(1319, 231);
+            dgwPersons.Size = new Size(863, 231);
             dgwPersons.TabIndex = 6;
+            dgwPersons.CellClick += dgwPersons_CellClick;
+            dgwPersons.SelectionChanged += dgwPersons_SelectionChanged;
             // 
             // tbxPersonFirstName
             // 
@@ -115,12 +123,22 @@
             grpBoxFilterPerson.Controls.Add(tbxIdentityNumber);
             grpBoxFilterPerson.Controls.Add(tbxPersonFirstName);
             grpBoxFilterPerson.Controls.Add(tbxPersonLastName);
-            grpBoxFilterPerson.Location = new Point(229, 12);
+            grpBoxFilterPerson.Location = new Point(12, 12);
             grpBoxFilterPerson.Name = "grpBoxFilterPerson";
             grpBoxFilterPerson.Size = new Size(863, 162);
             grpBoxFilterPerson.TabIndex = 11;
             grpBoxFilterPerson.TabStop = false;
             grpBoxFilterPerson.Text = "Gerçek müşteri arayın";
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(18, 124);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(75, 23);
+            btnClear.TabIndex = 20;
+            btnClear.Text = "Temizle";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // lblPhoneNumber
             // 
@@ -243,21 +261,67 @@
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += btnRefresh_Click;
             // 
-            // btnClear
+            // btnOpenFormToAddPerson
             // 
-            btnClear.Location = new Point(18, 124);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(75, 23);
-            btnClear.TabIndex = 20;
-            btnClear.Text = "Temizle";
-            btnClear.UseVisualStyleBackColor = true;
-            btnClear.Click += btnClear_Click;
+            btnOpenFormToAddPerson.Location = new Point(31, 33);
+            btnOpenFormToAddPerson.Name = "btnOpenFormToAddPerson";
+            btnOpenFormToAddPerson.Size = new Size(79, 32);
+            btnOpenFormToAddPerson.TabIndex = 20;
+            btnOpenFormToAddPerson.Text = "Ekle";
+            btnOpenFormToAddPerson.UseVisualStyleBackColor = true;
+            btnOpenFormToAddPerson.Click += btnOpenFormToAddPerson_Click;
+            // 
+            // grpBoxCRUD
+            // 
+            grpBoxCRUD.Controls.Add(btnDeletePerson);
+            grpBoxCRUD.Controls.Add(btnOpenFormToUpdatePerson);
+            grpBoxCRUD.Controls.Add(btnOpenFormToAddPerson);
+            grpBoxCRUD.Location = new Point(12, 491);
+            grpBoxCRUD.Name = "grpBoxCRUD";
+            grpBoxCRUD.Size = new Size(383, 82);
+            grpBoxCRUD.TabIndex = 21;
+            grpBoxCRUD.TabStop = false;
+            grpBoxCRUD.Text = "CRUD İşlemleri";
+            // 
+            // btnDeletePerson
+            // 
+            btnDeletePerson.Location = new Point(277, 33);
+            btnDeletePerson.Name = "btnDeletePerson";
+            btnDeletePerson.Size = new Size(75, 32);
+            btnDeletePerson.TabIndex = 22;
+            btnDeletePerson.Text = "Sil";
+            btnDeletePerson.UseVisualStyleBackColor = true;
+            // 
+            // btnOpenFormToUpdatePerson
+            // 
+            btnOpenFormToUpdatePerson.Location = new Point(157, 33);
+            btnOpenFormToUpdatePerson.Name = "btnOpenFormToUpdatePerson";
+            btnOpenFormToUpdatePerson.Size = new Size(78, 32);
+            btnOpenFormToUpdatePerson.TabIndex = 21;
+            btnOpenFormToUpdatePerson.Text = "Güncelle";
+            btnOpenFormToUpdatePerson.UseVisualStyleBackColor = true;
+            btnOpenFormToUpdatePerson.Click += btnOpenFormToUpdatePerson_Click;
+            // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.FromArgb(255, 123, 123);
+            btnExit.Cursor = Cursors.Hand;
+            btnExit.ForeColor = Color.Maroon;
+            btnExit.Location = new Point(792, 524);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(83, 32);
+            btnExit.TabIndex = 22;
+            btnExit.Text = "Kapat";
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
             // 
             // ListPersonPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1358, 512);
+            ClientSize = new Size(891, 585);
+            Controls.Add(btnExit);
+            Controls.Add(grpBoxCRUD);
             Controls.Add(btnRefresh);
             Controls.Add(grpBoxFilterPerson);
             Controls.Add(lblSearchPerson);
@@ -269,6 +333,7 @@
             ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();
             grpBoxFilterPerson.ResumeLayout(false);
             grpBoxFilterPerson.PerformLayout();
+            grpBoxCRUD.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -297,5 +362,10 @@
         private Label lblCity;
         private Label lblPhoneNumber;
         private Button btnClear;
+        private Button btnOpenFormToAddPerson;
+        private GroupBox grpBoxCRUD;
+        private Button btnDeletePerson;
+        private Button btnOpenFormToUpdatePerson;
+        private Button btnExit;
     }
 }

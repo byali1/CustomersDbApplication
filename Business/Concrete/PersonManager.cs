@@ -24,6 +24,12 @@ namespace Business.Concrete
             return _personDal.GetAll();
         }
 
+        public Person Get(Person person)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public void Add(Person person)
         {
             _personDal.Add(person);
