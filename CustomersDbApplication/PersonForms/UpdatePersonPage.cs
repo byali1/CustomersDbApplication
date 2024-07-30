@@ -17,12 +17,29 @@ namespace CustomersDbApplication.PersonForms
 {
     public partial class UpdatePersonPage : Form
     {
-        private IPersonService _personService;
+
+        private readonly ICustomerService _customerService;
+        private readonly IPersonService _personService;
+        private readonly ICustomerAddressService _customerAddressService;
+        private readonly IAddressDetailService _addressDetailService;
+        private readonly ICustomerEmailService _customerEmailService;
+        private readonly IEmailDetailService _emailDetailService;
+        private readonly ICustomerPhoneNumberService _customerPhoneNumberService;
+        private readonly IPhoneNumberDetailService _phoneNumberDetailService;
+
         private PersonDetailDto _personDetailDto;
-        public UpdatePersonPage(PersonDetailDto personDetailDto, IPersonService personService)
+        public UpdatePersonPage(PersonDetailDto personDetailDto, ICustomerService customerService, IPersonService personService, ICustomerAddressService customerAddressService, IAddressDetailService addressDetailService, ICustomerEmailService customerEmailService, IEmailDetailService emailDetailService, ICustomerPhoneNumberService customerPhoneNumberService, IPhoneNumberDetailService phoneNumberDetailService)
         {
+
             _personDetailDto = personDetailDto;
+            _customerService = customerService;
             _personService = personService;
+            _customerAddressService = customerAddressService;
+            _addressDetailService = addressDetailService;
+            _customerEmailService = customerEmailService;
+            _emailDetailService = emailDetailService;
+            _customerPhoneNumberService = customerPhoneNumberService;
+            _phoneNumberDetailService = phoneNumberDetailService;
             InitializeComponent();
         }
 
@@ -122,8 +139,124 @@ namespace CustomersDbApplication.PersonForms
             this.Close();
         }
 
-        private void grpBxUpdatePerson_Enter(object sender, EventArgs e)
+
+
+        private void btnUpdatePerson_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Değişiklikler kaydedilecektir. Onaylıyor musunuz ?", "Onay Gerekiyor", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
+            if (tbxIdentityNumber.Text.Length != 11)
+            {
+                MessageBox.Show("TC Kimlik no 11 haneli olmalıdır.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (Convert.ToInt64(tbxIdentityNumber.Text) % 2 != 0)
+            {
+                MessageBox.Show("TC Kimlik no'nun son hanesi çift sayı olmalıdır.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (HomePage.AreFilledAllTextBoxes(grpBxUpdatePerson) && HomePage.AreFilledAllComboBoxes(grpBxUpdatePerson) && HomePage.AreFilledAllRichTextBoxes(grpBxUpdatePerson))
+            {
+                var personById = _personService.GetPersonIdValuesById(_personDetailDto.PersonId);
+
+                var customer = new Customer
+                {
+                    CustomerId = personById.CustomerId,
+                    Name = tbxCustomerName.Text,
+                    LastName = tbxCustomerLastName.Text
+                };
+
+                var person = new Person
+                {
+                    PersonId = personById.PersonId,
+                    CustomerId = personById.CustomerId,
+                    PersonIdentityTypeId = Convert.ToInt16(cbxPersonIdentityType.SelectedValue),
+                    PersonOccupationId = Convert.ToInt16(cbxPersonOccupations.SelectedValue),
+                    PersonGenderId = HomePage.GetGenderId(radioBtnMale.Checked, radioBtnFemale.Checked),
+                    IdentityNumber = tbxIdentityNumber.Text,
+                    BirthDate = dTimePickerBirthDate.Value,
+                    BirthPlace = tbxBirthPlace.Text,
+                    CreatedTime = personById.CreatedTime,
+                    UpdatedTime = DateTime.Now
+
+                };
+
+                var customerAddress = new CustomerAddress
+                {
+                    CustomerId = personById.CustomerId,
+                    CustomerAddressId = personById.CustomerAddressId,
+                    AddressName = tbxAddressName.Text,
+                    AddressTypeId = Convert.ToInt16(cbxAddressTypes.SelectedValue),
+                    IsBillingAddress = checkBxIsBillingAddress.Checked
+                };
+
+                var addressDetail = new AddressDetail
+                {
+                    AddressDetailId = personById.AddressDetailId,
+                    DistrictId = Convert.ToInt16(cbxDistricts.SelectedValue),
+                    CustomerAddressId = personById.CustomerAddressId,
+                    CityId = Convert.ToInt16(cbxCities.SelectedValue),
+                    AddressDetailDescription = richTbxAddressDetailDescription.Text,
+                    CountryId = 190
+                };
+
+                var customerEmail = new CustomerEmail
+                {
+                    CustomerId = personById.CustomerId,
+                    IsPrimary = checkBxIsPrimaryEmail.Checked,
+                    CustomerEmailDetailId = personById.CustomerEmailDetailId,
+                    CustomerEmailId = personById.CustomerEmailId,
+                };
+
+                var emailDetail = new EmailDetail
+                {
+                    CustomerEmailDetailId = personById.CustomerEmailDetailId,
+                    Email = tbxEmail.Text
+                };
+
+                var customerPhoneNumber = new CustomerPhoneNumber
+                {
+                    CustomerId = personById.CustomerId,
+                    PhoneNumberDetailId = personById.PhoneNumberDetailId,
+                    CustomerPhoneNumberId = personById.CustomerPhoneNumberId,
+                    IsPrimary = checkBxIsPrimaryPhoneNumber.Checked
+                };
+
+                var phoneNumberDetail = new PhoneNumberDetail
+                {
+                    PhoneNumberDetailId = personById.PhoneNumberDetailId,
+                    PhoneNumber = tbxPhoneNumber.Text
+                };
+
+                //UPDATE
+                _customerService.Update(customer);
+                _personService.Update(person);
+                _customerAddressService.Update(customerAddress);
+                _addressDetailService.Update(addressDetail);
+                _customerEmailService.Update(customerEmail);
+                _emailDetailService.Update(emailDetail);
+                _customerPhoneNumberService.Update(customerPhoneNumber);
+                _phoneNumberDetailService.Update(phoneNumberDetail);
+
+
+                MessageBox.Show("Güncelleme işlemi başarılı.", "BAŞARILI", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                this.Close();
+                ListPersonPage.dgwPersons.DataSource = _personService.GetPersonDetails();
+                return;
+            }
+
+            MessageBox.Show("Tüm alanları doğru bir şekilde doldurduğunuza emin olun.", "BAŞARISIZ", MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
 
         }
     }

@@ -113,7 +113,6 @@
             grpBxUpdatePerson.TabIndex = 7;
             grpBxUpdatePerson.TabStop = false;
             grpBxUpdatePerson.Text = "Gerçek müşteri güncelle";
-            grpBxUpdatePerson.Enter += grpBxUpdatePerson_Enter;
             // 
             // btnExit
             // 
@@ -422,6 +421,7 @@
             btnUpdatePerson.TabIndex = 5;
             btnUpdatePerson.Text = "Güncelle";
             btnUpdatePerson.UseVisualStyleBackColor = false;
+            btnUpdatePerson.Click += btnUpdatePerson_Click;
             // 
             // tbxCustomerLastName
             // 
@@ -459,8 +459,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1071, 447);
+            ClientSize = new Size(1071, 455);
             Controls.Add(grpBxUpdatePerson);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "UpdatePersonPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gerçek Müşteri Güncelleme Paneli";

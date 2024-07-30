@@ -15,7 +15,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfPersonDal : EfEntityRepositoryBase<Person, EfCustomersDbContext>, IPersonDal
     {
-       
+
 
         public List<PersonDetailDto> GetPersonDetails(Expression<Func<PersonDetailDto, bool>> filter = null)
         {
@@ -65,8 +65,8 @@ namespace DataAccess.Concrete.EntityFramework
                             join ei in emailInfo on c.CustomerId equals ei.CustomerId
                             select new PersonDetailDto
                             {
-                                CustomerId =c.CustomerId,
-                               PersonId  = p.PersonId,
+                                CustomerId = c.CustomerId,
+                                PersonId = p.PersonId,
                                 Name = c.Name,
                                 LastName = c.LastName,
                                 IdentityNumber = p.IdentityNumber,
@@ -103,23 +103,36 @@ namespace DataAccess.Concrete.EntityFramework
             using (EfCustomersDbContext context = new EfCustomersDbContext())
             {
                 var query = from p in context.Persons
-                    join ca in context.CustomerAddresses
-                        on p.CustomerId equals ca.CustomerId
-                    join ad in context.AddressDetails
-                        on ca.CustomerAddressId equals ad.CustomerAddressId
-                    where p.PersonId == personId
-                     select new PersonById
-                    {
-                        PersonId = p.PersonId,
-                        CustomerId = p.CustomerId,
-                        PersonIdentityTypeId = p.PersonIdentityTypeId,
-                        PersonOccupationId = p.PersonOccupationId,
-                        PersonGenderId = p.PersonGenderId,
-                        CustomerAddressId = ca.CustomerAddressId,
-                        AddressTypeId = ca.AddressTypeId,
-                        CityId = ad.CityId,
-                        DistrictId = ad.DistrictId
-                    };
+                            join ca in context.CustomerAddresses
+                                on p.CustomerId equals ca.CustomerId
+                            join ad in context.AddressDetails
+                                on ca.CustomerAddressId equals ad.CustomerAddressId
+                            join ce in context.CustomerEmails
+                                on p.CustomerId equals ce.CustomerId
+                            join ed in context.EmailDetails on ce.CustomerEmailDetailId equals ed.CustomerEmailDetailId
+                            join cpn in context.CustomerPhoneNumbers on p.CustomerId equals cpn.CustomerId
+                            join pnd in context.PhoneNumberDetails on cpn.PhoneNumberDetailId equals pnd.PhoneNumberDetailId
+                            where p.PersonId == personId
+                            select new PersonById
+                            {
+                                PersonId = p.PersonId,
+                                CustomerId = p.CustomerId,
+                                PersonIdentityTypeId = p.PersonIdentityTypeId,
+                                PersonOccupationId = p.PersonOccupationId,
+                                PersonGenderId = p.PersonGenderId,
+                                CustomerAddressId = ca.CustomerAddressId,
+                                AddressTypeId = ca.AddressTypeId,
+                                CityId = ad.CityId,
+                                DistrictId = ad.DistrictId,
+                                AddressDetailId = ad.AddressDetailId,
+                                CustomerEmailDetailId = ed.CustomerEmailDetailId,
+                                CustomerEmailId = ce.CustomerEmailId,
+                                CustomerPhoneNumberId = cpn.CustomerPhoneNumberId,
+                                PhoneNumberDetailId = pnd.PhoneNumberDetailId,
+                                CreatedTime = p.CreatedTime,
+                                UpdatedTime = p.UpdatedTime,
+
+                            };
                 return query.SingleOrDefault();
 
 

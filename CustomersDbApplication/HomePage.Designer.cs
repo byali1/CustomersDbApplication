@@ -129,6 +129,7 @@
             Name = "HomePage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CustomersDb App";
+            WindowState = FormWindowState.Maximized;
             Load += HomePage_Load;
             menuStripHomePage.ResumeLayout(false);
             menuStripHomePage.PerformLayout();

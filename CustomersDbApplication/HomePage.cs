@@ -1,4 +1,4 @@
-using Business.Abstract;
+﻿using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using System;
@@ -16,9 +16,16 @@ namespace CustomersDbApplication
 
         }
 
-        private void HomePage_Load(object sender, EventArgs e)
+        //Public Operations
+        public static void ClearAllTextBoxes(Control parent)
         {
-
+            foreach (Control control in parent.Controls)
+            {
+                if (control is TextBox)
+                {
+                    ((TextBox)control).Text = "";
+                }
+            }
         }
 
         public static bool IsFormOpen(Type targetForm)
@@ -33,6 +40,66 @@ namespace CustomersDbApplication
             return false;
         }
 
+        public static int GetGenderId(bool radioBtnMaleChecked, bool radioBtnFemaleChecked)
+        {
+            if (radioBtnMaleChecked)
+            {
+                return 1;
+            }
+            if (radioBtnFemaleChecked)
+            {
+                return 2;
+            }
+
+            MessageBox.Show("Lütfen cinsiyet seçin.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return -1;
+        }
+
+        public static bool AreFilledAllTextBoxes(GroupBox groupBox)
+        {
+            foreach (Control control in groupBox.Controls)
+            {
+                if (control is TextBox textBox && string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    return false;
+                }   
+            }
+
+            return true;
+        }
+
+        public static bool AreFilledAllComboBoxes(GroupBox groupBox)
+        {
+            foreach (Control control in groupBox.Controls)
+            {
+                if (control is ComboBox comboBox && (comboBox.SelectedIndex == -1 || comboBox.SelectedIndex == 0))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+                
+        }
+
+        public static bool AreFilledAllRichTextBoxes(GroupBox groupBox)
+        {
+            foreach (Control control in groupBox.Controls)
+            {
+                if (control is RichTextBox richTextBox && string.IsNullOrWhiteSpace(richTextBox.Text))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        //Private
+        private void HomePage_Load(object sender, EventArgs e)
+        {
+
+        }
         private void addPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddPersonPage addPersonPage = new AddPersonPage(
@@ -52,6 +119,12 @@ namespace CustomersDbApplication
 
         private void listAllCustomersToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsFormOpen(typeof(ListCustomerPage)))
+            {
+                MessageBox.Show("Müşteri listeleme paneli zaten açık.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             ListCustomerPage listCustomerPage = new ListCustomerPage(new CustomerManager(new EfCustomerDal()));
             listCustomerPage.MdiParent = this;
             listCustomerPage.Show();
@@ -59,6 +132,12 @@ namespace CustomersDbApplication
 
         private void listPersonsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsFormOpen(typeof(ListPersonPage)))
+            {
+                MessageBox.Show("Gerçek müşteri listeleme paneli zaten açık.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             ListPersonPage listPersonPage = new ListPersonPage(new PersonManager(new EfPersonDal()));
             listPersonPage.MdiParent = this;
             listPersonPage.Show();
@@ -68,5 +147,7 @@ namespace CustomersDbApplication
         {
 
         }
+
+        
     }
 }

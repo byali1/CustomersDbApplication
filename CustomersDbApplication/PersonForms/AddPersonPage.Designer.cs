@@ -65,9 +65,7 @@
             tbxCustomerName = new TextBox();
             lblName = new Label();
             label2 = new Label();
-            dgwPersons = new DataGridView();
             grpBxAddPerson.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgwPersons).BeginInit();
             SuspendLayout();
             // 
             // grpBxAddPerson
@@ -108,7 +106,7 @@
             grpBxAddPerson.Controls.Add(tbxCustomerName);
             grpBxAddPerson.Controls.Add(lblName);
             grpBxAddPerson.Controls.Add(label2);
-            grpBxAddPerson.Location = new Point(34, 245);
+            grpBxAddPerson.Location = new Point(34, 31);
             grpBxAddPerson.Name = "grpBxAddPerson";
             grpBxAddPerson.Size = new Size(1010, 390);
             grpBxAddPerson.TabIndex = 6;
@@ -414,6 +412,7 @@
             // btnAddPerson
             // 
             btnAddPerson.BackColor = Color.LightGreen;
+            btnAddPerson.Cursor = Cursors.Hand;
             btnAddPerson.Location = new Point(769, 347);
             btnAddPerson.Name = "btnAddPerson";
             btnAddPerson.Size = new Size(87, 32);
@@ -454,33 +453,19 @@
             label2.TabIndex = 2;
             label2.Text = "Müşteri soyadı:";
             // 
-            // dgwPersons
-            // 
-            dgwPersons.AllowUserToAddRows = false;
-            dgwPersons.AllowUserToDeleteRows = false;
-            dgwPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgwPersons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgwPersons.Location = new Point(34, 34);
-            dgwPersons.Name = "dgwPersons";
-            dgwPersons.ReadOnly = true;
-            dgwPersons.RowTemplate.Height = 25;
-            dgwPersons.Size = new Size(1010, 190);
-            dgwPersons.TabIndex = 5;
-            // 
             // AddPersonPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1077, 676);
+            ClientSize = new Size(1077, 444);
             Controls.Add(grpBxAddPerson);
-            Controls.Add(dgwPersons);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "AddPersonPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gerçek Müşteri Ekleme Paneli";
             Load += AddPersonPage_Load;
             grpBxAddPerson.ResumeLayout(false);
             grpBxAddPerson.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();
             ResumeLayout(false);
         }
 
@@ -522,7 +507,6 @@
         private TextBox tbxCustomerName;
         private Label lblName;
         private Label label2;
-        private DataGridView dgwPersons;
         private Button btnExit;
     }
 }

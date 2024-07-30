@@ -43,7 +43,7 @@ namespace CustomersDbApplication
 
         private void AddPersonPage_Load(object sender, EventArgs e)
         {
-            dgwPersons.DataSource = _personService.GetAll();
+            //dgwPersons.DataSource = _personService.GetAll();
 
             FillComboBox(cbxPersonIdentityType, new EfPersonIdentityTypeDal().GetAll(), "IdentityTypeDescription", "PersonIdentityTypeId");
             FillComboBox(cbxPersonOccupations, new EfPersonOccupationDal().GetAll(), "OccupationName", "PersonOccupationId");
@@ -150,7 +150,7 @@ namespace CustomersDbApplication
                 var selectedDistrict = (District)cbxDistricts.SelectedItem;
                 int districtId = selectedDistrict.DistrictId;
 
-                int personGenderId = GetGenderId(radioBtnMale.Checked, radioBtnFemale.Checked);
+                int personGenderId = HomePage.GetGenderId(radioBtnMale.Checked, radioBtnFemale.Checked);
 
                 var customerAddress = new CustomerAddress
                 {
@@ -184,8 +184,8 @@ namespace CustomersDbApplication
                     IdentityNumber = tbxIdentityNumber.Text,
                     BirthDate = dTimePickerBirthDate.Value,
                     BirthPlace = tbxBirthPlace.Text,
-                    CreatedTime = DateTime.UtcNow,
-                    UpdatedTime = DateTime.UtcNow
+                    CreatedTime = DateTime.Now,
+                    UpdatedTime = DateTime.Now
                 });
 
 
@@ -221,7 +221,6 @@ namespace CustomersDbApplication
 
                 _customerEmailService.Add(customerEmail);
 
-                dgwPersons.DataSource = _personService.GetAll();
                 //dgwPersons.DataSource = _personService.GetPersonDetails();
 
                 ClearTextboxesOnAddPersonPage();
@@ -258,20 +257,7 @@ namespace CustomersDbApplication
         }
 
 
-        private int GetGenderId(bool radioBtnMaleChecked, bool radioBtnFemaleChecked)
-        {
-            if (radioBtnMaleChecked)
-            {
-                return 1;
-            }
-            if (radioBtnFemaleChecked)
-            {
-                return 2;
-            }
-
-            MessageBox.Show("Lütfen cinsiyet seçin.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return -1;
-        }
+        
 
         private void tbxIdentityNumber_KeyPress(object sender, KeyPressEventArgs e)
         {

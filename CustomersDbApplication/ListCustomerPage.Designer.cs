@@ -72,6 +72,7 @@
             Controls.Add(lblSearchCustomer);
             Controls.Add(tbxSearchCustomerByName);
             Controls.Add(dgwCustomers);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "ListCustomerPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Müşterileri Listele";

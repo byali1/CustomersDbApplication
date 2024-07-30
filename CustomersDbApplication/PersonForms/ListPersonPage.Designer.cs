@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             lblSearchPerson = new Label();
             tbxSearchPersonByName = new TextBox();
             dgwPersons = new DataGridView();
@@ -79,11 +80,22 @@
             // 
             dgwPersons.AllowUserToAddRows = false;
             dgwPersons.AllowUserToDeleteRows = false;
-            dgwPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgwPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgwPersons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgwPersons.Cursor = Cursors.Hand;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.Silver;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Brown;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgwPersons.DefaultCellStyle = dataGridViewCellStyle1;
             dgwPersons.Location = new Point(12, 241);
+            dgwPersons.MultiSelect = false;
             dgwPersons.Name = "dgwPersons";
             dgwPersons.ReadOnly = true;
+            dgwPersons.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dgwPersons.RowTemplate.Height = 25;
             dgwPersons.Size = new Size(863, 231);
             dgwPersons.TabIndex = 6;
@@ -327,7 +339,9 @@
             Controls.Add(lblSearchPerson);
             Controls.Add(tbxSearchPersonByName);
             Controls.Add(dgwPersons);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "ListPersonPage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Gerçek Müşteri Listeleme Paneli";
             Load += ListPersonPage_Load;
             ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();
@@ -342,7 +356,6 @@
 
         private Label lblSearchPerson;
         private TextBox tbxSearchPersonByName;
-        private DataGridView dgwPersons;
         private TextBox tbxPersonFirstName;
         private TextBox tbxPersonLastName;
         private GroupBox grpBoxFilterPerson;
@@ -367,5 +380,6 @@
         private Button btnDeletePerson;
         private Button btnOpenFormToUpdatePerson;
         private Button btnExit;
+        public static DataGridView dgwPersons;
     }
 }

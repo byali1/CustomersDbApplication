@@ -145,22 +145,13 @@ namespace CustomersDbApplication
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearAllTextBoxes(grpBoxFilterPerson);
+            HomePage.ClearAllTextBoxes(grpBoxFilterPerson);
             cbxCities.SelectedIndex = 0;
             cbxDistricts.SelectedIndex = 0;
             cbxOccupations.SelectedIndex = 0;
         }
 
-        private void ClearAllTextBoxes(Control parent)
-        {
-            foreach (Control control in parent.Controls)
-            {
-                if (control is TextBox)
-                {
-                    ((TextBox)control).Text = "";
-                }
-            }
-        }
+
 
         private void btnOpenFormToAddPerson_Click(object sender, EventArgs e)
         {
@@ -234,7 +225,13 @@ namespace CustomersDbApplication
 
                 if (form is HomePage homePage)
                 {
-                    UpdatePersonPage updatePersonPage = new UpdatePersonPage(personDTO,new PersonManager(new EfPersonDal()));
+                    UpdatePersonPage updatePersonPage = new UpdatePersonPage(personDTO, new CustomerManager(new EfCustomerDal()),
+                        new PersonManager(new EfPersonDal()),
+                        new CustomerAddressManager(new EfCustomerAddressDal()),
+                        new AddressDetailManager(new EfAddressDetailDal()),
+                        new CustomerEmailManager(new EfCustomerEmailDal()),
+                        new EmailDetailManager(new EfEmailDetailDal()),
+                        new CustomerPhoneNumberManager(new EfCustomerPhoneNumberDal()), new PhoneNumberDetailManager(new EfPhoneNumberDetailDal()));
                     updatePersonPage.MdiParent = homePage;
                     updatePersonPage.Show();
                     break;
@@ -258,6 +255,8 @@ namespace CustomersDbApplication
         {
             this.Close();
         }
+
+
 
         public static void FillComboBox<T>(ComboBox comboBox, List<T> dataSource, string displayMember, string valueMember)
         {
