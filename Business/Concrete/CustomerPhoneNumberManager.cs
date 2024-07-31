@@ -11,30 +11,31 @@ namespace Business.Concrete
 {
     public class CustomerPhoneNumberManager : ICustomerPhoneNumberService
     {
-        private ICustomerPhoneNumberDal _customerPhoneNumberDal;
+        private readonly ICustomerPhoneNumberDal _customerPhoneNumberDal;
 
         public CustomerPhoneNumberManager(ICustomerPhoneNumberDal customerPhoneNumberDal)
         {
             _customerPhoneNumberDal = customerPhoneNumberDal;
         }
-        public List<CustomerPhoneNumber> GetAll()
+
+        public async Task<List<CustomerPhoneNumber>> GetAllAsync()
         {
-            return _customerPhoneNumberDal.GetAll();
+            return await _customerPhoneNumberDal.GetAllAsync();
         }
 
-        public void Add(CustomerPhoneNumber customerPhoneNumber)
+        public async Task AddAsync(CustomerPhoneNumber customerPhoneNumber)
         {
-            _customerPhoneNumberDal.Add(customerPhoneNumber);
+            await _customerPhoneNumberDal.AddAsync(customerPhoneNumber);
         }
 
-        public void Update(CustomerPhoneNumber customerPhoneNumber)
+        public async Task UpdateAsync(CustomerPhoneNumber customerPhoneNumber)
         {
-            _customerPhoneNumberDal.Update(customerPhoneNumber);
+            await _customerPhoneNumberDal.UpdateAsync(customerPhoneNumber);
         }
 
-        public void Delete(CustomerPhoneNumber customerPhoneNumber)
+        public async Task DeleteAsync(CustomerPhoneNumber customerPhoneNumber)
         {
-            _customerPhoneNumberDal.Delete(customerPhoneNumber);
+            await _customerPhoneNumberDal.DeleteAsync(customerPhoneNumber);
         }
     }
 }

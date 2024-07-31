@@ -1,13 +1,13 @@
-﻿namespace CustomersDbApplication
+﻿namespace CustomersDbApplication.CompanyForms
 {
-    partial class UserControlAddPerson
+    partial class AddCompanyPage
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,22 +20,16 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            customersDbContextBindingSource = new BindingSource(components);
-            dgwPersons = new DataGridView();
-            label2 = new Label();
-            lblName = new Label();
-            tbxCustomerName = new TextBox();
-            tbxCustomerLastName = new TextBox();
-            grpBxAddPerson = new GroupBox();
+            grpBxAddCompany = new GroupBox();
+            btnExit = new Button();
             checkBxIsPrimaryEmail = new CheckBox();
             checkBxIsPrimaryPhoneNumber = new CheckBox();
             tbxEmail = new TextBox();
@@ -67,106 +61,71 @@
             lblPersonIdentityType = new Label();
             cbxPersonIdentityType = new ComboBox();
             btnAddPerson = new Button();
-            ((System.ComponentModel.ISupportInitialize)customersDbContextBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgwPersons).BeginInit();
-            grpBxAddPerson.SuspendLayout();
+            tbxCustomerName = new TextBox();
+            lblName = new Label();
+            grpBxAddCompany.SuspendLayout();
             SuspendLayout();
             // 
-            // customersDbContextBindingSource
+            // grpBxAddCompany
             // 
-            customersDbContextBindingSource.DataSource = typeof(DataAccess.Concrete.AdoNet.CustomersDbContext);
+            grpBxAddCompany.Controls.Add(btnExit);
+            grpBxAddCompany.Controls.Add(checkBxIsPrimaryEmail);
+            grpBxAddCompany.Controls.Add(checkBxIsPrimaryPhoneNumber);
+            grpBxAddCompany.Controls.Add(tbxEmail);
+            grpBxAddCompany.Controls.Add(lblEmail);
+            grpBxAddCompany.Controls.Add(tbxPhoneNumber);
+            grpBxAddCompany.Controls.Add(lblPhoneNumber);
+            grpBxAddCompany.Controls.Add(checkBxIsBillingAddress);
+            grpBxAddCompany.Controls.Add(cbxDistricts);
+            grpBxAddCompany.Controls.Add(lblDistrict);
+            grpBxAddCompany.Controls.Add(cbxCities);
+            grpBxAddCompany.Controls.Add(lblCity);
+            grpBxAddCompany.Controls.Add(label4);
+            grpBxAddCompany.Controls.Add(richTbxAddressDetailDescription);
+            grpBxAddCompany.Controls.Add(tbxAddressName);
+            grpBxAddCompany.Controls.Add(lblAddressName);
+            grpBxAddCompany.Controls.Add(cbxAddressTypes);
+            grpBxAddCompany.Controls.Add(lblAddressType);
+            grpBxAddCompany.Controls.Add(tbxBirthPlace);
+            grpBxAddCompany.Controls.Add(lblBirthPlace);
+            grpBxAddCompany.Controls.Add(label3);
+            grpBxAddCompany.Controls.Add(dTimePickerBirthDate);
+            grpBxAddCompany.Controls.Add(lblOccupation);
+            grpBxAddCompany.Controls.Add(tbxIdentityNumber);
+            grpBxAddCompany.Controls.Add(label1);
+            grpBxAddCompany.Controls.Add(lblGender);
+            grpBxAddCompany.Controls.Add(radioBtnFemale);
+            grpBxAddCompany.Controls.Add(radioBtnMale);
+            grpBxAddCompany.Controls.Add(cbxPersonOccupations);
+            grpBxAddCompany.Controls.Add(lblPersonIdentityType);
+            grpBxAddCompany.Controls.Add(cbxPersonIdentityType);
+            grpBxAddCompany.Controls.Add(btnAddPerson);
+            grpBxAddCompany.Controls.Add(tbxCustomerName);
+            grpBxAddCompany.Controls.Add(lblName);
+            grpBxAddCompany.ForeColor = Color.MidnightBlue;
+            grpBxAddCompany.Location = new Point(12, 12);
+            grpBxAddCompany.Name = "grpBxAddCompany";
+            grpBxAddCompany.Size = new Size(1010, 390);
+            grpBxAddCompany.TabIndex = 7;
+            grpBxAddCompany.TabStop = false;
+            grpBxAddCompany.Text = "Tüzem müşteri ekle";
             // 
-            // dgwPersons
+            // btnExit
             // 
-            dgwPersons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgwPersons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgwPersons.Location = new Point(33, 3);
-            dgwPersons.Name = "dgwPersons";
-            dgwPersons.RowTemplate.Height = 25;
-            dgwPersons.Size = new Size(1010, 190);
-            dgwPersons.TabIndex = 0;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(272, 55);
-            label2.Name = "label2";
-            label2.Size = new Size(87, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Müşteri soyadı:";
-            // 
-            // lblName
-            // 
-            lblName.AutoSize = true;
-            lblName.Location = new Point(17, 55);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(69, 15);
-            lblName.TabIndex = 1;
-            lblName.Text = "Müşteri adı:";
-            // 
-            // tbxCustomerName
-            // 
-            tbxCustomerName.Location = new Point(17, 73);
-            tbxCustomerName.Name = "tbxCustomerName";
-            tbxCustomerName.Size = new Size(209, 23);
-            tbxCustomerName.TabIndex = 3;
-            // 
-            // tbxCustomerLastName
-            // 
-            tbxCustomerLastName.Location = new Point(272, 73);
-            tbxCustomerLastName.Name = "tbxCustomerLastName";
-            tbxCustomerLastName.Size = new Size(209, 23);
-            tbxCustomerLastName.TabIndex = 4;
-            // 
-            // grpBxAddPerson
-            // 
-            grpBxAddPerson.Controls.Add(checkBxIsPrimaryEmail);
-            grpBxAddPerson.Controls.Add(checkBxIsPrimaryPhoneNumber);
-            grpBxAddPerson.Controls.Add(tbxEmail);
-            grpBxAddPerson.Controls.Add(lblEmail);
-            grpBxAddPerson.Controls.Add(tbxPhoneNumber);
-            grpBxAddPerson.Controls.Add(lblPhoneNumber);
-            grpBxAddPerson.Controls.Add(checkBxIsBillingAddress);
-            grpBxAddPerson.Controls.Add(cbxDistricts);
-            grpBxAddPerson.Controls.Add(lblDistrict);
-            grpBxAddPerson.Controls.Add(cbxCities);
-            grpBxAddPerson.Controls.Add(lblCity);
-            grpBxAddPerson.Controls.Add(label4);
-            grpBxAddPerson.Controls.Add(richTbxAddressDetailDescription);
-            grpBxAddPerson.Controls.Add(tbxAddressName);
-            grpBxAddPerson.Controls.Add(lblAddressName);
-            grpBxAddPerson.Controls.Add(cbxAddressTypes);
-            grpBxAddPerson.Controls.Add(lblAddressType);
-            grpBxAddPerson.Controls.Add(tbxBirthPlace);
-            grpBxAddPerson.Controls.Add(lblBirthPlace);
-            grpBxAddPerson.Controls.Add(label3);
-            grpBxAddPerson.Controls.Add(dTimePickerBirthDate);
-            grpBxAddPerson.Controls.Add(lblOccupation);
-            grpBxAddPerson.Controls.Add(tbxIdentityNumber);
-            grpBxAddPerson.Controls.Add(label1);
-            grpBxAddPerson.Controls.Add(lblGender);
-            grpBxAddPerson.Controls.Add(radioBtnFemale);
-            grpBxAddPerson.Controls.Add(radioBtnMale);
-            grpBxAddPerson.Controls.Add(cbxPersonOccupations);
-            grpBxAddPerson.Controls.Add(lblPersonIdentityType);
-            grpBxAddPerson.Controls.Add(cbxPersonIdentityType);
-            grpBxAddPerson.Controls.Add(btnAddPerson);
-            grpBxAddPerson.Controls.Add(tbxCustomerLastName);
-            grpBxAddPerson.Controls.Add(tbxCustomerName);
-            grpBxAddPerson.Controls.Add(lblName);
-            grpBxAddPerson.Controls.Add(label2);
-            grpBxAddPerson.Location = new Point(33, 214);
-            grpBxAddPerson.Name = "grpBxAddPerson";
-            grpBxAddPerson.Size = new Size(1010, 390);
-            grpBxAddPerson.TabIndex = 4;
-            grpBxAddPerson.TabStop = false;
-            grpBxAddPerson.Text = "Gerçek müşteri ekle";
-            grpBxAddPerson.Enter += grpBxAddPerson_Enter;
+            btnExit.BackColor = Color.FromArgb(255, 123, 123);
+            btnExit.Cursor = Cursors.Hand;
+            btnExit.ForeColor = Color.Maroon;
+            btnExit.Location = new Point(890, 326);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(87, 32);
+            btnExit.TabIndex = 39;
+            btnExit.Text = "Kapat";
+            btnExit.UseVisualStyleBackColor = false;
             // 
             // checkBxIsPrimaryEmail
             // 
             checkBxIsPrimaryEmail.AutoSize = true;
-            checkBxIsPrimaryEmail.Location = new Point(524, 303);
+            checkBxIsPrimaryEmail.Location = new Point(523, 277);
             checkBxIsPrimaryEmail.Name = "checkBxIsPrimaryEmail";
             checkBxIsPrimaryEmail.Size = new Size(119, 19);
             checkBxIsPrimaryEmail.TabIndex = 38;
@@ -176,7 +135,7 @@
             // checkBxIsPrimaryPhoneNumber
             // 
             checkBxIsPrimaryPhoneNumber.AutoSize = true;
-            checkBxIsPrimaryPhoneNumber.Location = new Point(769, 236);
+            checkBxIsPrimaryPhoneNumber.Location = new Point(768, 210);
             checkBxIsPrimaryPhoneNumber.Name = "checkBxIsPrimaryPhoneNumber";
             checkBxIsPrimaryPhoneNumber.Size = new Size(142, 19);
             checkBxIsPrimaryPhoneNumber.TabIndex = 37;
@@ -185,7 +144,7 @@
             // 
             // tbxEmail
             // 
-            tbxEmail.Location = new Point(524, 274);
+            tbxEmail.Location = new Point(523, 248);
             tbxEmail.Name = "tbxEmail";
             tbxEmail.Size = new Size(209, 23);
             tbxEmail.TabIndex = 36;
@@ -193,7 +152,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(524, 253);
+            lblEmail.Location = new Point(523, 227);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(39, 15);
             lblEmail.TabIndex = 35;
@@ -201,7 +160,7 @@
             // 
             // tbxPhoneNumber
             // 
-            tbxPhoneNumber.Location = new Point(769, 207);
+            tbxPhoneNumber.Location = new Point(768, 181);
             tbxPhoneNumber.MaxLength = 10;
             tbxPhoneNumber.Name = "tbxPhoneNumber";
             tbxPhoneNumber.PlaceholderText = "5XXXXXXXXX";
@@ -211,7 +170,7 @@
             // lblPhoneNumber
             // 
             lblPhoneNumber.AutoSize = true;
-            lblPhoneNumber.Location = new Point(769, 186);
+            lblPhoneNumber.Location = new Point(768, 160);
             lblPhoneNumber.Name = "lblPhoneNumber";
             lblPhoneNumber.Size = new Size(100, 15);
             lblPhoneNumber.TabIndex = 33;
@@ -220,7 +179,7 @@
             // checkBxIsBillingAddress
             // 
             checkBxIsBillingAddress.AutoSize = true;
-            checkBxIsBillingAddress.Location = new Point(17, 360);
+            checkBxIsBillingAddress.Location = new Point(16, 334);
             checkBxIsBillingAddress.Name = "checkBxIsBillingAddress";
             checkBxIsBillingAddress.Size = new Size(159, 19);
             checkBxIsBillingAddress.TabIndex = 32;
@@ -233,7 +192,7 @@
             cbxDistricts.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxDistricts.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxDistricts.FormattingEnabled = true;
-            cbxDistricts.Location = new Point(524, 207);
+            cbxDistricts.Location = new Point(523, 181);
             cbxDistricts.Name = "cbxDistricts";
             cbxDistricts.Size = new Size(209, 23);
             cbxDistricts.TabIndex = 31;
@@ -241,7 +200,7 @@
             // lblDistrict
             // 
             lblDistrict.AutoSize = true;
-            lblDistrict.Location = new Point(524, 186);
+            lblDistrict.Location = new Point(523, 160);
             lblDistrict.Name = "lblDistrict";
             lblDistrict.Size = new Size(28, 15);
             lblDistrict.TabIndex = 30;
@@ -253,16 +212,15 @@
             cbxCities.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxCities.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxCities.FormattingEnabled = true;
-            cbxCities.Location = new Point(272, 207);
+            cbxCities.Location = new Point(271, 181);
             cbxCities.Name = "cbxCities";
             cbxCities.Size = new Size(209, 23);
             cbxCities.TabIndex = 29;
-            cbxCities.SelectedIndexChanged += cbxCities_SelectedIndexChanged;
             // 
             // lblCity
             // 
             lblCity.AutoSize = true;
-            lblCity.Location = new Point(272, 186);
+            lblCity.Location = new Point(271, 160);
             lblCity.Name = "lblCity";
             lblCity.Size = new Size(36, 15);
             lblCity.TabIndex = 28;
@@ -271,7 +229,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(17, 186);
+            label4.Location = new Point(16, 160);
             label4.Name = "label4";
             label4.Size = new Size(58, 15);
             label4.TabIndex = 27;
@@ -280,7 +238,7 @@
             // richTbxAddressDetailDescription
             // 
             richTbxAddressDetailDescription.DetectUrls = false;
-            richTbxAddressDetailDescription.Location = new Point(17, 204);
+            richTbxAddressDetailDescription.Location = new Point(16, 178);
             richTbxAddressDetailDescription.MaxLength = 2000;
             richTbxAddressDetailDescription.Name = "richTbxAddressDetailDescription";
             richTbxAddressDetailDescription.Size = new Size(209, 148);
@@ -289,7 +247,7 @@
             // 
             // tbxAddressName
             // 
-            tbxAddressName.Location = new Point(272, 274);
+            tbxAddressName.Location = new Point(271, 248);
             tbxAddressName.Name = "tbxAddressName";
             tbxAddressName.Size = new Size(209, 23);
             tbxAddressName.TabIndex = 22;
@@ -297,7 +255,7 @@
             // lblAddressName
             // 
             lblAddressName.AutoSize = true;
-            lblAddressName.Location = new Point(272, 253);
+            lblAddressName.Location = new Point(271, 227);
             lblAddressName.Name = "lblAddressName";
             lblAddressName.Size = new Size(65, 15);
             lblAddressName.TabIndex = 21;
@@ -309,7 +267,7 @@
             cbxAddressTypes.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxAddressTypes.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxAddressTypes.FormattingEnabled = true;
-            cbxAddressTypes.Location = new Point(769, 140);
+            cbxAddressTypes.Location = new Point(768, 114);
             cbxAddressTypes.Name = "cbxAddressTypes";
             cbxAddressTypes.Size = new Size(209, 23);
             cbxAddressTypes.TabIndex = 20;
@@ -317,7 +275,7 @@
             // lblAddressType
             // 
             lblAddressType.AutoSize = true;
-            lblAddressType.Location = new Point(769, 119);
+            lblAddressType.Location = new Point(768, 93);
             lblAddressType.Name = "lblAddressType";
             lblAddressType.Size = new Size(62, 15);
             lblAddressType.TabIndex = 19;
@@ -325,7 +283,7 @@
             // 
             // tbxBirthPlace
             // 
-            tbxBirthPlace.Location = new Point(524, 140);
+            tbxBirthPlace.Location = new Point(523, 114);
             tbxBirthPlace.Name = "tbxBirthPlace";
             tbxBirthPlace.Size = new Size(209, 23);
             tbxBirthPlace.TabIndex = 18;
@@ -333,7 +291,7 @@
             // lblBirthPlace
             // 
             lblBirthPlace.AutoSize = true;
-            lblBirthPlace.Location = new Point(524, 119);
+            lblBirthPlace.Location = new Point(523, 93);
             lblBirthPlace.Name = "lblBirthPlace";
             lblBirthPlace.Size = new Size(72, 15);
             lblBirthPlace.TabIndex = 17;
@@ -342,7 +300,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(272, 119);
+            label3.Location = new Point(271, 93);
             label3.Name = "label3";
             label3.Size = new Size(81, 15);
             label3.TabIndex = 16;
@@ -350,7 +308,7 @@
             // 
             // dTimePickerBirthDate
             // 
-            dTimePickerBirthDate.Location = new Point(272, 137);
+            dTimePickerBirthDate.Location = new Point(271, 111);
             dTimePickerBirthDate.Name = "dTimePickerBirthDate";
             dTimePickerBirthDate.Size = new Size(209, 23);
             dTimePickerBirthDate.TabIndex = 15;
@@ -359,7 +317,7 @@
             // lblOccupation
             // 
             lblOccupation.AutoSize = true;
-            lblOccupation.Location = new Point(17, 119);
+            lblOccupation.Location = new Point(16, 93);
             lblOccupation.Name = "lblOccupation";
             lblOccupation.Size = new Size(47, 15);
             lblOccupation.TabIndex = 14;
@@ -367,17 +325,16 @@
             // 
             // tbxIdentityNumber
             // 
-            tbxIdentityNumber.Location = new Point(769, 73);
+            tbxIdentityNumber.Location = new Point(768, 47);
             tbxIdentityNumber.MaxLength = 11;
             tbxIdentityNumber.Name = "tbxIdentityNumber";
             tbxIdentityNumber.Size = new Size(209, 23);
             tbxIdentityNumber.TabIndex = 13;
-            tbxIdentityNumber.KeyPress += tbxIdentityNumber_KeyPress;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(769, 55);
+            label1.Location = new Point(768, 29);
             label1.Name = "label1";
             label1.Size = new Size(78, 15);
             label1.TabIndex = 12;
@@ -386,7 +343,7 @@
             // lblGender
             // 
             lblGender.AutoSize = true;
-            lblGender.Location = new Point(272, 312);
+            lblGender.Location = new Point(271, 286);
             lblGender.Name = "lblGender";
             lblGender.Size = new Size(52, 15);
             lblGender.TabIndex = 11;
@@ -395,7 +352,7 @@
             // radioBtnFemale
             // 
             radioBtnFemale.AutoSize = true;
-            radioBtnFemale.Location = new Point(340, 334);
+            radioBtnFemale.Location = new Point(339, 308);
             radioBtnFemale.Name = "radioBtnFemale";
             radioBtnFemale.Size = new Size(55, 19);
             radioBtnFemale.TabIndex = 10;
@@ -406,7 +363,7 @@
             // radioBtnMale
             // 
             radioBtnMale.AutoSize = true;
-            radioBtnMale.Location = new Point(272, 334);
+            radioBtnMale.Location = new Point(271, 308);
             radioBtnMale.Name = "radioBtnMale";
             radioBtnMale.Size = new Size(53, 19);
             radioBtnMale.TabIndex = 9;
@@ -420,7 +377,7 @@
             cbxPersonOccupations.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxPersonOccupations.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPersonOccupations.FormattingEnabled = true;
-            cbxPersonOccupations.Location = new Point(17, 137);
+            cbxPersonOccupations.Location = new Point(16, 111);
             cbxPersonOccupations.Name = "cbxPersonOccupations";
             cbxPersonOccupations.Size = new Size(209, 23);
             cbxPersonOccupations.TabIndex = 8;
@@ -428,7 +385,7 @@
             // lblPersonIdentityType
             // 
             lblPersonIdentityType.AutoSize = true;
-            lblPersonIdentityType.Location = new Point(524, 55);
+            lblPersonIdentityType.Location = new Point(523, 29);
             lblPersonIdentityType.Name = "lblPersonIdentityType";
             lblPersonIdentityType.Size = new Size(63, 15);
             lblPersonIdentityType.TabIndex = 7;
@@ -440,7 +397,7 @@
             cbxPersonIdentityType.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxPersonIdentityType.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPersonIdentityType.FormattingEnabled = true;
-            cbxPersonIdentityType.Location = new Point(524, 73);
+            cbxPersonIdentityType.Location = new Point(523, 47);
             cbxPersonIdentityType.Name = "cbxPersonIdentityType";
             cbxPersonIdentityType.Size = new Size(209, 23);
             cbxPersonIdentityType.TabIndex = 6;
@@ -448,68 +405,81 @@
             // btnAddPerson
             // 
             btnAddPerson.BackColor = Color.LightGreen;
-            btnAddPerson.Location = new Point(895, 352);
+            btnAddPerson.Cursor = Cursors.Hand;
+            btnAddPerson.Location = new Point(768, 326);
             btnAddPerson.Name = "btnAddPerson";
-            btnAddPerson.Size = new Size(109, 32);
+            btnAddPerson.Size = new Size(87, 32);
             btnAddPerson.TabIndex = 5;
             btnAddPerson.Text = "Ekle";
             btnAddPerson.UseVisualStyleBackColor = false;
-            btnAddPerson.Click += btnAddPerson_Click;
             // 
-            // UserControlAddPerson
+            // tbxCustomerName
+            // 
+            tbxCustomerName.Location = new Point(16, 47);
+            tbxCustomerName.Name = "tbxCustomerName";
+            tbxCustomerName.Size = new Size(464, 23);
+            tbxCustomerName.TabIndex = 3;
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.Location = new Point(16, 29);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(69, 15);
+            lblName.TabIndex = 1;
+            lblName.Text = "Müşteri adı:";
+            // 
+            // AddCompanyPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(grpBxAddPerson);
-            Controls.Add(dgwPersons);
-            Name = "UserControlAddPerson";
-            Size = new Size(1079, 630);
-            Load += UserControlAddPerson_Load;
-            ((System.ComponentModel.ISupportInitialize)customersDbContextBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgwPersons).EndInit();
-            grpBxAddPerson.ResumeLayout(false);
-            grpBxAddPerson.PerformLayout();
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(1036, 419);
+            Controls.Add(grpBxAddCompany);
+            Name = "AddCompanyPage";
+            Text = "AddCompanyPage";
+            Load += AddCompanyPage_Load;
+            grpBxAddCompany.ResumeLayout(false);
+            grpBxAddCompany.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-        private BindingSource customersDbContextBindingSource;
-        private DataGridView dgwPersons;
-        private Label label2;
-        private Label lblName;
-        private TextBox tbxCustomerName;
-        private TextBox tbxCustomerLastName;
-        private GroupBox grpBxAddPerson;
-        private Button btnAddPerson;
-        private ComboBox cbxPersonIdentityType;
-        private Label lblPersonIdentityType;
-        private ComboBox cbxPersonOccupations;
-        private RadioButton radioBtnFemale;
-        private RadioButton radioBtnMale;
-        private Label lblGender;
+
+        private GroupBox grpBxAddCompany;
+        private Button btnExit;
+        private CheckBox checkBxIsPrimaryEmail;
+        private CheckBox checkBxIsPrimaryPhoneNumber;
+        private TextBox tbxEmail;
+        private Label lblEmail;
+        private TextBox tbxPhoneNumber;
+        private Label lblPhoneNumber;
+        private CheckBox checkBxIsBillingAddress;
+        private ComboBox cbxDistricts;
+        private Label lblDistrict;
+        private ComboBox cbxCities;
+        private Label lblCity;
+        private Label label4;
+        private RichTextBox richTbxAddressDetailDescription;
+        private TextBox tbxAddressName;
+        private Label lblAddressName;
+        private ComboBox cbxAddressTypes;
+        private Label lblAddressType;
+        private TextBox tbxBirthPlace;
+        private Label lblBirthPlace;
         private Label label3;
         private DateTimePicker dTimePickerBirthDate;
         private Label lblOccupation;
         private TextBox tbxIdentityNumber;
         private Label label1;
-        private TextBox tbxBirthPlace;
-        private Label lblBirthPlace;
-        private Label lblAddressType;
-        private ComboBox cbxAddressTypes;
-        private TextBox tbxAddressName;
-        private Label lblAddressName;
-        private Label label4;
-        private RichTextBox richTbxAddressDetailDescription;
-        private ComboBox cbxCities;
-        private Label lblCity;
-        private ComboBox cbxDistricts;
-        private Label lblDistrict;
-        private CheckBox checkBxIsBillingAddress;
-        private TextBox tbxPhoneNumber;
-        private Label lblPhoneNumber;
-        private TextBox tbxEmail;
-        private Label lblEmail;
-        private CheckBox checkBxIsPrimaryPhoneNumber;
-        private CheckBox checkBxIsPrimaryEmail;
+        private Label lblGender;
+        private RadioButton radioBtnFemale;
+        private RadioButton radioBtnMale;
+        private ComboBox cbxPersonOccupations;
+        private Label lblPersonIdentityType;
+        private ComboBox cbxPersonIdentityType;
+        private Button btnAddPerson;
+        private TextBox tbxCustomerName;
+        private Label lblName;
     }
 }

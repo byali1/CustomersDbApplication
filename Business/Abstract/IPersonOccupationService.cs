@@ -9,9 +9,9 @@ namespace Business.Abstract
 {
     public interface IPersonOccupationService
     {
-        List<PersonOccupation> GetAll();
-        void Add(PersonOccupation personOccupation);
-        void Update(PersonOccupation personOccupation);
-        void Delete(PersonOccupation personOccupation);
+        Task<List<PersonOccupation>> GetAllAsync();
+        Task AddAsync(PersonOccupation personOccupation);
+        Task UpdateAsync(PersonOccupation personOccupation);
+        Task DeleteAsync(PersonOccupation personOccupation);
     }
 }

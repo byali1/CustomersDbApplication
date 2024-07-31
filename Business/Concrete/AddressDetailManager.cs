@@ -9,32 +9,33 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class AddressDetailManager :IAddressDetailService
+    public class AddressDetailManager : IAddressDetailService
     {
-        private IAddressDetailDal _addressDetailDal;
+        private readonly IAddressDetailDal _addressDetailDal;
 
         public AddressDetailManager(IAddressDetailDal addressDetailDal)
         {
             _addressDetailDal = addressDetailDal;
         }
-        public List<AddressDetail> GetAll()
+
+        public async Task<List<AddressDetail>> GetAllAsync()
         {
-            return _addressDetailDal.GetAll();
+            return await _addressDetailDal.GetAllAsync();
         }
 
-        public void Add(AddressDetail addressDetail)
+        public async Task AddAsync(AddressDetail addressDetail)
         {
-            _addressDetailDal.Add(addressDetail);
+            await _addressDetailDal.AddAsync(addressDetail);
         }
 
-        public void Update(AddressDetail addressDetail)
+        public async Task UpdateAsync(AddressDetail addressDetail)
         {
-            _addressDetailDal.Update(addressDetail);
+            await _addressDetailDal.UpdateAsync(addressDetail);
         }
 
-        public void Delete(AddressDetail addressDetail)
+        public async Task DeleteAsync(AddressDetail addressDetail)
         {
-            _addressDetailDal.Delete(addressDetail);
+            await _addressDetailDal.DeleteAsync(addressDetail);
         }
     }
 }

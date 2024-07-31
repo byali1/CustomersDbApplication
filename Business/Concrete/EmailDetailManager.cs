@@ -9,32 +9,33 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class EmailDetailManager:IEmailDetailService
+    public class EmailDetailManager : IEmailDetailService
     {
-        private IEmailDetailDal _emailDetailDal;
+        private readonly IEmailDetailDal _emailDetailDal;
 
         public EmailDetailManager(IEmailDetailDal emailDetailDal)
         {
             _emailDetailDal = emailDetailDal;
         }
-        public List<EmailDetail> GetAll()
+
+        public async Task<List<EmailDetail>> GetAllAsync()
         {
-            return _emailDetailDal.GetAll();
+            return await _emailDetailDal.GetAllAsync();
         }
 
-        public void Add(EmailDetail emailDetail)
+        public async Task AddAsync(EmailDetail emailDetail)
         {
-            _emailDetailDal.Add(emailDetail);
+            await _emailDetailDal.AddAsync(emailDetail);
         }
 
-        public void Update(EmailDetail emailDetail)
+        public async Task UpdateAsync(EmailDetail emailDetail)
         {
-            _emailDetailDal.Update(emailDetail);
+            await _emailDetailDal.UpdateAsync(emailDetail);
         }
 
-        public void Delete(EmailDetail emailDetail)
+        public async Task DeleteAsync(EmailDetail emailDetail)
         {
-            _emailDetailDal.Delete(emailDetail);
+            await _emailDetailDal.DeleteAsync(emailDetail);
         }
     }
 }

@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetCityDal : ICityDal
     {
-        public List<City> GetAll(Expression<Func<City, bool>> filter = null)
+        public Task<List<City>> GetAllAsync(Expression<Func<City, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public City Get(Expression<Func<City, bool>> filter)
+        public Task<City> GetAsync(Expression<Func<City, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(City entity)
+        public Task AddAsync(City entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(City entity)
+        public Task UpdateAsync(City entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(City entity)
+        public Task DeleteAsync(City entity)
         {
             throw new NotImplementedException();
         }

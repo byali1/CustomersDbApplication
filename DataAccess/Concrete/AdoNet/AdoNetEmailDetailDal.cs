@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetEmailDetailDal: IEmailDetailDal
     {
-        public List<EmailDetail> GetAll(Expression<Func<EmailDetail, bool>> filter = null)
+        public Task<List<EmailDetail>> GetAllAsync(Expression<Func<EmailDetail, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public EmailDetail Get(Expression<Func<EmailDetail, bool>> filter)
+        public Task<EmailDetail> GetAsync(Expression<Func<EmailDetail, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(EmailDetail entity)
+        public Task AddAsync(EmailDetail entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(EmailDetail entity)
+        public Task UpdateAsync(EmailDetail entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(EmailDetail entity)
+        public Task DeleteAsync(EmailDetail entity)
         {
             throw new NotImplementedException();
         }

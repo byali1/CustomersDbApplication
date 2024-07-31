@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,14 @@ namespace Business.Abstract
 {
     public interface ICompanyService
     {
-        List<Company> GetAll();
-        void Add(Company company);
-        void Update(Company company);
-        void Delete(Company company);
+        Task<List<Company>> GetAllAsync();
+        Task<Company> GetByCompanyIdAsync(int companyId);
+        Task<Company> GetByCustomerIdAsync(int customerId);
+        Task AddAsync(Company company);
+        Task UpdateAsync(Company company);
+        Task DeleteAsync(Company company);
+
+        Task<List<CompanyDetailDto>> GetCompanyDetailsAsync();
+       // Task<List<CompanyDetailDto>> GetCompanyDetailsByNameAsync(string name);
     }
 }

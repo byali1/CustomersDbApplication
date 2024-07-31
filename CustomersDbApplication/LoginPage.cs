@@ -17,16 +17,17 @@ namespace CustomersDbApplication
             InitializeComponent();
         }
 
-        private void btnSignUp_Click(object sender, EventArgs e)
+        private async void btnSignUp_Click(object sender, EventArgs e)
         {
             var username = tbxUsername.Text;
             var password = tbxPassword.Text;
 
             if (!checkBoxIHaveAccount.Checked)
             {
-                if (!IsUserExist(username))
+                // Hesap oluşturma
+                if (!await IsUserExistAsync(username))
                 {
-                    SignUp(username, password);
+                    await SignUpAsync(username, password);
                     return;
                 }
 
@@ -35,13 +36,13 @@ namespace CustomersDbApplication
             }
 
             // Hesabım var
-            if (IsUserExist(username))
+            if (await IsUserExistAsync(username))
             {
-                string passwordHash = GetPasswordHash(username);
+                string passwordHash = await GetPasswordHashByUsernameAsync(username);
 
-                if (VerifyUserPassword(password, passwordHash))
+                if (await VerifyUserPasswordAsync(password, passwordHash))
                 {
-                    SignIn(username, password);
+                    await SignInAsync(username, password);
                     return;
                 }
 
@@ -51,6 +52,7 @@ namespace CustomersDbApplication
 
             MessageBox.Show("Böyle bir hesap bulunamadı.", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -68,7 +70,7 @@ namespace CustomersDbApplication
             btnSignUp.Text = "Üye ol";
         }
 
-        private void SignUp(string username, string password)
+        private async Task SignUpAsync(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
@@ -78,15 +80,17 @@ namespace CustomersDbApplication
 
             try
             {
-                _userService.Add(new User
+                var user = new User
                 {
                     UserRoleId = 1,
                     Username = username.ToLower(),
-                    PasswordHash = password,
+                    PasswordHash = password, 
                     AccountCreatedTime = DateTime.UtcNow,
                     LastAciveTime = DateTime.UtcNow,
                     IsActive = true
-                });
+                };
+
+                await _userService.AddAsync(user);
                 MessageBox.Show("Başarıyla üye oldunuz.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exception)
@@ -95,26 +99,28 @@ namespace CustomersDbApplication
             }
         }
 
-        private void SignIn(string username, string password)
+
+        private async Task SignInAsync(string username, string password)
         {
-            _userService.UpdateLastActiveTime(username);
+            await _userService.UpdateLastActiveTimeAsync(username);
             isSignInSuccess = true;
             this.Close();
         }
 
-        private bool IsUserExist(string username)
+
+        private async Task<bool> IsUserExistAsync(string username)
         {
-            return _userService.IsUserExist(username);
+            return await _userService.IsUserExistAsync(username);
         }
 
-        private bool VerifyUserPassword(string password, string passwordHash)
+        private async Task<bool> VerifyUserPasswordAsync(string password, string passwordHash)
         {
-            return _userService.VerifyPassword(password, passwordHash);
+            return await _userService.VerifyPasswordAsync(password, passwordHash);
         }
 
-        private string GetPasswordHash(string username)
+        private async Task<string> GetPasswordHashByUsernameAsync(string username)
         {
-            return _userService.GetPasswordHashByUsername(username);
+            return await _userService.GetPasswordHashByUsernameAsync(username);
         }
 
         private void LoginPage_Load(object sender, EventArgs e)

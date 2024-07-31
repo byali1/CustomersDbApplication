@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetCountryDal : ICountryDal
     {
-        public List<Country> GetAll(Expression<Func<Country, bool>> filter = null)
+        public Task<List<Country>> GetAllAsync(Expression<Func<Country, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public Country Get(Expression<Func<Country, bool>> filter)
+        public Task<Country> GetAsync(Expression<Func<Country, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(Country country)
+        public Task AddAsync(Country entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Country country)
+        public Task UpdateAsync(Country entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Country country)
+        public Task DeleteAsync(Country entity)
         {
             throw new NotImplementedException();
         }

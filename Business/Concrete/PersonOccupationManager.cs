@@ -9,32 +9,33 @@ using DataAccess.Abstract;
 
 namespace Business.Concrete
 {
-    public class PersonOccupationManager: IPersonOccupationService
+    public class PersonOccupationManager : IPersonOccupationService
     {
-        private IPersonOccupationDal _personOccupationDal;
+        private readonly IPersonOccupationDal _personOccupationDal;
 
         public PersonOccupationManager(IPersonOccupationDal personOccupationDal)
         {
             _personOccupationDal = personOccupationDal;
         }
-        public List<PersonOccupation> GetAll()
+
+        public async Task<List<PersonOccupation>> GetAllAsync()
         {
-           return _personOccupationDal.GetAll();
+            return await _personOccupationDal.GetAllAsync();
         }
 
-        public void Add(PersonOccupation personOccupation)
+        public async Task AddAsync(PersonOccupation personOccupation)
         {
-            _personOccupationDal.Add(personOccupation);
+            await _personOccupationDal.AddAsync(personOccupation);
         }
 
-        public void Update(PersonOccupation personOccupation)
+        public async Task UpdateAsync(PersonOccupation personOccupation)
         {
-            _personOccupationDal.Update(personOccupation);
+            await _personOccupationDal.UpdateAsync(personOccupation);
         }
 
-        public void Delete(PersonOccupation personOccupation)
+        public async Task DeleteAsync(PersonOccupation personOccupation)
         {
-            _personOccupationDal.Delete(personOccupation);
+            await _personOccupationDal.DeleteAsync(personOccupation);
         }
     }
 }

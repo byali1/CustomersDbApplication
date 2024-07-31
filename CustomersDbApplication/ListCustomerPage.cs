@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using CheckBox = System.Windows.Forms.CheckBox;
 
 namespace CustomersDbApplication
 {
@@ -20,20 +22,73 @@ namespace CustomersDbApplication
             InitializeComponent();
         }
 
-        private void tbxSearchCustomerByName_TextChanged(object sender, EventArgs e)
+        private async void tbxSearchCustomerByName_TextChanged(object sender, EventArgs e)
         {
-            SearchCustomersByName(tbxSearchCustomerByName.Text);
+            if (!checkBxGetActiveCustomers.Checked && !checkBxGetInActiveCustomers.Checked)
+            {
+                SearchCustomersByName(tbxSearchCustomerByName.Text);
+            }
+            else if (checkBxGetActiveCustomers.Checked && !checkBxGetInActiveCustomers.Checked)
+            {
+                dgwCustomers.DataSource = await _customerService.GetAllByNameForActiveAsync(tbxSearchCustomerByName.Text);
+            }
+            else if (checkBxGetInActiveCustomers.Checked && !checkBxGetActiveCustomers.Checked)
+            {
+                dgwCustomers.DataSource = await _customerService.GetAllByNameForInActiveAsync(tbxSearchCustomerByName.Text);
+            }
         }
 
 
-        private void SearchCustomersByName(string text)
+        private async void SearchCustomersByName(string text)
         {
-            dgwCustomers.DataSource = _customerService.GetAllByName(text);
+            dgwCustomers.DataSource = await _customerService.GetAllByNameAsync(text);
         }
 
-        private void ListCustomerPage_Load(object sender, EventArgs e)
+        private async void ListCustomerPage_Load(object sender, EventArgs e)
         {
-            dgwCustomers.DataSource = _customerService.GetAll();
+            dgwCustomers.DataSource = await _customerService.GetAllAsync();
+        }
+
+        private async void checkBxGetActiveCustomers_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is CheckBox changedCheckBox)
+            {
+                if (changedCheckBox.Checked)
+                {
+                    if (changedCheckBox == checkBxGetActiveCustomers)
+                    {
+
+                        checkBxGetInActiveCustomers.CheckedChanged -= checkBxGetActiveCustomers_CheckedChanged;
+                        checkBxGetInActiveCustomers.Checked = false;
+                        checkBxGetInActiveCustomers.CheckedChanged += checkBxGetActiveCustomers_CheckedChanged;
+
+                        dgwCustomers.DataSource = await _customerService.GetActiveCustomersAsync();
+                    }
+                    else if (changedCheckBox == checkBxGetInActiveCustomers)
+                    {
+
+                        checkBxGetActiveCustomers.CheckedChanged -= checkBxGetActiveCustomers_CheckedChanged;
+                        checkBxGetActiveCustomers.Checked = false;
+                        checkBxGetActiveCustomers.CheckedChanged += checkBxGetActiveCustomers_CheckedChanged;
+
+                        dgwCustomers.DataSource = await _customerService.GetInActiveCustomersAsync();
+                    }
+                }
+                else
+                {
+
+                    if (!checkBxGetActiveCustomers.Checked && !checkBxGetInActiveCustomers.Checked)
+                    {
+                        checkBxGetActiveCustomers.CheckedChanged -= checkBxGetActiveCustomers_CheckedChanged;
+                        checkBxGetActiveCustomers.CheckedChanged += checkBxGetActiveCustomers_CheckedChanged;
+
+                        checkBxGetInActiveCustomers.CheckedChanged -= checkBxGetActiveCustomers_CheckedChanged;
+                        checkBxGetInActiveCustomers.CheckedChanged += checkBxGetActiveCustomers_CheckedChanged;
+
+                        dgwCustomers.DataSource = await _customerService.GetAllAsync();
+                    }
+                }
+            }
         }
     }
 }

@@ -106,7 +106,7 @@
             grpBxAddPerson.Controls.Add(tbxCustomerName);
             grpBxAddPerson.Controls.Add(lblName);
             grpBxAddPerson.Controls.Add(label2);
-            grpBxAddPerson.Location = new Point(34, 31);
+            grpBxAddPerson.Location = new Point(28, 23);
             grpBxAddPerson.Name = "grpBxAddPerson";
             grpBxAddPerson.Size = new Size(1010, 390);
             grpBxAddPerson.TabIndex = 6;
@@ -457,7 +457,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1077, 444);
+            ClientSize = new Size(1064, 440);
             Controls.Add(grpBxAddPerson);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "AddPersonPage";

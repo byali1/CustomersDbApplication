@@ -41,21 +41,24 @@ namespace CustomersDbApplication
 
 
 
-        private void AddPersonPage_Load(object sender, EventArgs e)
+        private async void AddPersonPage_Load(object sender, EventArgs e)
         {
-            //dgwPersons.DataSource = _personService.GetAll();
+                var personIdentityTypesTask = new EfPersonIdentityTypeDal().GetAllAsync();
+                var personOccupationsTask = new EfPersonOccupationDal().GetAllAsync();
+                var addressTypesTask = new EfAddressTypeDal().GetAllAsync();
+                var citiesTask = new EfCityDal().GetAllAsync();
 
-            FillComboBox(cbxPersonIdentityType, new EfPersonIdentityTypeDal().GetAll(), "IdentityTypeDescription", "PersonIdentityTypeId");
-            FillComboBox(cbxPersonOccupations, new EfPersonOccupationDal().GetAll(), "OccupationName", "PersonOccupationId");
-
-            FillComboBox(cbxAddressTypes, new EfAddressTypeDal().GetAll(), "AddressTypeDescription", "AddressTypeId");
-
-            FillComboBox(cbxCities, new EfCityDal().GetAll(), "CityName", "CityId");
+               
+                await FillComboBoxAsync(cbxPersonIdentityType, personIdentityTypesTask, "IdentityTypeDescription", "PersonIdentityTypeId");
+                await FillComboBoxAsync(cbxPersonOccupations, personOccupationsTask, "OccupationName", "PersonOccupationId");
+                await FillComboBoxAsync(cbxAddressTypes, addressTypesTask, "AddressTypeDescription", "AddressTypeId");
+                await FillComboBoxAsync(cbxCities, citiesTask, "CityName", "CityId");
+            
         }
 
 
 
-        private void btnAddPerson_Click(object sender, EventArgs e)
+        private async void btnAddPerson_Click(object sender, EventArgs e)
         {
             string customerName = tbxCustomerName.Text;
             string customerLastName = tbxCustomerLastName.Text;
@@ -124,128 +127,146 @@ namespace CustomersDbApplication
 
 
 
-                var customer = new Customer
+                try
                 {
-                    Name = customerName,
-                    LastName = customerLastName
-                };
+                    var customer = new Customer
+                    {
+                        Name = customerName,
+                        LastName = customerLastName,
+                        IsActiveCustomer = true
+                    };
 
-                _customerService.Add(customer);
+                    await _customerService.AddAsync(customer);
 
-                // int customerId = customer.CustomerId;
+                    // int customerId = customer.CustomerId;
 
-                var selectedIdentityType = (PersonIdentityType)cbxPersonIdentityType.SelectedItem;
-                int personIdentityTypeId = selectedIdentityType.PersonIdentityTypeId;
+                    var selectedIdentityType = (PersonIdentityType)cbxPersonIdentityType.SelectedItem;
+                    int personIdentityTypeId = selectedIdentityType.PersonIdentityTypeId;
 
 
-                var selectedOccupation = (PersonOccupation)cbxPersonOccupations.SelectedItem;
-                int personOccupationId = selectedOccupation.PersonOccupationId;
+                    var selectedOccupation = (PersonOccupation)cbxPersonOccupations.SelectedItem;
+                    int personOccupationId = selectedOccupation.PersonOccupationId;
 
-                var selectedAddressType = (AddressType)cbxAddressTypes.SelectedItem;
-                int customerAddressTypeId = selectedAddressType.AddressTypeId;
+                    var selectedAddressType = (AddressType)cbxAddressTypes.SelectedItem;
+                    int customerAddressTypeId = selectedAddressType.AddressTypeId;
 
-                var selectedCity = (City)cbxCities.SelectedItem;
-                int cityId = selectedCity.CityId;
+                    var selectedCity = (City)cbxCities.SelectedItem;
+                    int cityId = selectedCity.CityId;
 
-                var selectedDistrict = (District)cbxDistricts.SelectedItem;
-                int districtId = selectedDistrict.DistrictId;
+                    var selectedDistrict = (District)cbxDistricts.SelectedItem;
+                    int districtId = selectedDistrict.DistrictId;
 
-                int personGenderId = HomePage.GetGenderId(radioBtnMale.Checked, radioBtnFemale.Checked);
+                    int personGenderId = HomePage.GetGenderId(radioBtnMale.Checked, radioBtnFemale.Checked);
 
-                var customerAddress = new CustomerAddress
+                    var customerAddress = new CustomerAddress
+                    {
+                        CustomerId = customer.CustomerId,
+                        AddressTypeId = customerAddressTypeId,
+                        AddressName = tbxAddressName.Text,
+                        IsBillingAddress = checkBxIsBillingAddress.Checked
+                    };
+
+                    await _customerAddressService.AddAsync(customerAddress);
+
+                    var addressDetail = new AddressDetail
+                    {
+                        CustomerAddressId = customerAddress.CustomerAddressId,
+                        AddressDetailDescription = richTbxAddressDetailDescription.Text,
+                        CityId = cityId,
+                        CountryId = 190,
+                        DistrictId = districtId
+                    };
+
+                    await _addressDetailService.AddAsync(addressDetail);
+
+
+
+                    await _personService.AddAsync(new Person
+                    {
+                        CustomerId = customer.CustomerId,
+                        PersonIdentityTypeId = personIdentityTypeId,
+                        PersonOccupationId = personOccupationId,
+                        PersonGenderId = personGenderId,
+                        IdentityNumber = tbxIdentityNumber.Text,
+                        BirthDate = dTimePickerBirthDate.Value,
+                        BirthPlace = tbxBirthPlace.Text,
+                        CreatedTime = DateTime.Now,
+                        UpdatedTime = DateTime.Now
+                    });
+
+
+                    var phoneNumberDetail = new PhoneNumberDetail
+                    {
+                        PhoneNumber = tbxPhoneNumber.Text
+                    };
+
+                    await _phoneNumberDetailService.AddAsync(phoneNumberDetail);
+
+                    var customerPhoneNumber = new CustomerPhoneNumber
+                    {
+                        PhoneNumberDetailId = phoneNumberDetail.PhoneNumberDetailId,
+                        CustomerId = customer.CustomerId,
+                        IsPrimary = checkBxIsPrimaryPhoneNumber.Checked
+                    };
+
+                    await _customerPhoneNumberService.AddAsync(customerPhoneNumber);
+
+                    var emailDetail = new EmailDetail
+                    {
+                        Email = tbxEmail.Text
+                    };
+
+                    await _emailDetailService.AddAsync(emailDetail);
+
+                    var customerEmail = new CustomerEmail
+                    {
+                        CustomerEmailDetailId = emailDetail.CustomerEmailDetailId,
+                        CustomerId = customer.CustomerId,
+                        IsPrimary = checkBxIsPrimaryEmail.Checked
+                    };
+
+                    await _customerEmailService.AddAsync(customerEmail);
+
+                    //dgwPersons.DataSource = _personService.GetPersonDetails();
+
+                    ClearTextboxesOnAddPersonPage();
+
+                    MessageBox.Show("Müşteri başarıyla eklendi.", "BAŞARILI", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                catch (Exception exception)
                 {
-                    CustomerId = customer.CustomerId,
-                    AddressTypeId = customerAddressTypeId,
-                    AddressName = tbxAddressName.Text,
-                    IsBillingAddress = checkBxIsBillingAddress.Checked
-                };
-
-                _customerAddressService.Add(customerAddress);
-
-                var addressDetail = new AddressDetail
-                {
-                    CustomerAddressId = customerAddress.CustomerAddressId,
-                    AddressDetailDescription = richTbxAddressDetailDescription.Text,
-                    CityId = cityId,
-                    CountryId = 190,
-                    DistrictId = districtId
-                };
-
-                _addressDetailService.Add(addressDetail);
-
-
-
-                _personService.Add(new Person
-                {
-                    CustomerId = customer.CustomerId,
-                    PersonIdentityTypeId = personIdentityTypeId,
-                    PersonOccupationId = personOccupationId,
-                    PersonGenderId = personGenderId,
-                    IdentityNumber = tbxIdentityNumber.Text,
-                    BirthDate = dTimePickerBirthDate.Value,
-                    BirthPlace = tbxBirthPlace.Text,
-                    CreatedTime = DateTime.Now,
-                    UpdatedTime = DateTime.Now
-                });
-
-
-                var phoneNumberDetail = new PhoneNumberDetail
-                {
-                    PhoneNumber = tbxPhoneNumber.Text
-                };
-
-                _phoneNumberDetailService.Add(phoneNumberDetail);
-
-                var customerPhoneNumber = new CustomerPhoneNumber
-                {
-                    PhoneNumberDetailId = phoneNumberDetail.PhoneNumberDetailId,
-                    CustomerId = customer.CustomerId,
-                    IsPrimary = checkBxIsPrimaryPhoneNumber.Checked
-                };
-
-                _customerPhoneNumberService.Add(customerPhoneNumber);
-
-                var emailDetail = new EmailDetail
-                {
-                    Email = tbxEmail.Text
-                };
-
-                _emailDetailService.Add(emailDetail);
-
-                var customerEmail = new CustomerEmail
-                {
-                    CustomerEmailDetailId = emailDetail.CustomerEmailDetailId,
-                    CustomerId = customer.CustomerId,
-                    IsPrimary = checkBxIsPrimaryEmail.Checked
-                };
-
-                _customerEmailService.Add(customerEmail);
-
-                //dgwPersons.DataSource = _personService.GetPersonDetails();
-
-                ClearTextboxesOnAddPersonPage();
-
-                MessageBox.Show("Müşteri başarıyla eklendi.", "BAŞARILI", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                    MessageBox.Show("Müşteri eklenirken bir hata oluştu!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 return;
             }
 
-            MessageBox.Show("Müşteri ad ve soyad kısmı boş olamaz.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Tüm alanları doldurduğunuzdan emin olun.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
 
         }
 
-        private void FillComboBox<T>(ComboBox comboBox, List<T> dataSource, string displayMember, string valueMember)
+        private async Task FillComboBoxAsync<T>(ComboBox comboBox, Task<List<T>> dataSourceTask, string displayMember, string valueMember)
         {
-            BindingSource bindingSource = new BindingSource
+            try
             {
-                DataSource = dataSource
-            };
-            comboBox.DataSource = bindingSource;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
+                var dataSource = await dataSourceTask;
+
+                BindingSource bindingSource = new BindingSource
+                {
+                    DataSource = dataSource
+                };
+                comboBox.DataSource = bindingSource;
+                comboBox.DisplayMember = displayMember;
+                comboBox.ValueMember = valueMember;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Veri yüklenirken bir hata oluştu", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private bool IsNullOrEmptyCustomerInformation(string customerName, string customerLastName)
         {
@@ -267,12 +288,14 @@ namespace CustomersDbApplication
             }
         }
 
-        private void cbxCities_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbxCities_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedCity = (City)cbxCities.SelectedItem;
             int cityId = selectedCity.CityId;
 
-            FillComboBox(cbxDistricts, new EfDistrictDal().GetAll(d => d.CityId == cityId), "DistrictName", "DistrictId");
+            var districtsTask =  await new EfDistrictDal().GetAllAsync(d => d.CityId == cityId);
+           
+            await FillComboBoxAsync(cbxDistricts, Task.FromResult(districtsTask), "DistrictName", "DistrictId");
         }
 
         private void tbxPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)

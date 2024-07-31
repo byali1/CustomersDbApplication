@@ -9,9 +9,9 @@ namespace Business.Abstract
 {
     public interface IPersonIdentityTypeService
     {
-        List<PersonIdentityType> GetAll();
-        void Add(PersonIdentityType personIdentityType);
-        void Update(PersonIdentityType personIdentityType);
-        void Delete(PersonIdentityType personIdentityType);
+        Task<List<PersonIdentityType>> GetAllAsync();
+        Task AddAsync(PersonIdentityType personIdentityType);
+        Task UpdateAsync(PersonIdentityType personIdentityType);
+        Task DeleteAsync(PersonIdentityType personIdentityType);
     }
 }

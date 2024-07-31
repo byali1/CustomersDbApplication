@@ -9,10 +9,9 @@ namespace Business.Abstract
 {
     public interface IEmailDetailService
     {
-        List<EmailDetail> GetAll();
-
-        void Add(EmailDetail emailDetail);
-        void Update(EmailDetail emailDetail);
-        void Delete(EmailDetail emailDetail);
+        Task<List<EmailDetail>> GetAllAsync();
+        Task AddAsync(EmailDetail emailDetail);
+        Task UpdateAsync(EmailDetail emailDetail);
+        Task DeleteAsync(EmailDetail emailDetail);
     }
 }

@@ -9,12 +9,14 @@ namespace Business.Abstract
 {
     public interface ICustomerService
     {
-        List<Customer> GetAll();
-        List<Customer> GetAllByName(string FullName);
-        void Add(Customer customer);
-        void Update(Customer customer);
-        void Delete(Customer customer);
-
+        Task<List<Customer>> GetAllAsync();
+        Task<List<Customer>> GetActiveCustomersAsync();
+        Task<List<Customer>> GetInActiveCustomersAsync();
+        Task<List<Customer>> GetAllByNameAsync(string fullName);
+        Task<List<Customer>> GetAllByNameForActiveAsync(string fullName);
+        Task<List<Customer>> GetAllByNameForInActiveAsync(string fullName);
+        Task AddAsync(Customer customer);
+        Task UpdateAsync(Customer customer);
+        Task DeleteAsync(Customer customer);
     }
-
 }

@@ -9,9 +9,9 @@ namespace Business.Abstract
 {
     public interface ICustomerEmailService
     {
-        List<CustomerEmail> GetAll();
-        void Add(CustomerEmail customerEmail);
-        void Update(CustomerEmail customerEmail);
-        void Delete(CustomerEmail customerEmail);
+        Task<List<CustomerEmail>> GetAllAsync();
+        Task AddAsync(CustomerEmail customerEmail);
+        Task UpdateAsync(CustomerEmail customerEmail);
+        Task DeleteAsync(CustomerEmail customerEmail);
     }
 }

@@ -13,56 +13,60 @@ namespace Business.Concrete
 {
     public class PersonManager : IPersonService
     {
-        private IPersonDal _personDal;
+        private readonly IPersonDal _personDal;
 
         public PersonManager(IPersonDal personDal)
         {
             _personDal = personDal;
         }
 
-        public List<Person> GetAll()
+        public async Task<List<Person>> GetAllAsync()
         {
-            return _personDal.GetAll();
+            return await _personDal.GetAllAsync();
         }
 
-        
-
-
-        public void Add(Person person)
+        public async Task AddAsync(Person person)
         {
-            _personDal.Add(person);
+            await _personDal.AddAsync(person);
         }
 
-        public void Update(Person person)
+        public async Task UpdateAsync(Person person)
         {
-            _personDal.Update(person);
+            await _personDal.UpdateAsync(person);
         }
 
-        public void Delete(Person person)
+        public async Task DeleteAsync(Person person)
         {
-            _personDal.Delete(person);
+            await _personDal.DeleteAsync(person);
         }
 
-        public PersonById GetPersonIdValuesById(int personId)
+        public async Task<PersonById> GetPersonIdValuesByIdAsync(int personId)
         {
-            return _personDal.GetPersonIdValuesById(personId);
+            return await _personDal.GetPersonIdValuesByIdAsync(personId);
         }
 
-        public List<PersonDetailDto> GetPersonDetails()
+        public async Task<List<PersonDetailDto>> GetPersonDetailsAsync()
         {
-            return _personDal.GetPersonDetails();
+            return await _personDal.GetPersonDetailsAsync();
         }
 
-        public List<PersonDetailDto> GetPersonDetailsByFilter(string name = null, string lastName = null, string email = null,
-            string identityNumber = null, string city = null, string district = null,
-            string phoneNumber = null, string birthPlace = null, string occupation = null)
+        public async Task<List<PersonDetailDto>> GetPersonDetailsByFilterAsync(
+            string name = null,
+            string lastName = null,
+            string email = null,
+            string identityNumber = null,
+            string city = null,
+            string district = null,
+            string phoneNumber = null,
+            string birthPlace = null,
+            string occupation = null)
         {
-            return _personDal.GetPersonDetailsByFilter(name,lastName, email, identityNumber, city, district, phoneNumber, birthPlace, occupation);
+            return await _personDal.GetPersonDetailsByFilterAsync(name, lastName, email, identityNumber, city, district, phoneNumber, birthPlace, occupation);
         }
 
-        public List<PersonDetailDto> GetPersonDetailsByName(string fullName)
+        public async Task<List<PersonDetailDto>> GetPersonDetailsByNameAsync(string fullName)
         {
-            return _personDal.GetPersonDetails(p => (p.Name + " " + p.LastName).Contains(fullName));
+            return await _personDal.GetPersonDetailsAsync(p => (p.Name + " " + p.LastName).Contains(fullName));
         }
     }
 }

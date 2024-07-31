@@ -9,32 +9,33 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class PhoneNumberDetailManager:IPhoneNumberDetailService
+    public class PhoneNumberDetailManager : IPhoneNumberDetailService
     {
-        private IPhoneNumberDetailDal _phoneNumberDetailDal;
+        private readonly IPhoneNumberDetailDal _phoneNumberDetailDal;
 
         public PhoneNumberDetailManager(IPhoneNumberDetailDal phoneNumberDetailDal)
         {
             _phoneNumberDetailDal = phoneNumberDetailDal;
         }
-        public List<PhoneNumberDetail> GetAll()
+
+        public async Task<List<PhoneNumberDetail>> GetAllAsync()
         {
-            return _phoneNumberDetailDal.GetAll();
+            return await _phoneNumberDetailDal.GetAllAsync();
         }
 
-        public void Add(PhoneNumberDetail phoneNumberDetail)
+        public async Task AddAsync(PhoneNumberDetail phoneNumberDetail)
         {
-            _phoneNumberDetailDal.Add(phoneNumberDetail);
+            await _phoneNumberDetailDal.AddAsync(phoneNumberDetail);
         }
 
-        public void Update(PhoneNumberDetail phoneNumberDetail)
+        public async Task UpdateAsync(PhoneNumberDetail phoneNumberDetail)
         {
-            _phoneNumberDetailDal.Update(phoneNumberDetail);
+            await _phoneNumberDetailDal.UpdateAsync(phoneNumberDetail);
         }
 
-        public void Delete(PhoneNumberDetail phoneNumberDetail)
+        public async Task DeleteAsync(PhoneNumberDetail phoneNumberDetail)
         {
-            _phoneNumberDetailDal.Delete(phoneNumberDetail);
+            await _phoneNumberDetailDal.DeleteAsync(phoneNumberDetail);
         }
     }
 }

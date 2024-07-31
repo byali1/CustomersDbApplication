@@ -11,15 +11,16 @@ namespace Business.Concrete
 {
     public class CityManager : ICityService
     {
-        private ICityDal _cityDal;
+        private readonly ICityDal _cityDal;
 
         public CityManager(ICityDal cityDal)
         {
             _cityDal = cityDal;
         }
-        public List<City> GetAll()
+
+        public async Task<List<City>> GetAllAsync()
         {
-            return _cityDal.GetAll();
+            return await _cityDal.GetAllAsync();
         }
     }
 }

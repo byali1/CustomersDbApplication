@@ -11,30 +11,31 @@ namespace Business.Concrete
 {
     public class CustomerAddressManager : ICustomerAddressService
     {
-        private ICustomerAddressDal _customerAddressDal;
+        private readonly ICustomerAddressDal _customerAddressDal;
 
         public CustomerAddressManager(ICustomerAddressDal customerAddressDal)
         {
             _customerAddressDal = customerAddressDal;
         }
-        public List<CustomerAddress> GetAll()
+
+        public async Task<List<CustomerAddress>> GetAllAsync()
         {
-            return _customerAddressDal.GetAll();
+            return await _customerAddressDal.GetAllAsync();
         }
 
-        public void Add(CustomerAddress customerAddress)
+        public async Task AddAsync(CustomerAddress customerAddress)
         {
-            _customerAddressDal.Add(customerAddress);
+            await _customerAddressDal.AddAsync(customerAddress);
         }
 
-        public void Update(CustomerAddress customerAddress)
+        public async Task UpdateAsync(CustomerAddress customerAddress)
         {
-            _customerAddressDal.Update(customerAddress);
+            await _customerAddressDal.UpdateAsync(customerAddress);
         }
 
-        public void Delete(CustomerAddress customerAddress)
+        public async Task DeleteAsync(CustomerAddress customerAddress)
         {
-            _customerAddressDal.Delete(customerAddress);
+            await _customerAddressDal.DeleteAsync(customerAddress);
         }
     }
 }

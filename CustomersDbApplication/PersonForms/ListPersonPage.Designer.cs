@@ -206,6 +206,7 @@
             cbxDistricts.Name = "cbxDistricts";
             cbxDistricts.Size = new Size(137, 23);
             cbxDistricts.TabIndex = 20;
+            cbxDistricts.SelectedIndexChanged += cbxDistricts_SelectedIndexChanged;
             // 
             // cbxCities
             // 
@@ -303,6 +304,7 @@
             btnDeletePerson.TabIndex = 22;
             btnDeletePerson.Text = "Sil";
             btnDeletePerson.UseVisualStyleBackColor = true;
+            btnDeletePerson.Click += btnDeletePerson_Click;
             // 
             // btnOpenFormToUpdatePerson
             // 

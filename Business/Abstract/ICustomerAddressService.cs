@@ -9,9 +9,9 @@ namespace Business.Abstract
 {
     public interface ICustomerAddressService
     {
-        List<CustomerAddress> GetAll();
-        void Add(CustomerAddress customerAddress);
-        void Update(CustomerAddress customerAddress);
-        void Delete(CustomerAddress customerAddress);
+        Task<List<CustomerAddress>> GetAllAsync();
+        Task AddAsync(CustomerAddress customerAddress);
+        Task UpdateAsync(CustomerAddress customerAddress);
+        Task DeleteAsync(CustomerAddress customerAddress);
     }
 }

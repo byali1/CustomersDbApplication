@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetAddressDetailDal :IAddressDetailDal
     {
-        public List<AddressDetail> GetAll(Expression<Func<AddressDetail, bool>> filter = null)
+        public Task<List<AddressDetail>> GetAllAsync(Expression<Func<AddressDetail, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public AddressDetail Get(Expression<Func<AddressDetail, bool>> filter)
+        public Task<AddressDetail> GetAsync(Expression<Func<AddressDetail, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(AddressDetail addressDetail)
+        public Task AddAsync(AddressDetail entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(AddressDetail addressDetail)
+        public Task UpdateAsync(AddressDetail entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(AddressDetail addressDetail)
+        public Task DeleteAsync(AddressDetail entity)
         {
             throw new NotImplementedException();
         }

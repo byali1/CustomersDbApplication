@@ -11,30 +11,31 @@ namespace Business.Concrete
 {
     public class PersonIdentityTypeManager : IPersonIdentityTypeService
     {
-        private IPersonIdentityTypeDal _personIdentityTypeDal;
+        private readonly IPersonIdentityTypeDal _personIdentityTypeDal;
 
         public PersonIdentityTypeManager(IPersonIdentityTypeDal personIdentityTypeDal)
         {
             _personIdentityTypeDal = personIdentityTypeDal;
         }
-        public List<PersonIdentityType> GetAll()
+
+        public async Task<List<PersonIdentityType>> GetAllAsync()
         {
-            return _personIdentityTypeDal.GetAll();
+            return await _personIdentityTypeDal.GetAllAsync();
         }
 
-        public void Add(PersonIdentityType personIdentityType)
+        public async Task AddAsync(PersonIdentityType personIdentityType)
         {
-            _personIdentityTypeDal.Add(personIdentityType);
+            await _personIdentityTypeDal.AddAsync(personIdentityType);
         }
 
-        public void Update(PersonIdentityType personIdentityType)
+        public async Task UpdateAsync(PersonIdentityType personIdentityType)
         {
-            _personIdentityTypeDal.Update(personIdentityType);
+            await _personIdentityTypeDal.UpdateAsync(personIdentityType);
         }
 
-        public void Delete(PersonIdentityType personIdentityType)
+        public async Task DeleteAsync(PersonIdentityType personIdentityType)
         {
-            _personIdentityTypeDal.Delete(personIdentityType);
+            await _personIdentityTypeDal.DeleteAsync(personIdentityType);
         }
     }
 }

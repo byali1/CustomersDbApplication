@@ -12,11 +12,11 @@ using Entities;
 
 namespace DataAccess.Abstract
 {
-    public interface IPersonDal: IEntityRepository<Person>
+    public interface IPersonDal : IEntityRepository<Person>
     {
-        List<PersonDetailDto> GetPersonDetails(Expression<Func<PersonDetailDto, bool>> filter = null);
-        PersonById GetPersonIdValuesById(int personId);
-        List<PersonDetailDto> GetPersonDetailsByFilter(
+        Task<List<PersonDetailDto>> GetPersonDetailsAsync(Expression<Func<PersonDetailDto, bool>> filter = null);
+        Task<PersonById> GetPersonIdValuesByIdAsync(int personId);
+        Task<List<PersonDetailDto>> GetPersonDetailsByFilterAsync(
             string name = null,
             string lastName = null,
             string email = null,

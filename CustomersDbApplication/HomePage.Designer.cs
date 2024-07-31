@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             menuStripHomePage = new MenuStrip();
-            cRUDİşlemleriToolStripMenuItem = new ToolStripMenuItem();
-            addCustomerToolStripMenuItem = new ToolStripMenuItem();
-            addPersonToolStripMenuItem = new ToolStripMenuItem();
-            addCompanyToolStripMenuItem = new ToolStripMenuItem();
-            kullanıcıSilToolStripMenuItem = new ToolStripMenuItem();
-            kullanıcıDüzenleToolStripMenuItem = new ToolStripMenuItem();
             görüntüleToolStripMenuItem = new ToolStripMenuItem();
             listAllCustomersToolStripMenuItem = new ToolStripMenuItem();
             listPersonsToolStripMenuItem = new ToolStripMenuItem();
@@ -44,51 +38,12 @@
             // 
             // menuStripHomePage
             // 
-            menuStripHomePage.Items.AddRange(new ToolStripItem[] { cRUDİşlemleriToolStripMenuItem, görüntüleToolStripMenuItem });
+            menuStripHomePage.Items.AddRange(new ToolStripItem[] { görüntüleToolStripMenuItem });
             menuStripHomePage.Location = new Point(0, 0);
             menuStripHomePage.Name = "menuStripHomePage";
             menuStripHomePage.Size = new Size(1164, 24);
             menuStripHomePage.TabIndex = 1;
             menuStripHomePage.Text = "menuStrip1";
-            // 
-            // cRUDİşlemleriToolStripMenuItem
-            // 
-            cRUDİşlemleriToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addCustomerToolStripMenuItem, kullanıcıSilToolStripMenuItem, kullanıcıDüzenleToolStripMenuItem });
-            cRUDİşlemleriToolStripMenuItem.Name = "cRUDİşlemleriToolStripMenuItem";
-            cRUDİşlemleriToolStripMenuItem.Size = new Size(97, 20);
-            cRUDİşlemleriToolStripMenuItem.Text = "CRUD İşlemleri";
-            // 
-            // addCustomerToolStripMenuItem
-            // 
-            addCustomerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addPersonToolStripMenuItem, addCompanyToolStripMenuItem });
-            addCustomerToolStripMenuItem.Name = "addCustomerToolStripMenuItem";
-            addCustomerToolStripMenuItem.Size = new Size(158, 22);
-            addCustomerToolStripMenuItem.Text = "Müşteri ekle";
-            // 
-            // addPersonToolStripMenuItem
-            // 
-            addPersonToolStripMenuItem.Name = "addPersonToolStripMenuItem";
-            addPersonToolStripMenuItem.Size = new Size(177, 22);
-            addPersonToolStripMenuItem.Text = "Gerçek müşteri ekle";
-            addPersonToolStripMenuItem.Click += addPersonToolStripMenuItem_Click;
-            // 
-            // addCompanyToolStripMenuItem
-            // 
-            addCompanyToolStripMenuItem.Name = "addCompanyToolStripMenuItem";
-            addCompanyToolStripMenuItem.Size = new Size(177, 22);
-            addCompanyToolStripMenuItem.Text = "Tüzel müşteri ekle";
-            // 
-            // kullanıcıSilToolStripMenuItem
-            // 
-            kullanıcıSilToolStripMenuItem.Name = "kullanıcıSilToolStripMenuItem";
-            kullanıcıSilToolStripMenuItem.Size = new Size(158, 22);
-            kullanıcıSilToolStripMenuItem.Text = "Müşteri sil";
-            // 
-            // kullanıcıDüzenleToolStripMenuItem
-            // 
-            kullanıcıDüzenleToolStripMenuItem.Name = "kullanıcıDüzenleToolStripMenuItem";
-            kullanıcıDüzenleToolStripMenuItem.Size = new Size(158, 22);
-            kullanıcıDüzenleToolStripMenuItem.Text = "Müşteri düzenle";
             // 
             // görüntüleToolStripMenuItem
             // 
@@ -139,15 +94,9 @@
 
         #endregion
         private MenuStrip menuStripHomePage;
-        private ToolStripMenuItem cRUDİşlemleriToolStripMenuItem;
-        private ToolStripMenuItem addCustomerToolStripMenuItem;
-        private ToolStripMenuItem kullanıcıSilToolStripMenuItem;
-        private ToolStripMenuItem kullanıcıDüzenleToolStripMenuItem;
         private ToolStripMenuItem görüntüleToolStripMenuItem;
         private ToolStripMenuItem listAllCustomersToolStripMenuItem;
         private ToolStripMenuItem listPersonsToolStripMenuItem;
         private ToolStripMenuItem listCompaniesToolStripMenuItem;
-        private ToolStripMenuItem addPersonToolStripMenuItem;
-        private ToolStripMenuItem addCompanyToolStripMenuItem;
     }
 }

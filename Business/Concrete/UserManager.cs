@@ -18,44 +18,45 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
-        public List<User> GetAll()
+
+        public async Task<List<User>> GetAllAsync()
         {
-            return _userDal.GetAll();
+            return await _userDal.GetAllAsync();
         }
 
-        public void Add(User user)
+        public async Task AddAsync(User user)
         {
-            _userDal.Add(user);
+            await _userDal.AddAsync(user);
         }
 
-        public void Update(User user)
+        public async Task UpdateAsync(User user)
         {
-            _userDal.Update(user);
+            await _userDal.UpdateAsync(user);
         }
 
-        public void Delete(User user)
+        public async Task DeleteAsync(User user)
         {
-            _userDal.Delete(user);
+            await _userDal.DeleteAsync(user);
         }
 
-        public bool IsUserExist(string username)
+        public async Task<bool> IsUserExistAsync(string username)
         {
-            return _userDal.IsUserExist(username);
+            return await _userDal.IsUserExistAsync(username);
         }
 
-        public bool VerifyPassword(string password, string passwordHash)
+        public async Task<bool> VerifyPasswordAsync(string password, string passwordHash)
         {
-            return _userDal.VerifyPassword(password, passwordHash);
+            return await _userDal.VerifyPasswordAsync(password, passwordHash);
         }
 
-        public string GetPasswordHashByUsername(string username)
+        public async Task<string> GetPasswordHashByUsernameAsync(string username)
         {
-            return _userDal.GetPasswordHashByUsername(username);
+            return await _userDal.GetPasswordHashByUsernameAsync(username);
         }
 
-        public void UpdateLastActiveTime(string username)
+        public async Task UpdateLastActiveTimeAsync(string username)
         {
-            _userDal.UpdateLastActiveTime(username);
+            await _userDal.UpdateLastActiveTimeAsync(username);
         }
     }
 }

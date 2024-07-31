@@ -6,42 +6,64 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities.Concrete;
 using DataAccess.Abstract;
+using Core.DataAccess;
 
 namespace Business.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        private ICustomerDal _customerDal;
+        private readonly IEntityRepository<Customer> _customerDal;
 
-        public CustomerManager(ICustomerDal customerDal)
+        public CustomerManager(IEntityRepository<Customer> customerDal)
         {
             _customerDal = customerDal;
         }
 
-        public List<Customer> GetAll()
+        public async Task<List<Customer>> GetAllAsync()
         {
-            return _customerDal.GetAll();
+            return await _customerDal.GetAllAsync();
         }
 
-        public List<Customer> GetAllByName(string fullName)
+        public async Task<List<Customer>> GetActiveCustomersAsync()
         {
-            return _customerDal.GetAll(c => (c.Name + " " + c.LastName).Contains(fullName));
+            return await _customerDal.GetAllAsync(c => c.IsActiveCustomer == true);
 
         }
 
-        public void Add(Customer customer)
+        public async Task<List<Customer>> GetInActiveCustomersAsync()
         {
-            _customerDal.Add(customer);
+            return await _customerDal.GetAllAsync(c => c.IsActiveCustomer == false);
         }
 
-        public void Update(Customer customer)
+
+        public async Task<List<Customer>> GetAllByNameAsync(string fullName)
         {
-            _customerDal.Update(customer);
+            return await _customerDal.GetAllAsync(c => (c.Name + " " + c.LastName).Contains(fullName));
         }
 
-        public void Delete(Customer customer)
+        public async Task<List<Customer>> GetAllByNameForActiveAsync(string fullName)
         {
-            _customerDal.Delete(customer);
+            return await _customerDal.GetAllAsync(c => (c.Name + " " + c.LastName).Contains(fullName) && c.IsActiveCustomer == true);
+        }
+
+        public async Task<List<Customer>> GetAllByNameForInActiveAsync(string fullName)
+        {
+            return await _customerDal.GetAllAsync(c => (c.Name + " " + c.LastName).Contains(fullName) && c.IsActiveCustomer == false);
+        }
+
+        public async Task AddAsync(Customer customer)
+        {
+            await _customerDal.AddAsync(customer);
+        }
+
+        public async Task UpdateAsync(Customer customer)
+        {
+            await _customerDal.UpdateAsync(customer);
+        }
+
+        public async Task DeleteAsync(Customer customer)
+        {
+            await _customerDal.DeleteAsync(customer);
         }
     }
 }

@@ -9,15 +9,15 @@ namespace Business.Abstract
 {
     public interface IUserService
     {
-        List<User> GetAll();
+        Task<List<User>> GetAllAsync();
 
-        void Add(User user);
-        void Update(User user);
-        void Delete(User user);
+        Task AddAsync(User user);
+        Task UpdateAsync(User user);
+        Task DeleteAsync(User user);
 
-        bool IsUserExist(string username);
-        bool VerifyPassword(string password, string passwordHash);
-        string GetPasswordHashByUsername(string username);
-        void UpdateLastActiveTime(string username);
+        Task<bool> IsUserExistAsync(string username);
+        Task<bool> VerifyPasswordAsync(string password, string passwordHash);
+        Task<string> GetPasswordHashByUsernameAsync(string username);
+        Task UpdateLastActiveTimeAsync(string username);
     }
 }

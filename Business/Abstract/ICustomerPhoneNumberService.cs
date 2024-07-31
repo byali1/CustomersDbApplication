@@ -9,9 +9,9 @@ namespace Business.Abstract
 {
     public interface ICustomerPhoneNumberService
     {
-        List<CustomerPhoneNumber> GetAll();
-        void Add(CustomerPhoneNumber customerPhoneNumber);
-        void Update(CustomerPhoneNumber customerPhoneNumber);
-        void Delete(CustomerPhoneNumber customerPhoneNumber);
+        Task<List<CustomerPhoneNumber>> GetAllAsync();
+        Task AddAsync(CustomerPhoneNumber customerPhoneNumber);
+        Task UpdateAsync(CustomerPhoneNumber customerPhoneNumber);
+        Task DeleteAsync(CustomerPhoneNumber customerPhoneNumber);
     }
 }

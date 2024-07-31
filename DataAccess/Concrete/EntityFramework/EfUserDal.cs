@@ -12,22 +12,22 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfUserDal: EfEntityRepositoryBase<User, EfCustomersDbContext>, IUserDal
     {
-        public bool IsUserExist(string username)
+        public Task<bool> IsUserExistAsync(string username)
         {
             throw new NotImplementedException();
         }
 
-        public bool VerifyPassword(string password, string passwordHash)
+        public Task<bool> VerifyPasswordAsync(string password, string passwordHash)
         {
             throw new NotImplementedException();
         }
 
-        public string GetPasswordHashByUsername(string username)
+        public Task<string> GetPasswordHashByUsernameAsync(string username)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateLastActiveTime(string username)
+        public Task UpdateLastActiveTimeAsync(string username)
         {
             throw new NotImplementedException();
         }

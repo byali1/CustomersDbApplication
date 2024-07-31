@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetUserRoleDal: IUserRoleDal
     {
-        public List<UserRole> GetAll(Expression<Func<UserRole, bool>> filter = null)
+        public Task<List<UserRole>> GetAllAsync(Expression<Func<UserRole, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public UserRole Get(Expression<Func<UserRole, bool>> filter)
+        public Task<UserRole> GetAsync(Expression<Func<UserRole, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(UserRole entity)
+        public Task AddAsync(UserRole entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(UserRole entity)
+        public Task UpdateAsync(UserRole entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(UserRole entity)
+        public Task DeleteAsync(UserRole entity)
         {
             throw new NotImplementedException();
         }

@@ -11,30 +11,31 @@ namespace Business.Concrete
 {
     public class CustomerEmailManager : ICustomerEmailService
     {
-        private ICustomerEmailDal _customerEmailDal;
+        private readonly ICustomerEmailDal _customerEmailDal;
 
         public CustomerEmailManager(ICustomerEmailDal customerEmailDal)
         {
             _customerEmailDal = customerEmailDal;
         }
-        public List<CustomerEmail> GetAll()
+
+        public async Task<List<CustomerEmail>> GetAllAsync()
         {
-            return _customerEmailDal.GetAll();
+            return await _customerEmailDal.GetAllAsync();
         }
 
-        public void Add(CustomerEmail customerEmail)
+        public async Task AddAsync(CustomerEmail customerEmail)
         {
-            _customerEmailDal.Add(customerEmail);
+            await _customerEmailDal.AddAsync(customerEmail);
         }
 
-        public void Update(CustomerEmail customerEmail)
+        public async Task UpdateAsync(CustomerEmail customerEmail)
         {
-            _customerEmailDal.Update(customerEmail);
+            await _customerEmailDal.UpdateAsync(customerEmail);
         }
 
-        public void Delete(CustomerEmail customerEmail)
+        public async Task DeleteAsync(CustomerEmail customerEmail)
         {
-            _customerEmailDal.Delete(customerEmail);
+            await _customerEmailDal.DeleteAsync(customerEmail);
         }
     }
 }

@@ -21,24 +21,26 @@ namespace CustomersDbApplication
     public partial class ListPersonPage : Form
     {
         private IPersonService _personService;
+        private ICustomerService _customerService;
 
 
-        public ListPersonPage(IPersonService personService)
+        public ListPersonPage(IPersonService personService, ICustomerService customerService)
         {
             _personService = personService;
+            _customerService = customerService;
             InitializeComponent();
         }
 
-        private void ListPersonPage_Load(object sender, EventArgs e)
+        private async void ListPersonPage_Load(object sender, EventArgs e)
         {
-            dgwPersons.DataSource = _personService.GetPersonDetails();
+            dgwPersons.DataSource = await _personService.GetPersonDetailsAsync();
 
             cbxCities.Items.Clear();
             cbxDistricts.Items.Clear();
             cbxOccupations.Items.Clear();
 
-            FillComboBox(cbxCities, new EfCityDal().GetAll(), "CityName", "CityId");
-            FillComboBox(cbxOccupations, new EfPersonOccupationDal().GetAll(), "OccupationName", "PersonOccupationId");
+            await FillComboBoxAsync(cbxCities, new EfCityDal().GetAllAsync(), "CityName", "CityId");
+            await FillComboBoxAsync(cbxOccupations, new EfPersonOccupationDal().GetAllAsync(), "OccupationName", "PersonOccupationId");
 
             cbxCities.SelectedIndex = 0;
             cbxDistricts.SelectedIndex = 0;
@@ -46,11 +48,9 @@ namespace CustomersDbApplication
             cbxDistricts.Enabled = false;
         }
 
-
-
-        private void FillDataGridViewPerson()
+        private async void FillDataGridViewPersonAsync()
         {
-            dgwPersons.DataSource = _personService.GetPersonDetails();
+            dgwPersons.DataSource = await _personService.GetPersonDetailsAsync();
         }
 
         private void tbxSearchPersonByName_TextChanged(object sender, EventArgs e)
@@ -58,12 +58,12 @@ namespace CustomersDbApplication
             SearchPersonDetailByName(tbxSearchPersonByName.Text);
         }
 
-        private void SearchPersonDetailByName(string text)
+        private async void SearchPersonDetailByName(string text)
         {
-            dgwPersons.DataSource = _personService.GetPersonDetailsByName(text);
+            dgwPersons.DataSource = await _personService.GetPersonDetailsByNameAsync(text);
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private async void btnSearch_Click(object sender, EventArgs e)
         {
             string firstName = tbxPersonFirstName.Text;
             string lastName = tbxPersonLastName.Text;
@@ -91,21 +91,22 @@ namespace CustomersDbApplication
             string phoneNumber = tbxPhoneNumber.Text;
             string email = tbxEmail.Text;
 
-            dgwPersons.DataSource = _personService.GetPersonDetailsByFilter(firstName, lastName, email, identityNumber, city, district, phoneNumber, birthPlace, occupation);
+            dgwPersons.DataSource = await _personService.GetPersonDetailsByFilterAsync(firstName, lastName, email, identityNumber, city, district, phoneNumber, birthPlace, occupation);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            FillDataGridViewPerson();
+            FillDataGridViewPersonAsync();
         }
 
-        private void cbxCities_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbxCities_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             var selectedCity = (ComboBoxItem)cbxCities.SelectedItem;
             if (selectedCity.Id.HasValue)
             {
                 int cityId = selectedCity.Id.Value;
-                FillComboBox(cbxDistricts, new EfDistrictDal().GetAll(d => d.CityId == cityId), "DistrictName", "DistrictId");
+                await FillComboBoxAsync(cbxDistricts, new EfDistrictDal().GetAllAsync(d => d.CityId == cityId), "DistrictName", "DistrictId");
                 cbxDistricts.Enabled = true;
             }
             else
@@ -249,6 +250,7 @@ namespace CustomersDbApplication
         {
             bool anyRowSelected = dgwPersons.SelectedRows.Count == 1;
             btnOpenFormToUpdatePerson.Enabled = anyRowSelected;
+            btnDeletePerson.Enabled = anyRowSelected;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -256,30 +258,128 @@ namespace CustomersDbApplication
             this.Close();
         }
 
-
-
-        public static void FillComboBox<T>(ComboBox comboBox, List<T> dataSource, string displayMember, string valueMember)
+        private async void btnDeletePerson_Click(object sender, EventArgs e)
         {
-            var comboBoxItems = new List<ComboBoxItem>();
-            comboBoxItems.Add(new ComboBoxItem { Id = null, Name = "Seçiniz" });
 
-            foreach (var item in dataSource)
+            try
             {
-                var itemPropertyId = item.GetType().GetProperty(valueMember);
-                var itemPropertyName = item.GetType().GetProperty(displayMember);
-                comboBoxItems.Add(new ComboBoxItem
+                var personDTO = new PersonDetailDto
                 {
-                    Id = (int?)itemPropertyId.GetValue(item),
-                    Name = (string)itemPropertyName.GetValue(item)
-                });
+                    CustomerId = Convert.ToInt32(dgwPersons.CurrentRow.Cells[0].Value),
+                    PersonId = Convert.ToInt32(dgwPersons.CurrentRow.Cells[1].Value),
+                    Name = dgwPersons.CurrentRow.Cells[2].Value.ToString(),
+                    LastName = dgwPersons.CurrentRow.Cells[3].Value.ToString(),
+                    IdentityNumber = dgwPersons.CurrentRow.Cells[4].Value.ToString(),
+                    IdentityTypeDescription = dgwPersons.CurrentRow.Cells[5].Value.ToString(),
+                    BirthDate = Convert.ToDateTime(dgwPersons.CurrentRow.Cells[6].Value),
+                    BirthPlace = dgwPersons.CurrentRow.Cells[7].Value.ToString(),
+                    OccupationName = dgwPersons.CurrentRow.Cells[8].Value.ToString(),
+                    AddressDetailDescription = dgwPersons.CurrentRow.Cells[9].Value.ToString(),
+                    IsBillingAddress = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[10].Value),
+                    CountryName = dgwPersons.CurrentRow.Cells[11].Value.ToString(),
+                    CityName = dgwPersons.CurrentRow.Cells[12].Value.ToString(),
+                    DistrictName = dgwPersons.CurrentRow.Cells[13].Value.ToString(),
+                    AddressTypeDescription = dgwPersons.CurrentRow.Cells[14].Value.ToString(),
+                    PhoneNumber = dgwPersons.CurrentRow.Cells[15].Value.ToString(),
+                    IsPrimaryPhone = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[16].Value),
+                    Email = dgwPersons.CurrentRow.Cells[17].Value.ToString(),
+                    IsPrimaryEmail = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[18].Value),
+                    PersonGenderId = Convert.ToInt16(dgwPersons.CurrentRow.Cells[19].Value)
+
+                };
+
+                var personById = await _personService.GetPersonIdValuesByIdAsync(personDTO.PersonId);
+
+
+                var targetPerson = new Person
+                {
+                    PersonId = personDTO.PersonId,
+                    CustomerId = personDTO.CustomerId,
+                    PersonIdentityTypeId = personById.PersonIdentityTypeId,
+                    PersonOccupationId = personById.PersonOccupationId,
+                    PersonGenderId = personById.PersonGenderId,
+                    IdentityNumber = personDTO.IdentityNumber,
+                    BirthDate = personDTO.BirthDate,
+                    BirthPlace = personDTO.BirthPlace,
+                    CreatedTime = personById.CreatedTime,
+                    UpdatedTime = personById.UpdatedTime
+                };
+
+                var targetCustomer = new Customer
+                {
+                    CustomerId = personById.CustomerId,
+                    Name = personDTO.Name,
+                    LastName = personDTO.LastName,
+                    IsActiveCustomer = false
+
+
+                };
+
+                DialogResult dialogResult = MessageBox.Show($"Aşağıda bilgileri verilen müşteri silinecektir. Onaylıyor musunuz ?\n\nAd Soyad: {personDTO.Name} {personDTO.LastName}\nTC: {personDTO.IdentityNumber}", "ONAY GEREKİYOR", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Stop);
+
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+
+
+
+                await _personService.DeleteAsync(targetPerson);
+                await _customerService.UpdateAsync(targetCustomer);
+                FillDataGridViewPersonAsync();
+                MessageBox.Show("Silme işlemi başarıyla tamamlandı.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Silme işlemi tamamlanamadı. Daha sonra tekrar deneyin.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
 
-            comboBox.DataSource = comboBoxItems;
-            comboBox.DisplayMember = "Name";
-            comboBox.ValueMember = "Id";
 
-            comboBox.SelectedIndex = 0;
         }
+
+        private void cbxDistricts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public static async Task FillComboBoxAsync<T>(ComboBox comboBox, Task<List<T>> dataSourceTask, string displayMember, string valueMember)
+        {
+            try
+            {
+                var dataSource = await dataSourceTask;
+
+                var comboBoxItems = new List<ComboBoxItem>
+                {
+                    new ComboBoxItem { Id = null, Name = "Seçiniz" }
+                };
+
+                foreach (var item in dataSource)
+                {
+                    var itemPropertyId = item.GetType().GetProperty(valueMember);
+                    var itemPropertyName = item.GetType().GetProperty(displayMember);
+                    comboBoxItems.Add(new ComboBoxItem
+                    {
+                        Id = (int?)itemPropertyId.GetValue(item),
+                        Name = (string)itemPropertyName.GetValue(item)
+                    });
+                }
+
+                comboBox.DataSource = comboBoxItems;
+                comboBox.DisplayMember = "Name";
+                comboBox.ValueMember = "Id";
+
+                comboBox.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Veri yüklenirken bir hata oluştu:", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
 

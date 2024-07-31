@@ -13,49 +13,52 @@ namespace Core.DataAccess.EntityFramework
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             using (TContext dbContext = new TContext())
             {
-                return filter == null ? dbContext.Set<TEntity>().ToList() : dbContext.Set<TEntity>().Where(filter).ToList();
+                IQueryable<TEntity> query = dbContext.Set<TEntity>();
+                if (filter != null)
+                {
+                    query = query.Where(filter);
+                }
+
+                return await query.ToListAsync();
             }
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext dbContext = new TContext())
             {
-                return dbContext.Set<TEntity>().SingleOrDefault(filter);
+                return await dbContext.Set<TEntity>().SingleOrDefaultAsync(filter);
             }
         }
 
-        public void Add(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
             using (TContext dbContext = new TContext())
             {
-                var addedEntity = dbContext.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                dbContext.SaveChanges();
+                await dbContext.Set<TEntity>().AddAsync(entity);
+                await dbContext.SaveChangesAsync();
             }
         }
 
-        public void Update(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             using (TContext dbContext = new TContext())
             {
-                var updatedEntity = dbContext.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                dbContext.SaveChanges();
+                dbContext.Set<TEntity>().Update(entity);
+                await dbContext.SaveChangesAsync();
             }
         }
 
-        public void Delete(TEntity entity)
+        public async Task DeleteAsync(TEntity entity)
         {
             using (TContext dbContext = new TContext())
             {
-                var deletedEntity = dbContext.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                dbContext.SaveChanges();
+                dbContext.Set<TEntity>().Remove(entity);
+                await dbContext.SaveChangesAsync();
             }
         }
     }

@@ -12,18 +12,24 @@ namespace Business.Abstract
 {
     public interface IPersonService
     {
-        List<Person> GetAll();
-        void Add(Person person);
-        void Update(Person person);
-        void Delete(Person person);
-       
-        List<PersonDetailDto> GetPersonDetails();
-        List<PersonDetailDto> GetPersonDetailsByFilter(string name = null, string lastName = null, string email = null,
-            string identityNumber = null, string city = null, string district = null,
-            string phoneNumber = null, string birthPlace = null, string occupation = null);
-        List<PersonDetailDto> GetPersonDetailsByName(string fullName);
+        Task<List<Person>> GetAllAsync();
+        Task AddAsync(Person person);
+        Task UpdateAsync(Person person);
+        Task DeleteAsync(Person person);
 
-        PersonById GetPersonIdValuesById(int personId);
+        Task<List<PersonDetailDto>> GetPersonDetailsAsync();
+        Task<List<PersonDetailDto>> GetPersonDetailsByFilterAsync(
+            string name = null,
+            string lastName = null,
+            string email = null,
+            string identityNumber = null,
+            string city = null,
+            string district = null,
+            string phoneNumber = null,
+            string birthPlace = null,
+            string occupation = null);
+        Task<List<PersonDetailDto>> GetPersonDetailsByNameAsync(string fullName);
 
+        Task<PersonById> GetPersonIdValuesByIdAsync(int personId);
     }
 }

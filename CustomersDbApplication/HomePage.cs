@@ -3,6 +3,7 @@ using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using System;
 using System.Windows.Forms;
+using CustomersDbApplication.CompanyForms;
 
 namespace CustomersDbApplication
 {
@@ -138,14 +139,22 @@ namespace CustomersDbApplication
                 return;
             }
 
-            ListPersonPage listPersonPage = new ListPersonPage(new PersonManager(new EfPersonDal()));
+            ListPersonPage listPersonPage = new ListPersonPage(new PersonManager(new EfPersonDal()),new CustomerManager(new EfCustomerDal()));
             listPersonPage.MdiParent = this;
             listPersonPage.Show();
         }
 
         private void listCompaniesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsFormOpen(typeof(ListCompanyPage)))
+            {
+                MessageBox.Show("Tüzel müşteri listeleme paneli zaten açık.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            ListCompanyPage listCompanyPage = new ListCompanyPage(new CompanyManager(new EfCompanyDal()));
+            listCompanyPage.MdiParent = this;
+            listCompanyPage.Show();
         }
 
         

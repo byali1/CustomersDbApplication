@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetPersonIdentityTypeDal:IPersonIdentityTypeDal
     {
-        public List<PersonIdentityType> GetAll(Expression<Func<PersonIdentityType, bool>> filter = null)
+        public Task<List<PersonIdentityType>> GetAllAsync(Expression<Func<PersonIdentityType, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public PersonIdentityType Get(Expression<Func<PersonIdentityType, bool>> filter)
+        public Task<PersonIdentityType> GetAsync(Expression<Func<PersonIdentityType, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(PersonIdentityType entity)
+        public Task AddAsync(PersonIdentityType entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(PersonIdentityType entity)
+        public Task UpdateAsync(PersonIdentityType entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(PersonIdentityType entity)
+        public Task DeleteAsync(PersonIdentityType entity)
         {
             throw new NotImplementedException();
         }

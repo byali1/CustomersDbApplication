@@ -11,9 +11,9 @@ namespace DataAccess.Abstract
     public interface IUserDal:IEntityRepository<User>
     {
         //Özel operasyonlar
-        bool IsUserExist(string username);
-        bool VerifyPassword(string password, string passwordHash);
-        string GetPasswordHashByUsername(string username);
-        void UpdateLastActiveTime(string username);
+        Task<bool> IsUserExistAsync(string username);
+        Task<bool> VerifyPasswordAsync(string password, string passwordHash);
+        Task<string> GetPasswordHashByUsernameAsync(string username);
+        Task UpdateLastActiveTimeAsync(string username);
     }
 }

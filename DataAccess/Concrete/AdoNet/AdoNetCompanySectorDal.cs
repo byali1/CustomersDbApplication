@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetCompanySectorDal:ICompanySectorDal
     {
-        public List<CompanySector> GetAll(Expression<Func<CompanySector, bool>> filter = null)
+        public Task<List<CompanySector>> GetAllAsync(Expression<Func<CompanySector, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public CompanySector Get(Expression<Func<CompanySector, bool>> filter)
+        public Task<CompanySector> GetAsync(Expression<Func<CompanySector, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(CompanySector companySector)
+        public Task AddAsync(CompanySector entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(CompanySector companySector)
+        public Task UpdateAsync(CompanySector entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(CompanySector companySector)
+        public Task DeleteAsync(CompanySector entity)
         {
             throw new NotImplementedException();
         }

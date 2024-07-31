@@ -13,8 +13,8 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetUserDal : IUserDal
     {
-        private IDbContext _dbContext;
-        private IPasswordHasher _passwordHasher;
+        private readonly IDbContext _dbContext;
+        private readonly IPasswordHasher _passwordHasher;
 
         public AdoNetUserDal(IDbContext dbContext, IPasswordHasher passwordHasher)
         {
@@ -22,130 +22,121 @@ namespace DataAccess.Concrete.AdoNet
             _passwordHasher = passwordHasher;
         }
 
-
-        
-        public List<User> GetAll(Expression<Func<User, bool>> filter = null)
+        public async Task<List<User>> GetAllAsync(Expression<Func<User, bool>> filter = null)
         {
             _dbContext.OpenConnectionIfClosed();
 
-            SqlCommand sqlCommand = new SqlCommand("Select * from Users", _dbContext.GetConnection());
-
-            SqlDataReader reader = sqlCommand.ExecuteReader();
-
-            List<User> users = new List<User>();
-
-            while (reader.Read())
+            using (var sqlCommand = new SqlCommand("Select * from Users", _dbContext.GetConnection()))
             {
-                User user = new User
+                using (var reader = await sqlCommand.ExecuteReaderAsync())
                 {
-                    UserId = Convert.ToInt32(reader["UserId"]),
-                    UserRoleId = Convert.ToInt32(reader["UserRoleId"]),
-                    Username = reader["Username"].ToString(),
-                    PasswordHash = reader["PasswordHash"].ToString(),
-                    AccountCreatedTime = Convert.ToDateTime(reader["AccountCreatedTime"]),
-                    LastAciveTime = Convert.ToDateTime(reader["LastAciveTime"]),
-                    IsActive = Convert.ToBoolean(reader["LastAciveTime"])
+                    var users = new List<User>();
 
-                };
+                    while (await reader.ReadAsync())
+                    {
+                        var user = new User
+                        {
+                            UserId = Convert.ToInt32(reader["UserId"]),
+                            UserRoleId = Convert.ToInt32(reader["UserRoleId"]),
+                            Username = reader["Username"].ToString(),
+                            PasswordHash = reader["PasswordHash"].ToString(),
+                            AccountCreatedTime = Convert.ToDateTime(reader["AccountCreatedTime"]),
+                            LastAciveTime = Convert.ToDateTime(reader["LastAciveTime"]),
+                            IsActive = Convert.ToBoolean(reader["IsActive"])
+                        };
 
+                        users.Add(user);
+                    }
 
-                users.Add(user);
+                    return users;
+                }
             }
-
-            reader.Close();
-
-            _dbContext.CloseConnectionIfOpen();
-            return users;
         }
 
-        public User Get(Expression<Func<User, bool>> filter)
+        public async Task<User> GetAsync(Expression<Func<User, bool>> filter)
         {
+            // Filtre uygulanması gereken özel sorgu yazımı yapılmalıdır.
             throw new NotImplementedException();
         }
 
-        public void Add(User user)
+        public async Task AddAsync(User user)
         {
             _dbContext.OpenConnectionIfClosed();
 
-            SqlCommand sqlCommand = new SqlCommand("Insert into Users values(@userRoleId, @username, @passwordHash, @accountCreatedTime, @lastActiveTime, @isActive)", _dbContext.GetConnection());
-
-
-            sqlCommand.Parameters.AddWithValue("@userRoleId", user.UserRoleId);
-            sqlCommand.Parameters.AddWithValue("@username", user.Username.ToLower());
-            sqlCommand.Parameters.AddWithValue("@passwordHash", _passwordHasher.HashPassword(user.PasswordHash));
-            sqlCommand.Parameters.AddWithValue("@accountCreatedTime", user.AccountCreatedTime);
-            sqlCommand.Parameters.AddWithValue("@lastActiveTime", user.LastAciveTime);
-            sqlCommand.Parameters.AddWithValue("@isActive", user.IsActive);
-
-            sqlCommand.ExecuteNonQuery();
-
-            _dbContext.CloseConnectionIfOpen();
-
-
-        }
-
-        public void Update(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsUserExist(string username)
-        {
-            _dbContext.OpenConnectionIfClosed();
-
-            SqlCommand sqlCommand = new SqlCommand("Select Count(*) from users where username = @username", _dbContext.GetConnection());
-
-            sqlCommand.Parameters.AddWithValue("@username", username);
-
-            int count = (int)sqlCommand.ExecuteScalar();
-            _dbContext.CloseConnectionIfOpen();
-            return count > 0;
-        }
-
-
-
-        public bool VerifyPassword(string password, string passwordHash)
-        {
-            return _passwordHasher.VerifyPassword(password, passwordHash);
-        }
-
-        public string GetPasswordHashByUsername(string username)
-        {
-            _dbContext.OpenConnectionIfClosed();
-
-            SqlCommand sqlCommand = new SqlCommand("Select passwordHash from users where username= @username", _dbContext.GetConnection());
-
-            sqlCommand.Parameters.AddWithValue("@username", username);
-
-            SqlDataReader dataReader = sqlCommand.ExecuteReader();
-
-            if (dataReader.Read())
+            using (var sqlCommand = new SqlCommand("Insert into Users (UserRoleId, Username, PasswordHash, AccountCreatedTime, LastActiveTime, IsActive) values (@userRoleId, @username, @passwordHash, @accountCreatedTime, @lastActiveTime, @isActive)", _dbContext.GetConnection()))
             {
-                string hash = dataReader["PasswordHash"].ToString();
-                _dbContext.CloseConnectionIfOpen();
-                return hash;
+                sqlCommand.Parameters.AddWithValue("@userRoleId", user.UserRoleId);
+                sqlCommand.Parameters.AddWithValue("@username", user.Username.ToLower());
+                sqlCommand.Parameters.AddWithValue("@passwordHash", _passwordHasher.HashPassword(user.PasswordHash));
+                sqlCommand.Parameters.AddWithValue("@accountCreatedTime", user.AccountCreatedTime);
+                sqlCommand.Parameters.AddWithValue("@lastActiveTime", user.LastAciveTime);
+                sqlCommand.Parameters.AddWithValue("@isActive", user.IsActive);
+
+                await sqlCommand.ExecuteNonQueryAsync();
             }
-            _dbContext.CloseConnectionIfOpen();
+        }
+
+        public async Task UpdateAsync(User user)
+        {
+            // Güncelleme işlemi yapılmalıdır.
+            throw new NotImplementedException();
+        }
+
+        public async Task DeleteAsync(User user)
+        {
+            // Silme işlemi yapılmalıdır.
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> IsUserExistAsync(string username)
+        {
+            _dbContext.OpenConnectionIfClosed();
+
+            using (var sqlCommand = new SqlCommand("Select Count(*) from Users where Username = @username", _dbContext.GetConnection()))
+            {
+                sqlCommand.Parameters.AddWithValue("@username", username);
+
+                var count = (int)await sqlCommand.ExecuteScalarAsync();
+                return count > 0;
+            }
+        }
+
+        public async Task<bool> VerifyPasswordAsync(string password, string passwordHash)
+        {
+            return await Task.FromResult(_passwordHasher.VerifyPassword(password, passwordHash));
+        }
+
+        public async Task<string> GetPasswordHashByUsernameAsync(string username)
+        {
+            _dbContext.OpenConnectionIfClosed();
+
+            using (var sqlCommand = new SqlCommand("Select PasswordHash from Users where Username = @username", _dbContext.GetConnection()))
+            {
+                sqlCommand.Parameters.AddWithValue("@username", username);
+
+                using (var dataReader = await sqlCommand.ExecuteReaderAsync())
+                {
+                    if (await dataReader.ReadAsync())
+                    {
+                        return dataReader["PasswordHash"].ToString();
+                    }
+                }
+            }
+
             return "null";
         }
 
-        public void UpdateLastActiveTime(string username)
+        public async Task UpdateLastActiveTimeAsync(string username)
         {
             _dbContext.OpenConnectionIfClosed();
 
-            SqlCommand sqlCommand = new SqlCommand("Update Users Set LastActiveTime = @dateTimeUtcNow Where username = @username", _dbContext.GetConnection());
+            using (var sqlCommand = new SqlCommand("Update Users Set LastActiveTime = @dateTimeNow Where Username = @username", _dbContext.GetConnection()))
+            {
+                sqlCommand.Parameters.AddWithValue("@dateTimeNow", DateTime.Now);
+                sqlCommand.Parameters.AddWithValue("@username", username);
 
-            sqlCommand.Parameters.AddWithValue("@dateTimeUtcNow", DateTime.UtcNow);
-            sqlCommand.Parameters.AddWithValue("@username", username);
-
-            sqlCommand.ExecuteNonQuery();
-
-            _dbContext.CloseConnectionIfOpen();
+                await sqlCommand.ExecuteNonQueryAsync();
+            }
         }
     }
 }

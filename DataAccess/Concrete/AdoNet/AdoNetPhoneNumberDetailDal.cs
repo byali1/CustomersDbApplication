@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetPhoneNumberDetailDal:IPhoneNumberDetailDal
     {
-        public List<PhoneNumberDetail> GetAll(Expression<Func<PhoneNumberDetail, bool>> filter = null)
+        public Task<List<PhoneNumberDetail>> GetAllAsync(Expression<Func<PhoneNumberDetail, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public PhoneNumberDetail Get(Expression<Func<PhoneNumberDetail, bool>> filter)
+        public Task<PhoneNumberDetail> GetAsync(Expression<Func<PhoneNumberDetail, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(PhoneNumberDetail entity)
+        public Task AddAsync(PhoneNumberDetail entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(PhoneNumberDetail entity)
+        public Task UpdateAsync(PhoneNumberDetail entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(PhoneNumberDetail entity)
+        public Task DeleteAsync(PhoneNumberDetail entity)
         {
             throw new NotImplementedException();
         }

@@ -11,27 +11,27 @@ namespace DataAccess.Concrete.AdoNet
 {
     public class AdoNetDistrictDal:IDistrictDal
     {
-        public List<District> GetAll(Expression<Func<District, bool>> filter = null)
+        public Task<List<District>> GetAllAsync(Expression<Func<District, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public District Get(Expression<Func<District, bool>> filter)
+        public Task<District> GetAsync(Expression<Func<District, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(District entity)
+        public Task AddAsync(District entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(District entity)
+        public Task UpdateAsync(District entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(District entity)
+        public Task DeleteAsync(District entity)
         {
             throw new NotImplementedException();
         }

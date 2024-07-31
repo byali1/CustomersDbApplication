@@ -43,15 +43,15 @@ namespace CustomersDbApplication.PersonForms
             InitializeComponent();
         }
 
-        private void UpdatePersonPage_Load(object sender, EventArgs e)
+        private async void UpdatePersonPage_Load(object sender, EventArgs e)
         {
-            var personById = _personService.GetPersonIdValuesById(_personDetailDto.PersonId);
+            var personById = await _personService.GetPersonIdValuesByIdAsync(_personDetailDto.PersonId);
 
 
-            ListPersonPage.FillComboBox(cbxCities, new EfCityDal().GetAll(), "CityName", "CityId");
-            ListPersonPage.FillComboBox(cbxPersonOccupations, new EfPersonOccupationDal().GetAll(), "OccupationName", "PersonOccupationId");
-            ListPersonPage.FillComboBox(cbxAddressTypes, new EfAddressTypeDal().GetAll(), "AddressTypeDescription", "AddressTypeId");
-            ListPersonPage.FillComboBox(cbxPersonIdentityType, new EfPersonIdentityTypeDal().GetAll(), "IdentityTypeDescription", "PersonIdentityTypeId");
+            await ListPersonPage.FillComboBoxAsync(cbxCities, new EfCityDal().GetAllAsync(), "CityName", "CityId");
+            await ListPersonPage.FillComboBoxAsync(cbxPersonOccupations, new EfPersonOccupationDal().GetAllAsync(), "OccupationName", "PersonOccupationId");
+            await ListPersonPage.FillComboBoxAsync(cbxAddressTypes, new EfAddressTypeDal().GetAllAsync(), "AddressTypeDescription", "AddressTypeId");
+            await ListPersonPage.FillComboBoxAsync(cbxPersonIdentityType, new EfPersonIdentityTypeDal().GetAllAsync(), "IdentityTypeDescription", "PersonIdentityTypeId");
 
             //cbxAddressTypes.DataSource 
 
@@ -71,7 +71,7 @@ namespace CustomersDbApplication.PersonForms
             cbxAddressTypes.SelectedValue = personById.AddressTypeId;
 
             cbxCities.SelectedValue = personById.CityId;
-            cbxDistricts.SelectedValue = personById.DistrictId;
+            //cbxDistricts.SelectedValue = personById.DistrictId;
 
 
             //Checkbox
@@ -111,25 +111,47 @@ namespace CustomersDbApplication.PersonForms
             }
         }
 
-        private void cbxCities_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbxCities_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var personById =await _personService.GetPersonIdValuesByIdAsync( _personDetailDto.PersonId);
+
+            //sıkıntı
             var selectedCity = (ComboBoxItem)cbxCities.SelectedItem;
-            if (selectedCity.Id.HasValue)
+
+            if (selectedCity != null && selectedCity.Id.HasValue)
             {
                 int cityId = selectedCity.Id.Value;
-                ListPersonPage.FillComboBox(cbxDistricts, new EfDistrictDal().GetAll(d => d.CityId == cityId), "DistrictName", "DistrictId");
+                var districts = await new EfDistrictDal().GetAllAsync(d => d.CityId == cityId);
+
+                var districtItems = new List<ComboBoxItem>
+                {
+                    new ComboBoxItem { Id = null, Name = "Seçiniz" } 
+                };
+
+                districtItems.AddRange(districts.Select(d => new ComboBoxItem
+                {
+                    Id = d.DistrictId,
+                    Name = d.DistrictName
+                }));
+
+                cbxDistricts.DataSource = districtItems;
+                cbxDistricts.DisplayMember = "Name";
+                cbxDistricts.ValueMember = "Id";
+                //cbxDistricts.SelectedIndex = 0;
+                cbxDistricts.SelectedValue = personById.DistrictId;
                 cbxDistricts.Enabled = true;
             }
             else
             {
-                var districts = new List<ComboBoxItem>
+                var emptyDistrict = new List<ComboBoxItem>
                 {
                     new ComboBoxItem { Id = null, Name = "Önce şehir seçiniz" }
                 };
 
-                cbxDistricts.DataSource = districts;
-                cbxDistricts.SelectedIndex = 0;
+                cbxDistricts.DataSource = emptyDistrict;
                 cbxDistricts.DisplayMember = "Name";
+                cbxDistricts.ValueMember = "Id";
+                cbxDistricts.SelectedIndex = 0;
                 cbxDistricts.Enabled = false;
             }
         }
@@ -141,7 +163,7 @@ namespace CustomersDbApplication.PersonForms
 
 
 
-        private void btnUpdatePerson_Click(object sender, EventArgs e)
+        private async void btnUpdatePerson_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Değişiklikler kaydedilecektir. Onaylıyor musunuz ?", "Onay Gerekiyor", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -163,9 +185,11 @@ namespace CustomersDbApplication.PersonForms
                 return;
             }
 
+
+
             if (HomePage.AreFilledAllTextBoxes(grpBxUpdatePerson) && HomePage.AreFilledAllComboBoxes(grpBxUpdatePerson) && HomePage.AreFilledAllRichTextBoxes(grpBxUpdatePerson))
             {
-                var personById = _personService.GetPersonIdValuesById(_personDetailDto.PersonId);
+                var personById = await _personService.GetPersonIdValuesByIdAsync(_personDetailDto.PersonId);
 
                 var customer = new Customer
                 {
@@ -237,21 +261,21 @@ namespace CustomersDbApplication.PersonForms
                 };
 
                 //UPDATE
-                _customerService.Update(customer);
-                _personService.Update(person);
-                _customerAddressService.Update(customerAddress);
-                _addressDetailService.Update(addressDetail);
-                _customerEmailService.Update(customerEmail);
-                _emailDetailService.Update(emailDetail);
-                _customerPhoneNumberService.Update(customerPhoneNumber);
-                _phoneNumberDetailService.Update(phoneNumberDetail);
+                await _customerService.UpdateAsync(customer);
+                await _personService.UpdateAsync(person);
+                await _customerAddressService.UpdateAsync(customerAddress);
+                await _addressDetailService.UpdateAsync(addressDetail);
+                await _customerEmailService.UpdateAsync(customerEmail);
+                await _emailDetailService.UpdateAsync(emailDetail);
+                await _customerPhoneNumberService.UpdateAsync(customerPhoneNumber);
+                await _phoneNumberDetailService.UpdateAsync(phoneNumberDetail);
 
 
                 MessageBox.Show("Güncelleme işlemi başarılı.", "BAŞARILI", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 this.Close();
-                ListPersonPage.dgwPersons.DataSource = _personService.GetPersonDetails();
+                ListPersonPage.dgwPersons.DataSource = await _personService.GetPersonDetailsAsync();
                 return;
             }
 

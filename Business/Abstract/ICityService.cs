@@ -9,6 +9,6 @@ namespace Business.Abstract
 {
     public interface ICityService
     {
-        List<City> GetAll();
+        Task<List<City>> GetAllAsync();
     }
 }
