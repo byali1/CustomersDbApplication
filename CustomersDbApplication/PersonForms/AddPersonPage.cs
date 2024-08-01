@@ -65,7 +65,7 @@ namespace CustomersDbApplication
 
 
 
-            var check = IsNullOrEmptyCustomerInformation(customerName, customerLastName);
+            var check = ControlFunctions.IsNullOrEmptyCustomerInformation(customerName, customerLastName);
 
             if (!check)
             {
@@ -268,17 +268,19 @@ namespace CustomersDbApplication
         }
 
 
-        private bool IsNullOrEmptyCustomerInformation(string customerName, string customerLastName)
-        {
-            if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(customerLastName))
-            {
-                return true;
-            }
-            return false;
-        }
-
+        //private bool IsNullOrEmptyCustomerInformation(string customerName, string customerLastName)
+        //{
+        //    if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(customerLastName))
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         
+
+
+
 
         private void tbxIdentityNumber_KeyPress(object sender, KeyPressEventArgs e)
         {

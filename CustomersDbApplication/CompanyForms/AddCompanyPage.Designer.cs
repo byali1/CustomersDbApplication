@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             grpBxAddCompany = new GroupBox();
+            tbxEmployeeCount = new TextBox();
             btnExit = new Button();
             checkBxIsPrimaryEmail = new CheckBox();
             checkBxIsPrimaryPhoneNumber = new CheckBox();
@@ -47,20 +48,14 @@
             lblAddressName = new Label();
             cbxAddressTypes = new ComboBox();
             lblAddressType = new Label();
-            tbxBirthPlace = new TextBox();
-            lblBirthPlace = new Label();
-            label3 = new Label();
-            dTimePickerBirthDate = new DateTimePicker();
-            lblOccupation = new Label();
-            tbxIdentityNumber = new TextBox();
-            label1 = new Label();
-            lblGender = new Label();
-            radioBtnFemale = new RadioButton();
-            radioBtnMale = new RadioButton();
-            cbxPersonOccupations = new ComboBox();
-            lblPersonIdentityType = new Label();
-            cbxPersonIdentityType = new ComboBox();
-            btnAddPerson = new Button();
+            lblEstablishedDate = new Label();
+            dTimePickerEstablishedDate = new DateTimePicker();
+            lblEmployeeCount = new Label();
+            tbxTaxNumber = new TextBox();
+            lblTaxNumber = new Label();
+            lblCompanySector = new Label();
+            cbxCompanySectors = new ComboBox();
+            btnAddCompany = new Button();
             tbxCustomerName = new TextBox();
             lblName = new Label();
             grpBxAddCompany.SuspendLayout();
@@ -68,6 +63,7 @@
             // 
             // grpBxAddCompany
             // 
+            grpBxAddCompany.Controls.Add(tbxEmployeeCount);
             grpBxAddCompany.Controls.Add(btnExit);
             grpBxAddCompany.Controls.Add(checkBxIsPrimaryEmail);
             grpBxAddCompany.Controls.Add(checkBxIsPrimaryPhoneNumber);
@@ -86,41 +82,44 @@
             grpBxAddCompany.Controls.Add(lblAddressName);
             grpBxAddCompany.Controls.Add(cbxAddressTypes);
             grpBxAddCompany.Controls.Add(lblAddressType);
-            grpBxAddCompany.Controls.Add(tbxBirthPlace);
-            grpBxAddCompany.Controls.Add(lblBirthPlace);
-            grpBxAddCompany.Controls.Add(label3);
-            grpBxAddCompany.Controls.Add(dTimePickerBirthDate);
-            grpBxAddCompany.Controls.Add(lblOccupation);
-            grpBxAddCompany.Controls.Add(tbxIdentityNumber);
-            grpBxAddCompany.Controls.Add(label1);
-            grpBxAddCompany.Controls.Add(lblGender);
-            grpBxAddCompany.Controls.Add(radioBtnFemale);
-            grpBxAddCompany.Controls.Add(radioBtnMale);
-            grpBxAddCompany.Controls.Add(cbxPersonOccupations);
-            grpBxAddCompany.Controls.Add(lblPersonIdentityType);
-            grpBxAddCompany.Controls.Add(cbxPersonIdentityType);
-            grpBxAddCompany.Controls.Add(btnAddPerson);
+            grpBxAddCompany.Controls.Add(lblEstablishedDate);
+            grpBxAddCompany.Controls.Add(dTimePickerEstablishedDate);
+            grpBxAddCompany.Controls.Add(lblEmployeeCount);
+            grpBxAddCompany.Controls.Add(tbxTaxNumber);
+            grpBxAddCompany.Controls.Add(lblTaxNumber);
+            grpBxAddCompany.Controls.Add(lblCompanySector);
+            grpBxAddCompany.Controls.Add(cbxCompanySectors);
+            grpBxAddCompany.Controls.Add(btnAddCompany);
             grpBxAddCompany.Controls.Add(tbxCustomerName);
             grpBxAddCompany.Controls.Add(lblName);
             grpBxAddCompany.ForeColor = Color.MidnightBlue;
             grpBxAddCompany.Location = new Point(12, 12);
             grpBxAddCompany.Name = "grpBxAddCompany";
-            grpBxAddCompany.Size = new Size(1010, 390);
+            grpBxAddCompany.Size = new Size(1010, 370);
             grpBxAddCompany.TabIndex = 7;
             grpBxAddCompany.TabStop = false;
-            grpBxAddCompany.Text = "Tüzem müşteri ekle";
+            grpBxAddCompany.Text = "Tüzel müşteri ekle";
+            // 
+            // tbxEmployeeCount
+            // 
+            tbxEmployeeCount.Location = new Point(16, 114);
+            tbxEmployeeCount.Name = "tbxEmployeeCount";
+            tbxEmployeeCount.Size = new Size(209, 23);
+            tbxEmployeeCount.TabIndex = 40;
+            tbxEmployeeCount.KeyPress += tbxEmployeeCount_KeyPress;
             // 
             // btnExit
             // 
             btnExit.BackColor = Color.FromArgb(255, 123, 123);
             btnExit.Cursor = Cursors.Hand;
             btnExit.ForeColor = Color.Maroon;
-            btnExit.Location = new Point(890, 326);
+            btnExit.Location = new Point(890, 321);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(87, 32);
             btnExit.TabIndex = 39;
             btnExit.Text = "Kapat";
             btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
             // 
             // checkBxIsPrimaryEmail
             // 
@@ -135,7 +134,7 @@
             // checkBxIsPrimaryPhoneNumber
             // 
             checkBxIsPrimaryPhoneNumber.AutoSize = true;
-            checkBxIsPrimaryPhoneNumber.Location = new Point(768, 210);
+            checkBxIsPrimaryPhoneNumber.Location = new Point(768, 143);
             checkBxIsPrimaryPhoneNumber.Name = "checkBxIsPrimaryPhoneNumber";
             checkBxIsPrimaryPhoneNumber.Size = new Size(142, 19);
             checkBxIsPrimaryPhoneNumber.TabIndex = 37;
@@ -160,17 +159,18 @@
             // 
             // tbxPhoneNumber
             // 
-            tbxPhoneNumber.Location = new Point(768, 181);
+            tbxPhoneNumber.Location = new Point(768, 114);
             tbxPhoneNumber.MaxLength = 10;
             tbxPhoneNumber.Name = "tbxPhoneNumber";
             tbxPhoneNumber.PlaceholderText = "5XXXXXXXXX";
             tbxPhoneNumber.Size = new Size(209, 23);
             tbxPhoneNumber.TabIndex = 34;
+            tbxPhoneNumber.KeyPress += tbxPhoneNumber_KeyPress;
             // 
             // lblPhoneNumber
             // 
             lblPhoneNumber.AutoSize = true;
-            lblPhoneNumber.Location = new Point(768, 160);
+            lblPhoneNumber.Location = new Point(768, 93);
             lblPhoneNumber.Name = "lblPhoneNumber";
             lblPhoneNumber.Size = new Size(100, 15);
             lblPhoneNumber.TabIndex = 33;
@@ -216,6 +216,7 @@
             cbxCities.Name = "cbxCities";
             cbxCities.Size = new Size(209, 23);
             cbxCities.TabIndex = 29;
+            cbxCities.SelectedIndexChanged += cbxCities_SelectedIndexChanged;
             // 
             // lblCity
             // 
@@ -267,7 +268,7 @@
             cbxAddressTypes.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbxAddressTypes.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxAddressTypes.FormattingEnabled = true;
-            cbxAddressTypes.Location = new Point(768, 114);
+            cbxAddressTypes.Location = new Point(523, 111);
             cbxAddressTypes.Name = "cbxAddressTypes";
             cbxAddressTypes.Size = new Size(209, 23);
             cbxAddressTypes.TabIndex = 20;
@@ -275,143 +276,87 @@
             // lblAddressType
             // 
             lblAddressType.AutoSize = true;
-            lblAddressType.Location = new Point(768, 93);
+            lblAddressType.Location = new Point(523, 90);
             lblAddressType.Name = "lblAddressType";
             lblAddressType.Size = new Size(62, 15);
             lblAddressType.TabIndex = 19;
             lblAddressType.Text = "Adres Tipi:";
             // 
-            // tbxBirthPlace
+            // lblEstablishedDate
             // 
-            tbxBirthPlace.Location = new Point(523, 114);
-            tbxBirthPlace.Name = "tbxBirthPlace";
-            tbxBirthPlace.Size = new Size(209, 23);
-            tbxBirthPlace.TabIndex = 18;
+            lblEstablishedDate.AutoSize = true;
+            lblEstablishedDate.Location = new Point(271, 93);
+            lblEstablishedDate.Name = "lblEstablishedDate";
+            lblEstablishedDate.Size = new Size(81, 15);
+            lblEstablishedDate.TabIndex = 16;
+            lblEstablishedDate.Text = "Kuruluş Tarihi:";
             // 
-            // lblBirthPlace
+            // dTimePickerEstablishedDate
             // 
-            lblBirthPlace.AutoSize = true;
-            lblBirthPlace.Location = new Point(523, 93);
-            lblBirthPlace.Name = "lblBirthPlace";
-            lblBirthPlace.Size = new Size(72, 15);
-            lblBirthPlace.TabIndex = 17;
-            lblBirthPlace.Text = "Doğum Yeri:";
+            dTimePickerEstablishedDate.Location = new Point(271, 111);
+            dTimePickerEstablishedDate.Name = "dTimePickerEstablishedDate";
+            dTimePickerEstablishedDate.Size = new Size(209, 23);
+            dTimePickerEstablishedDate.TabIndex = 15;
+            dTimePickerEstablishedDate.Value = new DateTime(2024, 7, 23, 0, 0, 0, 0);
             // 
-            // label3
+            // lblEmployeeCount
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(271, 93);
-            label3.Name = "label3";
-            label3.Size = new Size(81, 15);
-            label3.TabIndex = 16;
-            label3.Text = "Doğum Tarihi:";
+            lblEmployeeCount.AutoSize = true;
+            lblEmployeeCount.Location = new Point(16, 93);
+            lblEmployeeCount.Name = "lblEmployeeCount";
+            lblEmployeeCount.Size = new Size(128, 15);
+            lblEmployeeCount.TabIndex = 14;
+            lblEmployeeCount.Text = "Çalışan Personel Sayısı:";
             // 
-            // dTimePickerBirthDate
+            // tbxTaxNumber
             // 
-            dTimePickerBirthDate.Location = new Point(271, 111);
-            dTimePickerBirthDate.Name = "dTimePickerBirthDate";
-            dTimePickerBirthDate.Size = new Size(209, 23);
-            dTimePickerBirthDate.TabIndex = 15;
-            dTimePickerBirthDate.Value = new DateTime(2024, 7, 23, 0, 0, 0, 0);
+            tbxTaxNumber.Location = new Point(768, 47);
+            tbxTaxNumber.MaxLength = 10;
+            tbxTaxNumber.Name = "tbxTaxNumber";
+            tbxTaxNumber.Size = new Size(209, 23);
+            tbxTaxNumber.TabIndex = 13;
+            tbxTaxNumber.KeyPress += tbxTaxNumber_KeyPress;
             // 
-            // lblOccupation
+            // lblTaxNumber
             // 
-            lblOccupation.AutoSize = true;
-            lblOccupation.Location = new Point(16, 93);
-            lblOccupation.Name = "lblOccupation";
-            lblOccupation.Size = new Size(47, 15);
-            lblOccupation.TabIndex = 14;
-            lblOccupation.Text = "Meslek:";
+            lblTaxNumber.AutoSize = true;
+            lblTaxNumber.Location = new Point(768, 29);
+            lblTaxNumber.Name = "lblTaxNumber";
+            lblTaxNumber.Size = new Size(90, 15);
+            lblTaxNumber.TabIndex = 12;
+            lblTaxNumber.Text = "Vergi Numarası:";
             // 
-            // tbxIdentityNumber
+            // lblCompanySector
             // 
-            tbxIdentityNumber.Location = new Point(768, 47);
-            tbxIdentityNumber.MaxLength = 11;
-            tbxIdentityNumber.Name = "tbxIdentityNumber";
-            tbxIdentityNumber.Size = new Size(209, 23);
-            tbxIdentityNumber.TabIndex = 13;
+            lblCompanySector.AutoSize = true;
+            lblCompanySector.Location = new Point(523, 29);
+            lblCompanySector.Name = "lblCompanySector";
+            lblCompanySector.Size = new Size(43, 15);
+            lblCompanySector.TabIndex = 7;
+            lblCompanySector.Text = "Sektör:";
             // 
-            // label1
+            // cbxCompanySectors
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(768, 29);
-            label1.Name = "label1";
-            label1.Size = new Size(78, 15);
-            label1.TabIndex = 12;
-            label1.Text = "TC Kimlik No:";
+            cbxCompanySectors.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbxCompanySectors.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxCompanySectors.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxCompanySectors.FormattingEnabled = true;
+            cbxCompanySectors.Location = new Point(523, 47);
+            cbxCompanySectors.Name = "cbxCompanySectors";
+            cbxCompanySectors.Size = new Size(209, 23);
+            cbxCompanySectors.TabIndex = 6;
             // 
-            // lblGender
+            // btnAddCompany
             // 
-            lblGender.AutoSize = true;
-            lblGender.Location = new Point(271, 286);
-            lblGender.Name = "lblGender";
-            lblGender.Size = new Size(52, 15);
-            lblGender.TabIndex = 11;
-            lblGender.Text = "Cinsiyet:";
-            // 
-            // radioBtnFemale
-            // 
-            radioBtnFemale.AutoSize = true;
-            radioBtnFemale.Location = new Point(339, 308);
-            radioBtnFemale.Name = "radioBtnFemale";
-            radioBtnFemale.Size = new Size(55, 19);
-            radioBtnFemale.TabIndex = 10;
-            radioBtnFemale.TabStop = true;
-            radioBtnFemale.Text = "Kadın";
-            radioBtnFemale.UseVisualStyleBackColor = true;
-            // 
-            // radioBtnMale
-            // 
-            radioBtnMale.AutoSize = true;
-            radioBtnMale.Location = new Point(271, 308);
-            radioBtnMale.Name = "radioBtnMale";
-            radioBtnMale.Size = new Size(53, 19);
-            radioBtnMale.TabIndex = 9;
-            radioBtnMale.TabStop = true;
-            radioBtnMale.Text = "Erkek";
-            radioBtnMale.UseVisualStyleBackColor = true;
-            // 
-            // cbxPersonOccupations
-            // 
-            cbxPersonOccupations.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cbxPersonOccupations.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cbxPersonOccupations.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxPersonOccupations.FormattingEnabled = true;
-            cbxPersonOccupations.Location = new Point(16, 111);
-            cbxPersonOccupations.Name = "cbxPersonOccupations";
-            cbxPersonOccupations.Size = new Size(209, 23);
-            cbxPersonOccupations.TabIndex = 8;
-            // 
-            // lblPersonIdentityType
-            // 
-            lblPersonIdentityType.AutoSize = true;
-            lblPersonIdentityType.Location = new Point(523, 29);
-            lblPersonIdentityType.Name = "lblPersonIdentityType";
-            lblPersonIdentityType.Size = new Size(63, 15);
-            lblPersonIdentityType.TabIndex = 7;
-            lblPersonIdentityType.Text = "Kimlik tipi:";
-            // 
-            // cbxPersonIdentityType
-            // 
-            cbxPersonIdentityType.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cbxPersonIdentityType.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cbxPersonIdentityType.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxPersonIdentityType.FormattingEnabled = true;
-            cbxPersonIdentityType.Location = new Point(523, 47);
-            cbxPersonIdentityType.Name = "cbxPersonIdentityType";
-            cbxPersonIdentityType.Size = new Size(209, 23);
-            cbxPersonIdentityType.TabIndex = 6;
-            // 
-            // btnAddPerson
-            // 
-            btnAddPerson.BackColor = Color.LightGreen;
-            btnAddPerson.Cursor = Cursors.Hand;
-            btnAddPerson.Location = new Point(768, 326);
-            btnAddPerson.Name = "btnAddPerson";
-            btnAddPerson.Size = new Size(87, 32);
-            btnAddPerson.TabIndex = 5;
-            btnAddPerson.Text = "Ekle";
-            btnAddPerson.UseVisualStyleBackColor = false;
+            btnAddCompany.BackColor = Color.LightGreen;
+            btnAddCompany.Cursor = Cursors.Hand;
+            btnAddCompany.Location = new Point(768, 321);
+            btnAddCompany.Name = "btnAddCompany";
+            btnAddCompany.Size = new Size(87, 32);
+            btnAddCompany.TabIndex = 5;
+            btnAddCompany.Text = "Ekle";
+            btnAddCompany.UseVisualStyleBackColor = false;
+            btnAddCompany.Click += btnAddCompany_Click;
             // 
             // tbxCustomerName
             // 
@@ -434,10 +379,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1036, 419);
+            ClientSize = new Size(1036, 411);
             Controls.Add(grpBxAddCompany);
             Name = "AddCompanyPage";
-            Text = "AddCompanyPage";
+            Text = "Tüzel Müşteri Ekleme Paneli";
             Load += AddCompanyPage_Load;
             grpBxAddCompany.ResumeLayout(false);
             grpBxAddCompany.PerformLayout();
@@ -465,21 +410,16 @@
         private Label lblAddressName;
         private ComboBox cbxAddressTypes;
         private Label lblAddressType;
-        private TextBox tbxBirthPlace;
-        private Label lblBirthPlace;
-        private Label label3;
-        private DateTimePicker dTimePickerBirthDate;
-        private Label lblOccupation;
-        private TextBox tbxIdentityNumber;
-        private Label label1;
-        private Label lblGender;
-        private RadioButton radioBtnFemale;
-        private RadioButton radioBtnMale;
-        private ComboBox cbxPersonOccupations;
-        private Label lblPersonIdentityType;
-        private ComboBox cbxPersonIdentityType;
-        private Button btnAddPerson;
+        private Label lblEstablishedDate;
+        private DateTimePicker dTimePickerEstablishedDate;
+        private Label lblEmployeeCount;
+        private TextBox tbxTaxNumber;
+        private Label lblTaxNumber;
+        private Label lblCompanySector;
+        private ComboBox cbxCompanySectors;
+        private Button btnAddCompany;
         private TextBox tbxCustomerName;
         private Label lblName;
+        private TextBox tbxEmployeeCount;
     }
 }

@@ -9,9 +9,9 @@ namespace Business.Abstract
 {
     public interface ICompanySectorService
     {
-        List<CompanySector> GetAll();
-        void Add(CompanySector companySector);
-        void Update(CompanySector companySector);
-        void Delete(CompanySector companySector);
+        Task<List<CompanySector>> GetAllAsync();
+        Task AddAsync(CompanySector companySector);
+        Task UpdateAsync(CompanySector companySector);
+        Task DeleteAsync(CompanySector companySector);
     }
 }

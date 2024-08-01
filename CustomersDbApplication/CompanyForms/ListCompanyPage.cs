@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities;
 using System;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Forms.Application;
 
 namespace CustomersDbApplication.CompanyForms
 {
@@ -30,18 +32,18 @@ namespace CustomersDbApplication.CompanyForms
 
         private async void ListCompanyPage_Load(object sender, EventArgs e)
         {
-            dgwCompanies.DataSource = await _companyService.GetAllAsync();
+            dgwCompanies.DataSource = await _companyService.GetCompanyDetailsAsync();
 
             cbxCities.Items.Clear();
             cbxDistricts.Items.Clear();
-            cbxOccupations.Items.Clear();
+            cbxCompanySectorTypes.Items.Clear();
 
             await ListPersonPage.FillComboBoxAsync(cbxCities, new EfCityDal().GetAllAsync(), "CityName", "CityId");
-            await ListPersonPage.FillComboBoxAsync(cbxOccupations, new EfPersonOccupationDal().GetAllAsync(), "OccupationName", "PersonOccupationId");
+            await ListPersonPage.FillComboBoxAsync(cbxCompanySectorTypes, new EfPersonOccupationDal().GetAllAsync(), "OccupationName", "PersonOccupationId");
 
             cbxCities.SelectedIndex = 0;
             cbxDistricts.SelectedIndex = 0;
-            cbxOccupations.SelectedIndex = 0;
+            cbxCompanySectorTypes.SelectedIndex = 0;
             cbxDistricts.Enabled = false;
         }
 
@@ -70,7 +72,44 @@ namespace CustomersDbApplication.CompanyForms
 
         private async void tbxSearchCompanyByName_TextChanged(object sender, EventArgs e)
         {
-           // dgwCompanies.DataSource = await _companyService.GetCompanyDetailsByNameAsync(tbxSearchCompanyByName.Text);
+            // dgwCompanies.DataSource = await _companyService.GetCompanyDetailsByNameAsync(tbxSearchCompanyByName.Text);
+        }
+
+        private async void btnRefresh_Click(object sender, EventArgs e)
+        {
+            dgwCompanies.DataSource = await _companyService.GetCompanyDetailsAsync();
+        }
+
+        private void btnOpenFormToAddCompany_Click(object sender, EventArgs e)
+        {
+            if (HomePage.IsFormOpen(typeof(AddCompanyPage)))
+            {
+                MessageBox.Show("Tüzel müşteri ekleme paneli zaten açık.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            foreach (Form form in Application.OpenForms)
+            {
+
+                if (form is HomePage homePage)
+                {
+                    AddCompanyPage addCompanyPage = new AddCompanyPage(
+                        new CustomerManager(new EfCustomerDal()),
+                        new CustomerAddressManager(new EfCustomerAddressDal()),
+                        new AddressDetailManager(new EfAddressDetailDal()),
+                        new PhoneNumberDetailManager(new EfPhoneNumberDetailDal()),
+                        new CustomerPhoneNumberManager(new EfCustomerPhoneNumberDal()),
+                        new EmailDetailManager(new EfEmailDetailDal()),
+                        new CustomerEmailManager(new EfCustomerEmailDal()),
+                        new CompanyManager(new EfCompanyDal())
+
+                    );
+                    addCompanyPage.MdiParent = homePage;
+                    addCompanyPage.Show();
+                    break;
+                }
+
+            }
         }
     }
 }

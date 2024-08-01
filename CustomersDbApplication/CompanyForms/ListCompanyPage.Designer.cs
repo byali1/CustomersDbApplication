@@ -40,15 +40,14 @@
             lblPhoneNumber = new Label();
             lblDistrict = new Label();
             lblCity = new Label();
-            lblOccupation = new Label();
-            cbxOccupations = new ComboBox();
+            lblCompanySectorType = new Label();
+            cbxCompanySectorTypes = new ComboBox();
             cbxDistricts = new ComboBox();
             cbxCities = new ComboBox();
             btnSearch = new Button();
             tbxEmail = new TextBox();
             tbxPhoneNumber = new TextBox();
-            tbxBirthPlace = new TextBox();
-            tbxIdentityNumber = new TextBox();
+            tbxTaxNumber = new TextBox();
             tbxCompanyName = new TextBox();
             lblSearchCompany = new Label();
             tbxSearchCompanyByName = new TextBox();
@@ -109,6 +108,7 @@
             btnOpenFormToAddCompany.TabIndex = 20;
             btnOpenFormToAddCompany.Text = "Ekle";
             btnOpenFormToAddCompany.UseVisualStyleBackColor = true;
+            btnOpenFormToAddCompany.Click += btnOpenFormToAddCompany_Click;
             // 
             // btnRefresh
             // 
@@ -118,6 +118,7 @@
             btnRefresh.TabIndex = 27;
             btnRefresh.Text = "Yenile";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // grpBoxFilterCompany
             // 
@@ -125,26 +126,26 @@
             grpBoxFilterCompany.Controls.Add(lblPhoneNumber);
             grpBoxFilterCompany.Controls.Add(lblDistrict);
             grpBoxFilterCompany.Controls.Add(lblCity);
-            grpBoxFilterCompany.Controls.Add(lblOccupation);
-            grpBoxFilterCompany.Controls.Add(cbxOccupations);
+            grpBoxFilterCompany.Controls.Add(lblCompanySectorType);
+            grpBoxFilterCompany.Controls.Add(cbxCompanySectorTypes);
             grpBoxFilterCompany.Controls.Add(cbxDistricts);
             grpBoxFilterCompany.Controls.Add(cbxCities);
             grpBoxFilterCompany.Controls.Add(btnSearch);
             grpBoxFilterCompany.Controls.Add(tbxEmail);
             grpBoxFilterCompany.Controls.Add(tbxPhoneNumber);
-            grpBoxFilterCompany.Controls.Add(tbxBirthPlace);
-            grpBoxFilterCompany.Controls.Add(tbxIdentityNumber);
+            grpBoxFilterCompany.Controls.Add(tbxTaxNumber);
             grpBoxFilterCompany.Controls.Add(tbxCompanyName);
+            grpBoxFilterCompany.ForeColor = Color.MediumBlue;
             grpBoxFilterCompany.Location = new Point(24, 19);
             grpBoxFilterCompany.Name = "grpBoxFilterCompany";
             grpBoxFilterCompany.Size = new Size(863, 162);
             grpBoxFilterCompany.TabIndex = 26;
             grpBoxFilterCompany.TabStop = false;
-            grpBoxFilterCompany.Text = "Gerçek müşteri arayın";
+            grpBoxFilterCompany.Text = "Tüzel müşteri arayın";
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(18, 124);
+            btnClear.Location = new Point(18, 114);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(75, 23);
             btnClear.TabIndex = 20;
@@ -178,23 +179,23 @@
             lblCity.TabIndex = 23;
             lblCity.Text = "Şehir:";
             // 
-            // lblOccupation
+            // lblCompanySectorType
             // 
-            lblOccupation.AutoSize = true;
-            lblOccupation.Location = new Point(531, 63);
-            lblOccupation.Name = "lblOccupation";
-            lblOccupation.Size = new Size(47, 15);
-            lblOccupation.TabIndex = 22;
-            lblOccupation.Text = "Meslek:";
+            lblCompanySectorType.AutoSize = true;
+            lblCompanySectorType.Location = new Point(531, 63);
+            lblCompanySectorType.Name = "lblCompanySectorType";
+            lblCompanySectorType.Size = new Size(47, 15);
+            lblCompanySectorType.TabIndex = 22;
+            lblCompanySectorType.Text = "Meslek:";
             // 
-            // cbxOccupations
+            // cbxCompanySectorTypes
             // 
-            cbxOccupations.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxOccupations.FormattingEnabled = true;
-            cbxOccupations.Location = new Point(532, 78);
-            cbxOccupations.Name = "cbxOccupations";
-            cbxOccupations.Size = new Size(137, 23);
-            cbxOccupations.TabIndex = 21;
+            cbxCompanySectorTypes.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxCompanySectorTypes.FormattingEnabled = true;
+            cbxCompanySectorTypes.Location = new Point(532, 78);
+            cbxCompanySectorTypes.Name = "cbxCompanySectorTypes";
+            cbxCompanySectorTypes.Size = new Size(137, 23);
+            cbxCompanySectorTypes.TabIndex = 21;
             // 
             // cbxDistricts
             // 
@@ -241,29 +242,21 @@
             tbxPhoneNumber.Size = new Size(137, 23);
             tbxPhoneNumber.TabIndex = 16;
             // 
-            // tbxBirthPlace
+            // tbxTaxNumber
             // 
-            tbxBirthPlace.Location = new Point(194, 78);
-            tbxBirthPlace.Name = "tbxBirthPlace";
-            tbxBirthPlace.PlaceholderText = "Doğum yeri";
-            tbxBirthPlace.Size = new Size(137, 23);
-            tbxBirthPlace.TabIndex = 12;
-            // 
-            // tbxIdentityNumber
-            // 
-            tbxIdentityNumber.Location = new Point(18, 78);
-            tbxIdentityNumber.MaxLength = 11;
-            tbxIdentityNumber.Name = "tbxIdentityNumber";
-            tbxIdentityNumber.PlaceholderText = "TC No";
-            tbxIdentityNumber.Size = new Size(137, 23);
-            tbxIdentityNumber.TabIndex = 11;
+            tbxTaxNumber.Location = new Point(18, 78);
+            tbxTaxNumber.MaxLength = 11;
+            tbxTaxNumber.Name = "tbxTaxNumber";
+            tbxTaxNumber.PlaceholderText = "Vergi numarası";
+            tbxTaxNumber.Size = new Size(217, 23);
+            tbxTaxNumber.TabIndex = 11;
             // 
             // tbxCompanyName
             // 
             tbxCompanyName.Location = new Point(18, 33);
             tbxCompanyName.Name = "tbxCompanyName";
             tbxCompanyName.PlaceholderText = "Unvan";
-            tbxCompanyName.Size = new Size(313, 23);
+            tbxCompanyName.Size = new Size(316, 23);
             tbxCompanyName.TabIndex = 9;
             // 
             // lblSearchCompany
@@ -311,6 +304,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(908, 604);
             Controls.Add(btnExit);
             Controls.Add(grpBoxCRUD);
@@ -321,7 +315,7 @@
             Controls.Add(dgwCompanies);
             Name = "ListCompanyPage";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ListCompanyPage";
+            Text = "Tüzel Müşteri Listeleme Paneli";
             Load += ListCompanyPage_Load;
             grpBoxCRUD.ResumeLayout(false);
             grpBoxFilterCompany.ResumeLayout(false);
@@ -344,19 +338,18 @@
         private Label lblPhoneNumber;
         private Label lblDistrict;
         private Label lblCity;
-        private Label lblOccupation;
-        private ComboBox cbxOccupations;
+        private Label lblCompanySectorType;
+        private ComboBox cbxCompanySectorTypes;
         private ComboBox cbxDistricts;
         private ComboBox cbxCities;
         private Button btnSearch;
         private TextBox tbxEmail;
         private TextBox tbxPhoneNumber;
-        private TextBox tbxBirthPlace;
-        private TextBox tbxIdentityNumber;
+        private TextBox tbxTaxNumber;
         private TextBox tbxCompanyName;
         private TextBox tbxPersonLastName;
         private Label lblSearchCompany;
         private TextBox tbxSearchCompanyByName;
-        public DataGridView dgwCompanies;
+        public static DataGridView dgwCompanies;
     }
 }

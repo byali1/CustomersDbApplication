@@ -12,6 +12,17 @@ namespace Business.Utilities.SpecialFunctions
     public static class ControlFunctions
     {
 
+        public static bool IsNullOrEmptyCustomerInformation(params string[] customerInfos)
+        {
+            foreach (string info in customerInfos)
+            {
+                if (string.IsNullOrEmpty(info))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public static bool CheckStartsWithNumber(string text)
         {
@@ -22,6 +33,15 @@ namespace Business.Utilities.SpecialFunctions
 
             return false;
         }
+
+        public static bool CheckStartsWithZero(string text)
+        {
+            return text[0] == '0';
+        }
+
+
+
+
         //public static bool IsValidEmail(string text)
         //{
         //    if (text.Contains("@"))

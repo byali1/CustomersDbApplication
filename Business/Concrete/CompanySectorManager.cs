@@ -4,46 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 
 namespace Business.Concrete
 {
-    public class CompanySectorManager:ICompanyService
+    public class CompanySectorManager:ICompanySectorService
     {
-        public Task<List<Company>> GetAllAsync()
+        private readonly ICompanySectorDal _companySectorDal;
+
+        public CompanySectorManager(ICompanySectorDal companySectorDal)
         {
-            throw new NotImplementedException();
+            _companySectorDal = companySectorDal;
         }
 
-        public Task<Company> GetByCompanyIdAsync(int companyId)
+        public async Task<List<CompanySector>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _companySectorDal.GetAllAsync();
         }
 
-        public Task<Company> GetByCustomerIdAsync(int customerId)
+        public async Task AddAsync(CompanySector companySector)
         {
-            throw new NotImplementedException();
+            await _companySectorDal.AddAsync(companySector);
         }
 
-        public Task AddAsync(Company company)
+        public async Task UpdateAsync(CompanySector companySector)
         {
-            throw new NotImplementedException();
+            await _companySectorDal.UpdateAsync(companySector);
         }
 
-        public Task UpdateAsync(Company company)
+        public async Task DeleteAsync(CompanySector companySector)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(Company company)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<CompanyDetailDto>> GetCompanyDetailsAsync()
-        {
-            throw new NotImplementedException();
+            await _companySectorDal.DeleteAsync(companySector);
         }
     }
 }
