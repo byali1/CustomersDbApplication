@@ -19,38 +19,48 @@ namespace CustomersDbApplication
 
         private async void btnSignUp_Click(object sender, EventArgs e)
         {
-            var username = tbxUsername.Text;
-            var password = tbxPassword.Text;
-
-            if (!checkBoxIHaveAccount.Checked)
+            try
             {
-                // Hesap oluşturma
-                if (!await IsUserExistAsync(username))
+                var username = tbxUsername.Text;
+                var password = tbxPassword.Text;
+
+                if (!checkBoxIHaveAccount.Checked)
                 {
-                    await SignUpAsync(username, password);
+                    // Hesap oluşturma
+                    if (!await IsUserExistAsync(username))
+                    {
+                        await SignUpAsync(username, password);
+                        return;
+                    }
+
+                    MessageBox.Show("Bu kullanıcı adı ile zaten bir üye mevcut.", "UYARI", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                     return;
                 }
 
-                MessageBox.Show("Bu kullanıcı adı ile zaten bir üye mevcut.", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Hesabım var
-            if (await IsUserExistAsync(username))
-            {
-                string passwordHash = await GetPasswordHashByUsernameAsync(username);
-
-                if (await VerifyUserPasswordAsync(password, passwordHash))
+                // Hesabım var
+                if (await IsUserExistAsync(username))
                 {
-                    await SignInAsync(username, password);
+                    string passwordHash = await GetPasswordHashByUsernameAsync(username);
+
+                    if (await VerifyUserPasswordAsync(password, passwordHash))
+                    {
+                        await SignInAsync(username, password);
+                        return;
+                    }
+
+                    MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "HATA", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                     return;
                 }
 
-                MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show("Böyle bir hesap bulunamadı.", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Veritabanına bağlanılamadı.", "DİKKAT", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            MessageBox.Show("Böyle bir hesap bulunamadı.", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
 

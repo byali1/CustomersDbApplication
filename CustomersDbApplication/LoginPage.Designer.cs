@@ -95,6 +95,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.SeaShell;
             ClientSize = new Size(333, 274);
             Controls.Add(btnSignUp);
             Controls.Add(checkBoxIHaveAccount);
