@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
+using Entities;
 using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,52 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCompanyDal : EfEntityRepositoryBase<Company, EfCustomersDbContext>, ICompanyDal
     {
+        public async Task<CompanyById> GetCompanyIdValuesByIdAsync(int companyId)
+        {
+            using (var context = new EfCustomersDbContext())
+            {
+                var query = from c in context.Companies
+                            join cs in context.CompanySectors
+                                on c.CompanySectorTypeId equals cs.CompanySectorTypeId
+                            join ca in context.CustomerAddresses
+                                on c.CustomerId equals ca.CustomerId
+                            join adt in context.AddressTypes
+                                on ca.AddressTypeId equals adt.AddressTypeId
+                            join ad in context.AddressDetails
+                                on ca.CustomerAddressId equals ad.CustomerAddressId
+                            join ce in context.CustomerEmails
+                                on c.CustomerId equals ce.CustomerId
+                            join ed in context.EmailDetails
+                                on ce.CustomerEmailDetailId equals ed.CustomerEmailDetailId
+                            join cpn in context.CustomerPhoneNumbers
+                                on c.CustomerId equals cpn.CustomerId
+                            join pnd in context.PhoneNumberDetails
+                                on cpn.PhoneNumberDetailId equals pnd.PhoneNumberDetailId
+                            where c.CompanyId == companyId
+                            select new CompanyById
+                            {
+                                CompanyId = c.CompanyId,
+                                CustomerId = c.CustomerId,
+                                CompanySectorTypeId = c.CompanySectorTypeId,
+                                AuthorizedPersonId = c.AuthorizedPersonId,
+                                CustomerAddressId = ca.CustomerAddressId,
+                                AddressTypeId = adt.AddressTypeId,
+                                AddressDetailId = ad.AddressDetailId,
+                                CityId = ad.CityId,
+                                DistrictId = ad.DistrictId,
+                                CountryId = ad.CountryId,
+                                CustomerEmailDetailId = ed.CustomerEmailDetailId,
+                                CustomerEmailId = ce.CustomerEmailId,
+                                CustomerPhoneNumberId = cpn.CustomerPhoneNumberId,
+                                PhoneNumberDetailId = pnd.PhoneNumberDetailId,
+                                CreatedTime = c.CreatedTime,
+                                UpdatedTime = c.UpdatedTime
+                            };
+
+                return await query.SingleOrDefaultAsync();
+            }
+        }
+
         public async Task<List<CompanyDetailDto>> GetCompanyDetailsAsync(Expression<Func<CompanyDetailDto, bool>> filter = null)
         {
             using (var context = new EfCustomersDbContext())

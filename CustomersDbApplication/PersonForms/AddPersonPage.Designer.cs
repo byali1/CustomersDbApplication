@@ -460,6 +460,7 @@
             ClientSize = new Size(1064, 440);
             Controls.Add(grpBxAddPerson);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "AddPersonPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gerçek Müşteri Ekleme Paneli";

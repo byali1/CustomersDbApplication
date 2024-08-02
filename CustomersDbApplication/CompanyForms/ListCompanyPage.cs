@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using CustomersDbApplication.PersonForms;
 using DataAccess.Concrete.EntityFramework;
 using Entities;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,6 +34,9 @@ namespace CustomersDbApplication.CompanyForms
 
         private async void ListCompanyPage_Load(object sender, EventArgs e)
         {
+            btnOpenFormToUpdateCompany.Enabled = false;
+            btnDeleteCompany.Enabled = false;
+
             dgwCompanies.DataSource = await _companyService.GetCompanyDetailsAsync();
 
             cbxCities.Items.Clear();
@@ -45,6 +50,8 @@ namespace CustomersDbApplication.CompanyForms
             cbxDistricts.SelectedIndex = 0;
             cbxCompanySectorTypes.SelectedIndex = 0;
             cbxDistricts.Enabled = false;
+
+
         }
 
         private async void cbxCities_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,6 +117,78 @@ namespace CustomersDbApplication.CompanyForms
                 }
 
             }
+        }
+
+        private void dgwCompanies_SelectionChanged(object sender, EventArgs e)
+        {
+            bool anyRowSelected = dgwCompanies.SelectedRows.Count == 1;
+            btnOpenFormToUpdateCompany.Enabled = anyRowSelected;
+            btnDeleteCompany.Enabled = anyRowSelected;
+        }
+
+        private void btnOpenFormToUpdateCompany_Click(object sender, EventArgs e)
+        {
+            if (HomePage.IsFormOpen(typeof(UpdateCompanyPage)))
+            {
+                MessageBox.Show("Tüzel müşteri güncelleme paneli zaten açık.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var companyDTO = new CompanyDetailDto
+                {
+                    CustomerId = Convert.ToInt32(dgwCompanies.CurrentRow.Cells[0].Value),
+                    CompanyId = Convert.ToInt32(dgwCompanies.CurrentRow.Cells[1].Value),
+                    Name = dgwCompanies.CurrentRow.Cells[2].Value.ToString(),
+                    TaxNumber = dgwCompanies.CurrentRow.Cells[3].Value.ToString(),
+                    EstablishedDate = Convert.ToDateTime(dgwCompanies.CurrentRow.Cells[4].Value),
+                    EmployeeCount = Convert.ToInt32(dgwCompanies.CurrentRow.Cells[5].Value),
+                    CompanySectorType = dgwCompanies.CurrentRow.Cells[6].Value.ToString(),
+                    AddressName = dgwCompanies.CurrentRow.Cells[7].Value.ToString(),
+                    AddressTypeDescription = dgwCompanies.CurrentRow.Cells[8].Value.ToString(),
+                    AddressDetailDescription = dgwCompanies.CurrentRow.Cells[9].Value.ToString(),
+                    IsBillingAddress = Convert.ToBoolean(dgwCompanies.CurrentRow.Cells[10].Value),
+                    CityName = dgwCompanies.CurrentRow.Cells[11].Value.ToString(),
+                    DistrictName = dgwCompanies.CurrentRow.Cells[12].Value.ToString(),
+                    CountryName = dgwCompanies.CurrentRow.Cells[13].Value.ToString(),
+                    Email = dgwCompanies.CurrentRow.Cells[14].Value.ToString(),
+                    IsPrimaryEmail = Convert.ToBoolean(dgwCompanies.CurrentRow.Cells[15].Value),
+                    PhoneNumber = dgwCompanies.CurrentRow.Cells[16].Value.ToString(),
+                    IsPrimaryPhone = Convert.ToBoolean(dgwCompanies.CurrentRow.Cells[17].Value),
+                    IsActiveCustomer = Convert.ToBoolean(dgwCompanies.CurrentRow.Cells[18].Value),
+                    CreatedTime = Convert.ToDateTime(dgwCompanies.CurrentRow.Cells[19].Value)
+                };
+
+
+                foreach (Form form in Application.OpenForms)
+                {
+
+                    if (form is HomePage homePage)
+                    {
+                        UpdateCompanyPage updateCompanyPage = new UpdateCompanyPage(companyDTO,
+                            new CustomerManager(new EfCustomerDal()),
+                            new CustomerAddressManager(new EfCustomerAddressDal()),
+                            new AddressDetailManager(new EfAddressDetailDal()),
+                            new CustomerEmailManager(new EfCustomerEmailDal()),
+                            new EmailDetailManager(new EfEmailDetailDal()),
+                            new CustomerPhoneNumberManager(new EfCustomerPhoneNumberDal()),
+                            new PhoneNumberDetailManager(new EfPhoneNumberDetailDal()),
+                            new CompanyManager(new EfCompanyDal())
+
+                        );
+                        updateCompanyPage.MdiParent = homePage;
+                        updateCompanyPage.Show();
+                        break;
+                    }
+
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Beklenmeyen bir hata meydana geldi! Lütfen daha sonra tekrar deneyin.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

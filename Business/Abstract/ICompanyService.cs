@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Entities;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace Business.Abstract
         Task DeleteAsync(Company company);
 
         Task<List<CompanyDetailDto>> GetCompanyDetailsAsync();
-       // Task<List<CompanyDetailDto>> GetCompanyDetailsByNameAsync(string name);
+        // Task<List<CompanyDetailDto>> GetCompanyDetailsByNameAsync(string name);
+
+        Task<CompanyById> GetCompanyIdValuesByIdAsync(int companyId);
     }
 }

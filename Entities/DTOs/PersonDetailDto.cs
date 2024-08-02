@@ -28,7 +28,7 @@ namespace Entities.DTOs
         public bool IsPrimaryPhone { get; set; }
         public string Email { get; set; }
         public bool IsPrimaryEmail { get; set; }
-        public int PersonGenderId { get; set; }
+        public string GenderName { get; set; }
 
 
 

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
+using Entities;
 using Entities.Concrete;
 using Entities.DTOs;
 
@@ -33,6 +34,11 @@ namespace DataAccess.Concrete.AdoNet
         }
 
         public Task DeleteAsync(Company entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<CompanyById> GetCompanyIdValuesByIdAsync(int companyId)
         {
             throw new NotImplementedException();
         }

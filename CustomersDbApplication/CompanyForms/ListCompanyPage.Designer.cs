@@ -84,6 +84,7 @@
             // 
             // btnDeleteCompany
             // 
+            btnDeleteCompany.Cursor = Cursors.Hand;
             btnDeleteCompany.Location = new Point(277, 33);
             btnDeleteCompany.Name = "btnDeleteCompany";
             btnDeleteCompany.Size = new Size(75, 32);
@@ -93,15 +94,18 @@
             // 
             // btnOpenFormToUpdateCompany
             // 
+            btnOpenFormToUpdateCompany.Cursor = Cursors.Hand;
             btnOpenFormToUpdateCompany.Location = new Point(157, 33);
             btnOpenFormToUpdateCompany.Name = "btnOpenFormToUpdateCompany";
             btnOpenFormToUpdateCompany.Size = new Size(78, 32);
             btnOpenFormToUpdateCompany.TabIndex = 21;
             btnOpenFormToUpdateCompany.Text = "Güncelle";
             btnOpenFormToUpdateCompany.UseVisualStyleBackColor = true;
+            btnOpenFormToUpdateCompany.Click += btnOpenFormToUpdateCompany_Click;
             // 
             // btnOpenFormToAddCompany
             // 
+            btnOpenFormToAddCompany.Cursor = Cursors.Hand;
             btnOpenFormToAddCompany.Location = new Point(31, 33);
             btnOpenFormToAddCompany.Name = "btnOpenFormToAddCompany";
             btnOpenFormToAddCompany.Size = new Size(79, 32);
@@ -145,6 +149,7 @@
             // 
             // btnClear
             // 
+            btnClear.ForeColor = SystemColors.ActiveCaptionText;
             btnClear.Location = new Point(18, 114);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(75, 23);
@@ -184,9 +189,9 @@
             lblCompanySectorType.AutoSize = true;
             lblCompanySectorType.Location = new Point(531, 63);
             lblCompanySectorType.Name = "lblCompanySectorType";
-            lblCompanySectorType.Size = new Size(47, 15);
+            lblCompanySectorType.Size = new Size(43, 15);
             lblCompanySectorType.TabIndex = 22;
-            lblCompanySectorType.Text = "Meslek:";
+            lblCompanySectorType.Text = "Sektör:";
             // 
             // cbxCompanySectorTypes
             // 
@@ -218,6 +223,7 @@
             // 
             // btnSearch
             // 
+            btnSearch.ForeColor = SystemColors.ActiveCaptionText;
             btnSearch.Location = new Point(778, 114);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(70, 33);
@@ -299,6 +305,7 @@
             dgwCompanies.RowTemplate.Height = 25;
             dgwCompanies.Size = new Size(863, 231);
             dgwCompanies.TabIndex = 23;
+            dgwCompanies.SelectionChanged += dgwCompanies_SelectionChanged;
             // 
             // ListCompanyPage
             // 
@@ -313,6 +320,7 @@
             Controls.Add(lblSearchCompany);
             Controls.Add(tbxSearchCompanyByName);
             Controls.Add(dgwCompanies);
+            MaximizeBox = false;
             Name = "ListCompanyPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tüzel Müşteri Listeleme Paneli";

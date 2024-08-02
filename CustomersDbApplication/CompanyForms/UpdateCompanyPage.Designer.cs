@@ -1,6 +1,6 @@
 ﻿namespace CustomersDbApplication.CompanyForms
 {
-    partial class AddCompanyPage
+    partial class UpdateCompanyPage
     {
         /// <summary>
         /// Required designer variable.
@@ -28,26 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            grpBxAddCompany = new GroupBox();
-            tbxEmployeeCount = new TextBox();
+            grpBxUpdateCompany = new GroupBox();
             btnExit = new Button();
+            btnUpdateCompany = new Button();
+            tbxEmployeeCount = new TextBox();
             checkBxIsPrimaryEmail = new CheckBox();
             checkBxIsPrimaryPhoneNumber = new CheckBox();
             tbxEmail = new TextBox();
-            lblEmail = new Label();
+            label2 = new Label();
             tbxPhoneNumber = new TextBox();
-            lblPhoneNumber = new Label();
+            label5 = new Label();
             checkBxIsBillingAddress = new CheckBox();
             cbxDistricts = new ComboBox();
-            lblDistrict = new Label();
+            label6 = new Label();
             cbxCities = new ComboBox();
-            lblCity = new Label();
-            label4 = new Label();
+            label7 = new Label();
+            label8 = new Label();
             richTbxAddressDetailDescription = new RichTextBox();
             tbxAddressName = new TextBox();
-            lblAddressName = new Label();
+            label9 = new Label();
             cbxAddressTypes = new ComboBox();
-            lblAddressType = new Label();
+            label10 = new Label();
             lblEstablishedDate = new Label();
             dTimePickerEstablishedDate = new DateTimePicker();
             lblEmployeeCount = new Label();
@@ -55,50 +56,75 @@
             lblTaxNumber = new Label();
             lblCompanySector = new Label();
             cbxCompanySectors = new ComboBox();
-            btnAddCompany = new Button();
-            tbxCustomerName = new TextBox();
-            lblName = new Label();
-            grpBxAddCompany.SuspendLayout();
+            tbxCompanyName = new TextBox();
+            label11 = new Label();
+            grpBxUpdateCompany.SuspendLayout();
             SuspendLayout();
             // 
-            // grpBxAddCompany
+            // grpBxUpdateCompany
             // 
-            grpBxAddCompany.Controls.Add(tbxEmployeeCount);
-            grpBxAddCompany.Controls.Add(btnExit);
-            grpBxAddCompany.Controls.Add(checkBxIsPrimaryEmail);
-            grpBxAddCompany.Controls.Add(checkBxIsPrimaryPhoneNumber);
-            grpBxAddCompany.Controls.Add(tbxEmail);
-            grpBxAddCompany.Controls.Add(lblEmail);
-            grpBxAddCompany.Controls.Add(tbxPhoneNumber);
-            grpBxAddCompany.Controls.Add(lblPhoneNumber);
-            grpBxAddCompany.Controls.Add(checkBxIsBillingAddress);
-            grpBxAddCompany.Controls.Add(cbxDistricts);
-            grpBxAddCompany.Controls.Add(lblDistrict);
-            grpBxAddCompany.Controls.Add(cbxCities);
-            grpBxAddCompany.Controls.Add(lblCity);
-            grpBxAddCompany.Controls.Add(label4);
-            grpBxAddCompany.Controls.Add(richTbxAddressDetailDescription);
-            grpBxAddCompany.Controls.Add(tbxAddressName);
-            grpBxAddCompany.Controls.Add(lblAddressName);
-            grpBxAddCompany.Controls.Add(cbxAddressTypes);
-            grpBxAddCompany.Controls.Add(lblAddressType);
-            grpBxAddCompany.Controls.Add(lblEstablishedDate);
-            grpBxAddCompany.Controls.Add(dTimePickerEstablishedDate);
-            grpBxAddCompany.Controls.Add(lblEmployeeCount);
-            grpBxAddCompany.Controls.Add(tbxTaxNumber);
-            grpBxAddCompany.Controls.Add(lblTaxNumber);
-            grpBxAddCompany.Controls.Add(lblCompanySector);
-            grpBxAddCompany.Controls.Add(cbxCompanySectors);
-            grpBxAddCompany.Controls.Add(btnAddCompany);
-            grpBxAddCompany.Controls.Add(tbxCustomerName);
-            grpBxAddCompany.Controls.Add(lblName);
-            grpBxAddCompany.ForeColor = Color.MidnightBlue;
-            grpBxAddCompany.Location = new Point(12, 12);
-            grpBxAddCompany.Name = "grpBxAddCompany";
-            grpBxAddCompany.Size = new Size(1010, 370);
-            grpBxAddCompany.TabIndex = 7;
-            grpBxAddCompany.TabStop = false;
-            grpBxAddCompany.Text = "Tüzel müşteri ekle";
+            grpBxUpdateCompany.Controls.Add(btnExit);
+            grpBxUpdateCompany.Controls.Add(btnUpdateCompany);
+            grpBxUpdateCompany.Controls.Add(tbxEmployeeCount);
+            grpBxUpdateCompany.Controls.Add(checkBxIsPrimaryEmail);
+            grpBxUpdateCompany.Controls.Add(checkBxIsPrimaryPhoneNumber);
+            grpBxUpdateCompany.Controls.Add(tbxEmail);
+            grpBxUpdateCompany.Controls.Add(label2);
+            grpBxUpdateCompany.Controls.Add(tbxPhoneNumber);
+            grpBxUpdateCompany.Controls.Add(label5);
+            grpBxUpdateCompany.Controls.Add(checkBxIsBillingAddress);
+            grpBxUpdateCompany.Controls.Add(cbxDistricts);
+            grpBxUpdateCompany.Controls.Add(label6);
+            grpBxUpdateCompany.Controls.Add(cbxCities);
+            grpBxUpdateCompany.Controls.Add(label7);
+            grpBxUpdateCompany.Controls.Add(label8);
+            grpBxUpdateCompany.Controls.Add(richTbxAddressDetailDescription);
+            grpBxUpdateCompany.Controls.Add(tbxAddressName);
+            grpBxUpdateCompany.Controls.Add(label9);
+            grpBxUpdateCompany.Controls.Add(cbxAddressTypes);
+            grpBxUpdateCompany.Controls.Add(label10);
+            grpBxUpdateCompany.Controls.Add(lblEstablishedDate);
+            grpBxUpdateCompany.Controls.Add(dTimePickerEstablishedDate);
+            grpBxUpdateCompany.Controls.Add(lblEmployeeCount);
+            grpBxUpdateCompany.Controls.Add(tbxTaxNumber);
+            grpBxUpdateCompany.Controls.Add(lblTaxNumber);
+            grpBxUpdateCompany.Controls.Add(lblCompanySector);
+            grpBxUpdateCompany.Controls.Add(cbxCompanySectors);
+            grpBxUpdateCompany.Controls.Add(tbxCompanyName);
+            grpBxUpdateCompany.Controls.Add(label11);
+            grpBxUpdateCompany.ForeColor = Color.MidnightBlue;
+            grpBxUpdateCompany.Location = new Point(27, 26);
+            grpBxUpdateCompany.Name = "grpBxUpdateCompany";
+            grpBxUpdateCompany.Size = new Size(1010, 370);
+            grpBxUpdateCompany.TabIndex = 9;
+            grpBxUpdateCompany.TabStop = false;
+            grpBxUpdateCompany.Text = "Tüzel müşteri ekle";
+            // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.FromArgb(255, 123, 123);
+            btnExit.Cursor = Cursors.Hand;
+            btnExit.ForeColor = Color.Maroon;
+            btnExit.Location = new Point(894, 309);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(83, 32);
+            btnExit.TabIndex = 42;
+            btnExit.Text = "Kapat";
+            btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
+            // 
+            // btnUpdateCompany
+            // 
+            btnUpdateCompany.BackColor = SystemColors.ActiveCaption;
+            btnUpdateCompany.Cursor = Cursors.Hand;
+            btnUpdateCompany.ForeColor = Color.Black;
+            btnUpdateCompany.Location = new Point(768, 309);
+            btnUpdateCompany.Name = "btnUpdateCompany";
+            btnUpdateCompany.Size = new Size(109, 32);
+            btnUpdateCompany.TabIndex = 41;
+            btnUpdateCompany.Text = "Güncelle";
+            btnUpdateCompany.UseVisualStyleBackColor = false;
+            btnUpdateCompany.Click += btnUpdateCompany_Click;
             // 
             // tbxEmployeeCount
             // 
@@ -106,20 +132,6 @@
             tbxEmployeeCount.Name = "tbxEmployeeCount";
             tbxEmployeeCount.Size = new Size(209, 23);
             tbxEmployeeCount.TabIndex = 40;
-            tbxEmployeeCount.KeyPress += tbxEmployeeCount_KeyPress;
-            // 
-            // btnExit
-            // 
-            btnExit.BackColor = Color.FromArgb(255, 123, 123);
-            btnExit.Cursor = Cursors.Hand;
-            btnExit.ForeColor = Color.Maroon;
-            btnExit.Location = new Point(890, 321);
-            btnExit.Name = "btnExit";
-            btnExit.Size = new Size(87, 32);
-            btnExit.TabIndex = 39;
-            btnExit.Text = "Kapat";
-            btnExit.UseVisualStyleBackColor = false;
-            btnExit.Click += btnExit_Click;
             // 
             // checkBxIsPrimaryEmail
             // 
@@ -148,14 +160,14 @@
             tbxEmail.Size = new Size(209, 23);
             tbxEmail.TabIndex = 36;
             // 
-            // lblEmail
+            // label2
             // 
-            lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(523, 227);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(39, 15);
-            lblEmail.TabIndex = 35;
-            lblEmail.Text = "Email:";
+            label2.AutoSize = true;
+            label2.Location = new Point(523, 227);
+            label2.Name = "label2";
+            label2.Size = new Size(39, 15);
+            label2.TabIndex = 35;
+            label2.Text = "Email:";
             // 
             // tbxPhoneNumber
             // 
@@ -165,16 +177,15 @@
             tbxPhoneNumber.PlaceholderText = "5XXXXXXXXX";
             tbxPhoneNumber.Size = new Size(209, 23);
             tbxPhoneNumber.TabIndex = 34;
-            tbxPhoneNumber.KeyPress += tbxPhoneNumber_KeyPress;
             // 
-            // lblPhoneNumber
+            // label5
             // 
-            lblPhoneNumber.AutoSize = true;
-            lblPhoneNumber.Location = new Point(768, 93);
-            lblPhoneNumber.Name = "lblPhoneNumber";
-            lblPhoneNumber.Size = new Size(100, 15);
-            lblPhoneNumber.TabIndex = 33;
-            lblPhoneNumber.Text = "Telefon numarası:";
+            label5.AutoSize = true;
+            label5.Location = new Point(768, 93);
+            label5.Name = "label5";
+            label5.Size = new Size(100, 15);
+            label5.TabIndex = 33;
+            label5.Text = "Telefon numarası:";
             // 
             // checkBxIsBillingAddress
             // 
@@ -197,14 +208,14 @@
             cbxDistricts.Size = new Size(209, 23);
             cbxDistricts.TabIndex = 31;
             // 
-            // lblDistrict
+            // label6
             // 
-            lblDistrict.AutoSize = true;
-            lblDistrict.Location = new Point(523, 160);
-            lblDistrict.Name = "lblDistrict";
-            lblDistrict.Size = new Size(28, 15);
-            lblDistrict.TabIndex = 30;
-            lblDistrict.Text = "İlçe:";
+            label6.AutoSize = true;
+            label6.Location = new Point(523, 160);
+            label6.Name = "label6";
+            label6.Size = new Size(28, 15);
+            label6.TabIndex = 30;
+            label6.Text = "İlçe:";
             // 
             // cbxCities
             // 
@@ -218,23 +229,23 @@
             cbxCities.TabIndex = 29;
             cbxCities.SelectedIndexChanged += cbxCities_SelectedIndexChanged;
             // 
-            // lblCity
+            // label7
             // 
-            lblCity.AutoSize = true;
-            lblCity.Location = new Point(271, 160);
-            lblCity.Name = "lblCity";
-            lblCity.Size = new Size(36, 15);
-            lblCity.TabIndex = 28;
-            lblCity.Text = "Şehir:";
+            label7.AutoSize = true;
+            label7.Location = new Point(271, 160);
+            label7.Name = "label7";
+            label7.Size = new Size(36, 15);
+            label7.TabIndex = 28;
+            label7.Text = "Şehir:";
             // 
-            // label4
+            // label8
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(16, 160);
-            label4.Name = "label4";
-            label4.Size = new Size(58, 15);
-            label4.TabIndex = 27;
-            label4.Text = "Adresiniz:";
+            label8.AutoSize = true;
+            label8.Location = new Point(16, 160);
+            label8.Name = "label8";
+            label8.Size = new Size(58, 15);
+            label8.TabIndex = 27;
+            label8.Text = "Adresiniz:";
             // 
             // richTbxAddressDetailDescription
             // 
@@ -253,14 +264,14 @@
             tbxAddressName.Size = new Size(209, 23);
             tbxAddressName.TabIndex = 22;
             // 
-            // lblAddressName
+            // label9
             // 
-            lblAddressName.AutoSize = true;
-            lblAddressName.Location = new Point(271, 227);
-            lblAddressName.Name = "lblAddressName";
-            lblAddressName.Size = new Size(65, 15);
-            lblAddressName.TabIndex = 21;
-            lblAddressName.Text = "Adres ismi:";
+            label9.AutoSize = true;
+            label9.Location = new Point(271, 227);
+            label9.Name = "label9";
+            label9.Size = new Size(65, 15);
+            label9.TabIndex = 21;
+            label9.Text = "Adres ismi:";
             // 
             // cbxAddressTypes
             // 
@@ -273,14 +284,14 @@
             cbxAddressTypes.Size = new Size(209, 23);
             cbxAddressTypes.TabIndex = 20;
             // 
-            // lblAddressType
+            // label10
             // 
-            lblAddressType.AutoSize = true;
-            lblAddressType.Location = new Point(523, 90);
-            lblAddressType.Name = "lblAddressType";
-            lblAddressType.Size = new Size(62, 15);
-            lblAddressType.TabIndex = 19;
-            lblAddressType.Text = "Adres Tipi:";
+            label10.AutoSize = true;
+            label10.Location = new Point(523, 90);
+            label10.Name = "label10";
+            label10.Size = new Size(62, 15);
+            label10.TabIndex = 19;
+            label10.Text = "Adres Tipi:";
             // 
             // lblEstablishedDate
             // 
@@ -315,7 +326,6 @@
             tbxTaxNumber.Name = "tbxTaxNumber";
             tbxTaxNumber.Size = new Size(209, 23);
             tbxTaxNumber.TabIndex = 13;
-            tbxTaxNumber.KeyPress += tbxTaxNumber_KeyPress;
             // 
             // lblTaxNumber
             // 
@@ -346,71 +356,60 @@
             cbxCompanySectors.Size = new Size(209, 23);
             cbxCompanySectors.TabIndex = 6;
             // 
-            // btnAddCompany
+            // tbxCompanyName
             // 
-            btnAddCompany.BackColor = Color.LightGreen;
-            btnAddCompany.Cursor = Cursors.Hand;
-            btnAddCompany.Location = new Point(768, 321);
-            btnAddCompany.Name = "btnAddCompany";
-            btnAddCompany.Size = new Size(87, 32);
-            btnAddCompany.TabIndex = 5;
-            btnAddCompany.Text = "Ekle";
-            btnAddCompany.UseVisualStyleBackColor = false;
-            btnAddCompany.Click += btnAddCompany_Click;
+            tbxCompanyName.Location = new Point(16, 47);
+            tbxCompanyName.Name = "tbxCompanyName";
+            tbxCompanyName.Size = new Size(464, 23);
+            tbxCompanyName.TabIndex = 3;
             // 
-            // tbxCustomerName
+            // label11
             // 
-            tbxCustomerName.Location = new Point(16, 47);
-            tbxCustomerName.Name = "tbxCustomerName";
-            tbxCustomerName.Size = new Size(464, 23);
-            tbxCustomerName.TabIndex = 3;
+            label11.AutoSize = true;
+            label11.Location = new Point(16, 29);
+            label11.Name = "label11";
+            label11.Size = new Size(69, 15);
+            label11.TabIndex = 1;
+            label11.Text = "Müşteri adı:";
             // 
-            // lblName
-            // 
-            lblName.AutoSize = true;
-            lblName.Location = new Point(16, 29);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(69, 15);
-            lblName.TabIndex = 1;
-            lblName.Text = "Müşteri adı:";
-            // 
-            // AddCompanyPage
+            // UpdateCompanyPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
-            ClientSize = new Size(1036, 411);
-            Controls.Add(grpBxAddCompany);
+            ClientSize = new Size(1062, 424);
+            Controls.Add(grpBxUpdateCompany);
             MaximizeBox = false;
-            Name = "AddCompanyPage";
-            Text = "Tüzel Müşteri Ekleme Paneli";
-            Load += AddCompanyPage_Load;
-            grpBxAddCompany.ResumeLayout(false);
-            grpBxAddCompany.PerformLayout();
+            Name = "UpdateCompanyPage";
+            Text = "Tüzel Müşteri Güncelleme Paneli";
+            Load += UpdateCompanyPage_Load;
+            grpBxUpdateCompany.ResumeLayout(false);
+            grpBxUpdateCompany.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private GroupBox grpBxAddCompany;
+        private GroupBox grpBxUpdateCompany;
         private Button btnExit;
+        private Button btnUpdateCompany;
+        private TextBox tbxEmployeeCount;
         private CheckBox checkBxIsPrimaryEmail;
         private CheckBox checkBxIsPrimaryPhoneNumber;
         private TextBox tbxEmail;
-        private Label lblEmail;
+        private Label label2;
         private TextBox tbxPhoneNumber;
-        private Label lblPhoneNumber;
+        private Label label5;
         private CheckBox checkBxIsBillingAddress;
         private ComboBox cbxDistricts;
-        private Label lblDistrict;
+        private Label label6;
         private ComboBox cbxCities;
-        private Label lblCity;
-        private Label label4;
+        private Label label7;
+        private Label label8;
         private RichTextBox richTbxAddressDetailDescription;
         private TextBox tbxAddressName;
-        private Label lblAddressName;
+        private Label label9;
         private ComboBox cbxAddressTypes;
-        private Label lblAddressType;
+        private Label label10;
         private Label lblEstablishedDate;
         private DateTimePicker dTimePickerEstablishedDate;
         private Label lblEmployeeCount;
@@ -418,9 +417,7 @@
         private Label lblTaxNumber;
         private Label lblCompanySector;
         private ComboBox cbxCompanySectors;
-        private Button btnAddCompany;
-        private TextBox tbxCustomerName;
-        private Label lblName;
-        private TextBox tbxEmployeeCount;
+        private TextBox tbxCompanyName;
+        private Label label11;
     }
 }

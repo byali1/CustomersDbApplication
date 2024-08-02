@@ -81,12 +81,12 @@ namespace CustomersDbApplication.PersonForms
 
             dTimePickerBirthDate.Value = _personDetailDto.BirthDate;
 
-            if (_personDetailDto.PersonGenderId == 1)
+            if (personById.PersonGenderId == 1)
             {
                 radioBtnMale.Checked = true;
                 radioBtnFemale.Checked = false;
             }
-            else if (_personDetailDto.PersonGenderId == 2)
+            else if (personById.PersonGenderId == 2)
             {
                 radioBtnMale.Checked = false;
                 radioBtnFemale.Checked = true;

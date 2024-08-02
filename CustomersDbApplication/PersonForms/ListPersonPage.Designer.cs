@@ -342,6 +342,7 @@
             Controls.Add(tbxSearchPersonByName);
             Controls.Add(dgwPersons);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "ListPersonPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gerçek Müşteri Listeleme Paneli";

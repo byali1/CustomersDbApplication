@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using DataAccess.Abstract;
+using Entities;
 using Entities.Concrete;
 using Entities.DTOs;
 
@@ -27,7 +28,7 @@ namespace Business.Concrete
 
         public async Task<Company> GetByCompanyIdAsync(int companyId)
         {
-            return await _companyDal.GetAsync(c=> c.CompanyId == companyId);
+            return await _companyDal.GetAsync(c => c.CompanyId == companyId);
         }
 
         public async Task<Company> GetByCustomerIdAsync(int customerId)
@@ -56,6 +57,9 @@ namespace Business.Concrete
             return await _companyDal.GetCompanyDetailsAsync();
         }
 
-        
+        public async Task<CompanyById> GetCompanyIdValuesByIdAsync(int companyId)
+        {
+            return await _companyDal.GetCompanyIdValuesByIdAsync(companyId);
+        }
     }
 }

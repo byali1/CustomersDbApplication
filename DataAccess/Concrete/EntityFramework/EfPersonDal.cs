@@ -61,6 +61,7 @@ namespace DataAccess.Concrete.EntityFramework
                             join ai in addressInfo on c.CustomerId equals ai.CustomerId
                             join pi in phoneInfo on c.CustomerId equals pi.CustomerId
                             join ei in emailInfo on c.CustomerId equals ei.CustomerId
+                            join pg in context.PersonGenders on p.PersonGenderId equals pg.PersonGenderId
                             select new PersonDetailDto
                             {
                                 CustomerId = c.CustomerId,
@@ -82,7 +83,7 @@ namespace DataAccess.Concrete.EntityFramework
                                 IsPrimaryPhone = pi.IsPrimary,
                                 Email = ei.Email,
                                 IsPrimaryEmail = ei.IsPrimary,
-                                PersonGenderId = p.PersonGenderId
+                                GenderName = pg.GenderName
                             };
 
                 if (filter != null)
@@ -188,6 +189,7 @@ namespace DataAccess.Concrete.EntityFramework
                             join ai in addressInfo on c.CustomerId equals ai.CustomerId
                             join pi in phoneInfo on c.CustomerId equals pi.CustomerId
                             join ei in emailInfo on c.CustomerId equals ei.CustomerId
+                            join pg in context.PersonGenders on p.PersonGenderId equals pg.PersonGenderId 
                             select new PersonDetailDto
                             {
                                 CustomerId = c.CustomerId,
@@ -209,7 +211,7 @@ namespace DataAccess.Concrete.EntityFramework
                                 IsPrimaryPhone = pi.IsPrimary,
                                 Email = ei.Email,
                                 IsPrimaryEmail = ei.IsPrimary,
-                                PersonGenderId = p.PersonGenderId
+                                GenderName = pg.GenderName
                             };
 
                 if (!string.IsNullOrEmpty(name))

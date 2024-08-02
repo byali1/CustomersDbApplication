@@ -101,6 +101,7 @@
             Controls.Add(tbxSearchCustomerByName);
             Controls.Add(dgwCustomers);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "ListCustomerPage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Müşterileri Listele";

@@ -216,7 +216,7 @@ namespace CustomersDbApplication
                 IsPrimaryPhone = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[16].Value),
                 Email = dgwPersons.CurrentRow.Cells[17].Value.ToString(),
                 IsPrimaryEmail = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[18].Value),
-                PersonGenderId = Convert.ToInt16(dgwPersons.CurrentRow.Cells[19].Value)
+                GenderName = dgwPersons.CurrentRow.Cells[19].ToString()
 
             };
 
@@ -284,7 +284,7 @@ namespace CustomersDbApplication
                     IsPrimaryPhone = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[16].Value),
                     Email = dgwPersons.CurrentRow.Cells[17].Value.ToString(),
                     IsPrimaryEmail = Convert.ToBoolean(dgwPersons.CurrentRow.Cells[18].Value),
-                    PersonGenderId = Convert.ToInt16(dgwPersons.CurrentRow.Cells[19].Value)
+                    GenderName = dgwPersons.CurrentRow.Cells[19].ToString()
 
                 };
 
